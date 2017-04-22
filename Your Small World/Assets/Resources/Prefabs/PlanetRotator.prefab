@@ -96,6 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4617757390609296}
   - component: {fileID: 95576987640338494}
+  - component: {fileID: 114475510174364390}
   m_Layer: 2
   m_Name: wood_house
   m_TagString: Untagged
@@ -206,7 +207,7 @@ GameObject:
   - component: {fileID: 114788214704362390}
   - component: {fileID: 135177288006823016}
   - component: {fileID: 64193701091221344}
-  m_Layer: 1
+  m_Layer: 0
   m_Name: PlanetRotator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1445,7 +1446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c69f14ecfc946629cf5460cc76a17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {fileID: 4606993056121832, guid: bc8d14b5abbc0496d8e99373e0eaa652, type: 2}
+  center: {fileID: 4922970605027450}
 --- !u!114 &114226156264457182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1482,6 +1483,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {fileID: 4922970605027450}
+--- !u!114 &114475510174364390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1337699734470946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c69f14ecfc946629cf5460cc76a17f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  center: {fileID: 4922970605027450}
 --- !u!114 &114483717114369244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1494,6 +1507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   st: {fileID: 114568604629550450}
+  dirIndicator: {fileID: 0}
   maxBuffer: 0.1
 --- !u!114 &114568604629550450
 MonoBehaviour:
@@ -1509,6 +1523,8 @@ MonoBehaviour:
   radius: 1
   curVertices: []
   heightMap: []
+  maxHeight: 0.2
+  minHeight: -0.1
 --- !u!114 &114699384432452154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1520,7 +1536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c69f14ecfc946629cf5460cc76a17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {fileID: 4606993056121832, guid: bc8d14b5abbc0496d8e99373e0eaa652, type: 2}
+  center: {fileID: 4922970605027450}
 --- !u!114 &114714636985816986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1555,7 +1571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c69f14ecfc946629cf5460cc76a17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {fileID: 4606993056121832, guid: bc8d14b5abbc0496d8e99373e0eaa652, type: 2}
+  center: {fileID: 4922970605027450}
 --- !u!124 &124349133136317958
 Behaviour:
   m_ObjectHideFlags: 1
@@ -1571,9 +1587,9 @@ SphereCollider:
   m_GameObject: {fileID: 1597184927201864}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135949801544074354
 SphereCollider:

@@ -108,11 +108,6 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &300288237 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4922970605027450, guid: c5e4e448a77954d52b6107a295d02446,
-    type: 2}
-  m_PrefabInternal: {fileID: 1305132313}
 --- !u!1 &1135323488
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de475d0157a347068062e8d98b80267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationInSeconds: 5
+  rotationInSeconds: 300
 --- !u!4 &1135323490
 Transform:
   m_ObjectHideFlags: 0
@@ -194,21 +189,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114177014669567086, guid: c5e4e448a77954d52b6107a295d02446,
-        type: 2}
-      propertyPath: center
-      value: 
-      objectReference: {fileID: 300288237}
-    - target: {fileID: 114977802069906782, guid: c5e4e448a77954d52b6107a295d02446,
-        type: 2}
-      propertyPath: center
-      value: 
-      objectReference: {fileID: 300288237}
-    - target: {fileID: 114699384432452154, guid: c5e4e448a77954d52b6107a295d02446,
-        type: 2}
-      propertyPath: center
-      value: 
-      objectReference: {fileID: 300288237}
     - target: {fileID: 114483717114369244, guid: c5e4e448a77954d52b6107a295d02446,
         type: 2}
       propertyPath: dirIndicator
@@ -512,20 +492,3 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1905353260}
---- !u!1 &1975761790 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1337699734470946, guid: c5e4e448a77954d52b6107a295d02446,
-    type: 2}
-  m_PrefabInternal: {fileID: 1305132313}
---- !u!114 &1975761793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1975761790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c69f14ecfc946629cf5460cc76a17f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  center: {fileID: 300288237}
