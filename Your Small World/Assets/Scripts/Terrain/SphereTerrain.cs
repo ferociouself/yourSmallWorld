@@ -11,9 +11,15 @@ public class SphereTerrain : MonoBehaviour {
 	public Vector3[] curVertices;
 	public float[] heightMap;
 	public bool[] buildableMap;
+	public string[] biomeMap;
 
 	public float maxHeight = 0.5f;
 	public float minHeight = -0.5f;
+
+	public const string DESERT_BIOME = "Desert";
+	public const string LOW_BIOME = "Low";
+	public const string MED_BIOME = "Medium";
+	public const string HIGH_BIOME = "High";
 
 	// Use this for initialization
 	void Start () {
@@ -27,9 +33,11 @@ public class SphereTerrain : MonoBehaviour {
 		Mesh planetMesh = GetComponent<MeshFilter> ().mesh;
 		heightMap = new float[planetMesh.vertices.Length];
 		buildableMap = new bool[planetMesh.vertices.Length];
+		biomeMap = new string[planetMesh.vertices.Length];
 		for (int i = 0; i < planetMesh.vertices.Length; i++) {
 			heightMap[i] = 0.0f;
 			buildableMap[i] = true;
+			biomeMap[i] = "Desert";
 		}
 		updateMesh ();
 	}
@@ -120,5 +128,13 @@ public class SphereTerrain : MonoBehaviour {
 			GameObject water = Resources.Load("Prefabs/Water", typeof(GameObject)) as GameObject;
 			water = Instantiate(water, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity);
 		}
+	}
+
+	public void markAtIndex(int index, string biome) {
+		biomeMap[index] = biome;
+	}
+
+	public string getBiomeAtIndex(int index) {
+		return biomeMap[index];
 	}
 }
