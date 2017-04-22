@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Crops : BaseResource {
 
+	public static Crops instance = new Crops();
+
 	// Use this for initialization
 	void Start () {
 		GetPrereqs().Add (new Tuple<int, BaseResource> (0, new Tools2()));

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Meat : BaseResource {
 
+	public static Meat instance = new Meat();
+
 	// Use this for initialization
 	void Start () {
 		SetPrereqNum (0);

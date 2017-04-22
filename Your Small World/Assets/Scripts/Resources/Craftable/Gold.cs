@@ -8,6 +8,7 @@ public class Gold : CraftableResource {
 	void Start () {
 		GetPrereqs().Add(new Tuple<int, BaseResource>(1, new GoldOre()));
 		GetPrereqs().Add(new Tuple<int, BaseResource>(2, new Smelter()));
+		SetPrereqNum (2);
 	}
 	
 	// Update is called once per frame

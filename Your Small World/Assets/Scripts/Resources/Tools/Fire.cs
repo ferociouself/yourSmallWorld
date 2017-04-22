@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Fire : BaseTool {
 
+	public static Fire instance = new Fire();
+
 	// Use this for initialization
 	void Start () {
 		GetPrereqs ().Add (new Tuple<int, BaseResource> (0, new Flint ()));

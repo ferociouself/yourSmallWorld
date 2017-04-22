@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Steel : CraftableResource {
 
+	public static Steel instance = new Steel();
+
 	// Use this for initialization
 	void Start () {
 		GetPrereqs ().Add (new Tuple<int, BaseResource> (0, new Iron ()));
