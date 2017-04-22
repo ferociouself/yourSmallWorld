@@ -30,7 +30,7 @@ public class TerrainEditor : MonoBehaviour {
 				RaycastHit hitInfo;
 				int layerMask = 1 << 8;
 				if (Physics.Raycast(ray, out hitInfo, layerMask)) {
-					st.buildAtIndex(st.findIndexOfNearest(hitInfo.point), "big_house");
+					st.waterAtIndex(st.findIndexOfNearest(hitInfo.point));
 				}
 				buffer = 0.0f;
 			}
@@ -56,9 +56,9 @@ public class TerrainEditor : MonoBehaviour {
 		if (Input.GetButtonDown("Build_Mode")) {
 			buildMode = !buildMode;
 			if (buildMode) {
-				buildIndicator.text = "Build Mode: On";
+				buildIndicator.text = "Water Mode: On";
 			} else {
-				buildIndicator.text = "Build Mode: Off";
+				buildIndicator.text = "Water Mode: Off";
 			}
 		}
 		buffer += Time.deltaTime;

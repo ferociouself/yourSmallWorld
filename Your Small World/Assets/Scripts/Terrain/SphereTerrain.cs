@@ -114,4 +114,11 @@ public class SphereTerrain : MonoBehaviour {
 			buildableMap[index] = false;
 		}
 	}
+
+	public void waterAtIndex(int index) {
+		if (heightMap[index] < 0) {
+			GameObject water = Resources.Load("Prefabs/Water", typeof(GameObject)) as GameObject;
+			water = Instantiate(water, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity);
+		}
+	}
 }
