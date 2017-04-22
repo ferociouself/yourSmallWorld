@@ -13,8 +13,8 @@ public class RotateTowardsCenter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 towardsCenter = transform.position - center.position;
+		Vector3 towardsCenter = center.position - transform.position;
 
-		transform.rotation = Quaternion.LookRotation(towardsCenter);
+		transform.rotation = Quaternion.LookRotation(towardsCenter) * Quaternion.Euler(-90.0f, 0.0f, 0.0f);
 	}
 }
