@@ -47,18 +47,22 @@ public class TerrainEditor : MonoBehaviour {
 		}
 		if (Input.GetButtonDown("Activate")) {
 			incrDir *= -1;
-			if (incrDir > 0) {
-				dirIndicator.text = "Direction: Up";
-			} else {
-				dirIndicator.text = "Direction: Down";
+			if (dirIndicator != null) {
+				if (incrDir > 0) {
+					dirIndicator.text = "Direction: Up";
+				} else {
+					dirIndicator.text = "Direction: Down";
+				}
 			}
 		}
 		if (Input.GetButtonDown("Build_Mode")) {
 			buildMode = !buildMode;
-			if (buildMode) {
-				buildIndicator.text = "Water Mode: On";
-			} else {
-				buildIndicator.text = "Water Mode: Off";
+			if (buildIndicator != null) {
+				if (buildMode) {
+					buildIndicator.text = "Water Mode: On";
+				} else {
+					buildIndicator.text = "Water Mode: Off";
+				}
 			}
 		}
 		buffer += Time.deltaTime;
