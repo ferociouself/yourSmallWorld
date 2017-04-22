@@ -8,7 +8,7 @@ public class Coal : PlaceableResource {
 
 	// Use this for initialization
 	void Start () {
-		GetPrereqs().Add(new Tuple<int, BaseResource>(1, new Tools1()));
+		GetPrereqs().Add(new Tuple<int, BaseResource>(1, Tools1.instance));
 		SetPrereqNum (1);
 	}
 	

@@ -8,11 +8,10 @@ public class Steel : CraftableResource {
 
 	// Use this for initialization
 	void Start () {
-		GetPrereqs ().Add (new Tuple<int, BaseResource> (0, new Iron ()));
-		GetPrereqs ().Add (new Tuple<int, BaseResource> (1, new Coal ()));
-		GetPrereqs ().Add (new Tuple<int, BaseResource> (2, new Smelter ()));
+		GetPrereqs ().Add (new Tuple<int, BaseResource> (0, Iron.instance));
+		GetPrereqs ().Add (new Tuple<int, BaseResource> (1, Coal.instance));
+		GetPrereqs ().Add (new Tuple<int, BaseResource> (2, Smelter.instance));
 		SetPrereqNum (3);
-
 		GetCosts ().Add (new Tuple<BaseResource, int> (new Iron (), 1));
 		GetCosts ().Add (new Tuple<BaseResource, int> (new Coal (), 1));
 	}

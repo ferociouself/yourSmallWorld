@@ -8,7 +8,7 @@ public class Marble : PlaceableResource {
 
 	// Use this for initialization
 	void Start () {
-		GetPrereqs().Add(new Tuple<int, BaseResource>(1, new Tools2()));
+		GetPrereqs().Add(new Tuple<int, BaseResource>(1, Tools2.instance));
 		SetPrereqNum (1);
 	}
 	

@@ -8,9 +8,10 @@ public class Copper : CraftableResource {
 
 	// Use this for initialization
 	void Start () {
-		GetPrereqs ().Add (new Tuple<int, BaseResource> (1, new CopperOre ()));
-		GetPrereqs ().Add (new Tuple<int, BaseResource> (2, new Smelter ()));
+		GetPrereqs ().Add (new Tuple<int, BaseResource> (1, CopperOre.instance ));
+		GetPrereqs ().Add (new Tuple<int, BaseResource> (2, Smelter.instance ));
 		SetPrereqNum (2);
+		GetCosts().Add(new Tuple<BaseResource, int>(CopperOre.instance,2));
 	}
 	
 	// Update is called once per frame
