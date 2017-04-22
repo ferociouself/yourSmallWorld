@@ -23,7 +23,7 @@ public class MusicController : MonoBehaviour {
 	List<AudioClip> tones;
 
 	//Audioclips
-	AudioClip introClip;
+	public static AudioClip introClip;
 	AudioClip loop1Clip;
 	AudioClip loop2Clip;
 	AudioClip loop3Clip;
@@ -50,7 +50,7 @@ public class MusicController : MonoBehaviour {
 	AudioClip tone8;
 
 	//LogicElements
-	bool introduction;
+	public static bool introduction;
 	double timer;
 	double introTimer;
 	bool firstLoopIsPlaying;
