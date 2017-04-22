@@ -28,7 +28,7 @@ public class BaseResource : MonoBehaviour {
 		unlocked = true;
 	}
 
-	public void GetUnlocked(){
+	public bool GetUnlocked(){
 		return unlocked;
 	}
 
