@@ -10,6 +10,7 @@ public class SphereTerrain : MonoBehaviour {
 	public int radius;
 	public Vector3[] curVertices;
 	public float[] heightMap;
+	public bool[] buildableMap;
 
 	public float maxHeight = 0.5f;
 	public float minHeight = -0.5f;
@@ -25,8 +26,10 @@ public class SphereTerrain : MonoBehaviour {
 		sides.Add (new QuadTree (gameObject.transform.position + Vector3.right, 1, Vector3.forward, Vector3.up));*/
 		Mesh planetMesh = GetComponent<MeshFilter> ().mesh;
 		heightMap = new float[planetMesh.vertices.Length];
-		for (int i = 0; i < heightMap.Length; i++) {
+		buildableMap = new bool[planetMesh.vertices.Length];
+		for (int i = 0; i < planetMesh.vertices.Length; i++) {
 			heightMap[i] = 0.0f;
+			buildableMap[i] = true;
 		}
 		updateMesh ();
 	}
@@ -83,12 +86,32 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void setHeightAtIndex(int index, float height) {
-		heightMap[index] = Mathf.Max(Mathf.Min(height, maxHeight), minHeight);
-		updateMesh();
+		if (buildableMap[index]) {
+			heightMap[index] = Mathf.Max(Mathf.Min(height, maxHeight), minHeight);
+			if (heightMap[index] >= maxHeight || heightMap[index] <= 0) {
+				buildableMap[index] = false;
+			}
+			updateMesh();
+		}
 	}
 
 	public void incHeightAtIndex(int index, float height) {
-		heightMap[index] = Mathf.Max(Mathf.Min(heightMap[index] + height, maxHeight), minHeight);
-		updateMesh();
+		if (buildableMap[index]) {
+			heightMap[index] = Mathf.Max(Mathf.Min(heightMap[index] + height, maxHeight), minHeight);
+			if (heightMap[index] >= maxHeight || heightMap[index] <= 0) {
+				buildableMap[index] = false;
+			}
+			updateMesh();
+		}
+	}
+
+	public void buildAtIndex(int index, string prefabName) {
+		if (buildableMap[index]) {
+			GameObject building = Resources.Load("Prefabs/" + prefabName, typeof(GameObject)) as GameObject;
+			building = Instantiate(building, transform.TransformPoint(curVertices[index]), Quaternion.identity);
+			building.transform.parent = transform.FindChild("Planet Objects");
+			building.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
+			buildableMap[index] = false;
+		}
 	}
 }

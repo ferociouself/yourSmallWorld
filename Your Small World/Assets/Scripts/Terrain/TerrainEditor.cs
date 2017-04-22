@@ -8,11 +8,14 @@ public class TerrainEditor : MonoBehaviour {
 	public SphereTerrain st;
 
 	public Text dirIndicator;
+	public Text buildIndicator;
 
 	float buffer = 0.0f;
 	public float maxBuffer = 1.0f;
 
 	int incrDir = 1;
+
+	bool buildMode = false;
 
 	// Use this for initialization
 	void Start () {
@@ -21,14 +24,26 @@ public class TerrainEditor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButton(1) && buffer > maxBuffer) {
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hitInfo;
-			int layerMask = 1 << 8;
-			if (Physics.Raycast(ray, out hitInfo, layerMask)) {
-				st.incHeightAtIndex(st.findIndexOfNearest(hitInfo.point), incrDir * 0.1f);
+		if (buildMode) {
+			if (Input.GetMouseButton(1) && buffer > maxBuffer) {
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				RaycastHit hitInfo;
+				int layerMask = 1 << 8;
+				if (Physics.Raycast(ray, out hitInfo, layerMask)) {
+					st.buildAtIndex(st.findIndexOfNearest(hitInfo.point), "big_house");
+				}
+				buffer = 0.0f;
 			}
-			buffer = 0.0f;
+		} else {
+			if (Input.GetMouseButton(1) && buffer > maxBuffer) {
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				RaycastHit hitInfo;
+				int layerMask = 1 << 8;
+				if (Physics.Raycast(ray, out hitInfo, layerMask)) {
+					st.incHeightAtIndex(st.findIndexOfNearest(hitInfo.point), incrDir * 0.1f);
+				}
+				buffer = 0.0f;
+			}
 		}
 		if (Input.GetButtonDown("Activate")) {
 			incrDir *= -1;
@@ -36,6 +51,14 @@ public class TerrainEditor : MonoBehaviour {
 				dirIndicator.text = "Direction: Up";
 			} else {
 				dirIndicator.text = "Direction: Down";
+			}
+		}
+		if (Input.GetButtonDown("Build_Mode")) {
+			buildMode = !buildMode;
+			if (buildMode) {
+				buildIndicator.text = "Build Mode: On";
+			} else {
+				buildIndicator.text = "Build Mode: Off";
 			}
 		}
 		buffer += Time.deltaTime;
