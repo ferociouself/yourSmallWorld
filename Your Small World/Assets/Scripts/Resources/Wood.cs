@@ -8,7 +8,7 @@ public class Wood : BaseResource {
 
 	// Use this for initialization
 	void Start () {
-		GetPrereqs().Add (new Tuple<int, BaseResource> (0, new Tools1()));
+		GetPrereqs().Add (new Tuple<int, BaseResource> (0, Tools1.instance));
 		SetPrereqNum (1);
 	}
 	

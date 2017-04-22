@@ -8,7 +8,7 @@ public class Crops : BaseResource {
 
 	// Use this for initialization
 	void Start () {
-		GetPrereqs().Add (new Tuple<int, BaseResource> (0, new Tools2()));
+		GetPrereqs().Add (new Tuple<int, BaseResource> (0, Tools2.instance));
 		SetPrereqNum (1);
 	}
 	

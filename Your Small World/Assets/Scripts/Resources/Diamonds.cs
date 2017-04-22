@@ -8,7 +8,7 @@ public class Diamonds : BaseResource {
 
 	// Use this for initialization
 	void Start () {
-		GetPrereqs().Add (new Tuple<int, BaseResource> (0, new Tools3()));
+		GetPrereqs().Add (new Tuple<int, BaseResource> (0, Tools3.instance));
 		SetPrereqNum (1);
 	}
 	

@@ -8,7 +8,7 @@ public class Tools1 : BaseTool {
 
 	// Use this for initialization
 	void Start () {
-		GetPrereqs().Add(new Tuple<int, BaseResource>(1, new Flint()));
+		GetPrereqs().Add(new Tuple<int, BaseResource>(1, Flint.instance));
 		SetPrereqNum (1);
 	}
 	
