@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flint : MonoBehaviour {
+public class Flint : PlaceableResource {
 
 	// Use this for initialization
 	void Start () {
