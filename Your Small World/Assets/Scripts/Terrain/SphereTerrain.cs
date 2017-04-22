@@ -8,6 +8,11 @@ public class SphereTerrain : MonoBehaviour {
 
 	//private List<QuadTree> sides;
 	public int radius;
+	public Vector3[] curVertices;
+	public float[] heightMap;
+
+	public float maxHeight = 0.5f;
+	public float minHeight = -0.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +23,11 @@ public class SphereTerrain : MonoBehaviour {
 		sides.Add (new QuadTree (gameObject.transform.position + Vector3.forward, 1, Vector3.right, Vector3.up));
 		sides.Add (new QuadTree (gameObject.transform.position + Vector3.left, 1, Vector3.forward, Vector3.up));
 		sides.Add (new QuadTree (gameObject.transform.position + Vector3.right, 1, Vector3.forward, Vector3.up));*/
+		Mesh planetMesh = GetComponent<MeshFilter> ().mesh;
+		heightMap = new float[planetMesh.vertices.Length];
+		for (int i = 0; i < heightMap.Length; i++) {
+			heightMap[i] = 0.0f;
+		}
 		updateMesh ();
 	}
 	
@@ -28,9 +38,14 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void updateMesh() {
 		Mesh planetMesh = GetComponent<MeshFilter> ().mesh;
-		Debug.Log (planetMesh.vertices.Length);
-		planetMesh.vertices = expandCube (planetMesh.vertices, new float[]{0.05f, 0.1f, 0.15f, -0.05f, -0.1f, 0f, 0.05f, 0});
+		planetMesh.vertices = expandCube (planetMesh.vertices, heightMap);
+		curVertices = planetMesh.vertices;
 		planetMesh.RecalculateNormals ();
+		DestroyImmediate(GetComponent<MeshCollider>());
+		gameObject.AddComponent(typeof(MeshCollider));
+		DestroyImmediate(transform.parent.GetComponent<MeshCollider>());
+		transform.parent.gameObject.AddComponent(typeof(MeshCollider));
+		transform.parent.gameObject.GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter> ().mesh;
 	}
 
 	/*public Vector3[] vertices() {
@@ -47,5 +62,33 @@ public class SphereTerrain : MonoBehaviour {
 			endVertices [i] = (cubeVertices [i] - gameObject.transform.position).normalized * (radius + heightmap [i % heightmap.Length]);
 		}
 		return endVertices;
+	}
+
+	public int findIndexOfNearest(Vector3 point) {
+		float minMag = float.MaxValue;
+		int minIndex = -1;
+
+		for (int i = 0; i < curVertices.Length; i++) {
+			float curMag = (transform.TransformPoint(curVertices[i]) - point).magnitude;
+			if (curMag < minMag) {
+				minMag = curMag;
+				minIndex = i;
+			}
+		}
+		return minIndex;
+	}
+
+	public float heightAtIndex(int index) {
+		return heightMap[index];
+	}
+
+	public void setHeightAtIndex(int index, float height) {
+		heightMap[index] = Mathf.Max(Mathf.Min(height, maxHeight), minHeight);
+		updateMesh();
+	}
+
+	public void incHeightAtIndex(int index, float height) {
+		heightMap[index] = Mathf.Max(Mathf.Min(heightMap[index] + height, maxHeight), minHeight);
+		updateMesh();
 	}
 }

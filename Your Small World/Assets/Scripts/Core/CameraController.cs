@@ -33,8 +33,6 @@ public class CameraController : MonoBehaviour {
 
 		lastMousePos = Input.mousePosition;
 
-		print("Mouse Down");
-
 		yield return null;
 	}
 
@@ -44,7 +42,7 @@ public class CameraController : MonoBehaviour {
 
 		Vector3 mouseDelta = curMousePos - lastMousePos;
 
-		Transform child = transform.GetChild(0);
+		Transform child = transform.GetChild(0).GetChild(0);
 
 		child.rotation = child.rotation * Quaternion.Euler(-mouseDelta.y * (zoomAmt / 100.0f), mouseDelta.x * (zoomAmt / 100.0f), 0.0f);
 
@@ -56,8 +54,6 @@ public class CameraController : MonoBehaviour {
 		dragging = false;
 
 		lastMousePos = Vector3.zero;
-
-		print("Mouse Up");
 
 		yield return null;
 	}
