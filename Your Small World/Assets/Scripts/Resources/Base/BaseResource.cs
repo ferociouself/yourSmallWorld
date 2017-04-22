@@ -47,4 +47,8 @@ public class BaseResource : MonoBehaviour {
 	public int GetPrereqNum(){
 		return numberOfPrereqs;
 	}
+
+	public void SetPrereqNum(int num){
+		numberOfPrereqs = num;
+	}
 }
