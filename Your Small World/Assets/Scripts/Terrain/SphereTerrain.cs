@@ -28,7 +28,9 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void updateMesh() {
 		Mesh planetMesh = GetComponent<MeshFilter> ().mesh;
-		planetMesh.vertices = expandCube (planetMesh.vertices, new float[]{0.1f, 0.2f, 0.3f, -0.1f, -0.2f, 0f, 0.1f});
+		Debug.Log (planetMesh.vertices.Length);
+		planetMesh.vertices = expandCube (planetMesh.vertices, new float[]{0.05f, 0.1f, 0.15f, -0.05f, -0.1f, 0f, 0.05f, 0});
+		planetMesh.RecalculateNormals ();
 	}
 
 	/*public Vector3[] vertices() {
@@ -42,7 +44,7 @@ public class SphereTerrain : MonoBehaviour {
 	public Vector3[] expandCube(Vector3[] cubeVertices, float[] heightmap) {
 		Vector3[] endVertices = new Vector3[cubeVertices.Length];
 		for (int i = 0; i < cubeVertices.Length; i++) {
-			endVertices [i] = (cubeVertices [i] - gameObject.transform.position) * (radius + heightmap [i % heightmap.Length]);
+			endVertices [i] = (cubeVertices [i] - gameObject.transform.position).normalized * (radius + heightmap [i % heightmap.Length]);
 		}
 		return endVertices;
 	}
