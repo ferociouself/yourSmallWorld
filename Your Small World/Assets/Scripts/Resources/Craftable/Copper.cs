@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Copper : BaseResource {
+public class Copper : CraftableResource {
 
 	// Use this for initialization
 	void Start () {
