@@ -18,7 +18,6 @@ public class SphereTerrain : MonoBehaviour {
 		sides.Add (new QuadTree (gameObject.transform.position + Vector3.forward, 1, Vector3.right, Vector3.up));
 		sides.Add (new QuadTree (gameObject.transform.position + Vector3.left, 1, Vector3.forward, Vector3.up));
 		sides.Add (new QuadTree (gameObject.transform.position + Vector3.right, 1, Vector3.forward, Vector3.up));*/
-		radius = 10;
 		updateMesh ();
 	}
 	
@@ -29,7 +28,7 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void updateMesh() {
 		Mesh planetMesh = GetComponent<MeshFilter> ().mesh;
-		planetMesh.vertices = expandCube (planetMesh.vertices, new float[]{1, 2, 3, -1, -2, 0, 1});
+		planetMesh.vertices = expandCube (planetMesh.vertices, new float[]{0.1f, 0.2f, 0.3f, -0.1f, -0.2f, 0f, 0.1f});
 	}
 
 	/*public Vector3[] vertices() {
