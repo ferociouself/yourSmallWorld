@@ -6,6 +6,8 @@ public class CameraController : MonoBehaviour {
 
 	bool dragging = false;
 
+	float zoomAmt = 15.0f;
+
 	Vector3 lastMousePos;
 
 	// Use this for initialization
@@ -15,7 +17,15 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetAxis("Mouse ScrollWheel") != 0) {
+			//Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 
+			//		Mathf.Max(-20.0f, Mathf.Min(-7.0f, Camera.main.transform.position.z + Input.GetAxis("Mouse ScrollWheel"))));
+
+			zoomAmt = Mathf.Min(20.0f, Mathf.Max(7.0f, zoomAmt - Input.GetAxis("Mouse ScrollWheel")));
+
+			Vector3 awayFromSphere = Camera.main.transform.position - gameObject.transform.position;
+			Camera.main.transform.position = awayFromSphere.normalized * zoomAmt + gameObject.transform.position;
+		}
 	}
 
 	IEnumerator OnMouseDown() {
@@ -36,14 +46,7 @@ public class CameraController : MonoBehaviour {
 
 		Transform child = transform.GetChild(0);
 
-		Vector3 rotDelta = new Vector3(-mouseDelta.y, mouseDelta.x, 0.0f);
-
-		print("Cur Rotation: " + child.rotation);
-		print("Rot Delta: " + rotDelta);
-		print("Rot Delta Rotation: " + Quaternion.Euler(-mouseDelta.y , mouseDelta.x, 0.0f));
-
-		child.rotation = child.rotation * Quaternion.Euler(-mouseDelta.y , mouseDelta.x, 0.0f);
-		//child.rotation = Quaternion.Euler(child.rotation.eulerAngles.x, child.rotation.eulerAngles.y, 0.0f);
+		child.rotation = child.rotation * Quaternion.Euler(-mouseDelta.y * (zoomAmt / 100.0f), mouseDelta.x * (zoomAmt / 100.0f), 0.0f);
 
 		lastMousePos = curMousePos;
 		yield return null;
