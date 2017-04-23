@@ -183,6 +183,16 @@ public class SphereTerrain : MonoBehaviour {
 				markAtIndex(index, HIGH_BIOME);
 			} else if (heightMap[index] < 0.0f) {
 				markAtIndex(index, LOW_BIOME);
+				int[] neighbors = neighborsOf (index);
+				bool nextToWater = false;
+				for (int i = 0; i < neighbors.Length; i++) {
+					if (biomeMap [neighbors [i]] == WATER_BIOME) {
+						nextToWater = true;
+					}
+				}
+				if (nextToWater) {
+					spreadWaterBiome (index);
+				}
 			} else {
 				if (biomeMap[index] != MED_BIOME) {
 					markAtIndex(index, DESERT_BIOME);
@@ -199,6 +209,16 @@ public class SphereTerrain : MonoBehaviour {
 				markAtIndex(index, HIGH_BIOME);
 			} else if (heightMap[index] < 0.0f) {
 				markAtIndex(index, LOW_BIOME);
+				int[] neighbors = neighborsOf (index);
+				bool nextToWater = false;
+				for (int i = 0; i < neighbors.Length; i++) {
+					if (biomeMap [neighbors [i]] == WATER_BIOME) {
+						nextToWater = true;
+					}
+				}
+				if (nextToWater) {
+					spreadWaterBiome (index);
+				}
 			} else {
 				if (biomeMap[index] != MED_BIOME) {
 					markAtIndex(index, DESERT_BIOME);
@@ -309,6 +329,9 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void markAtIndex(int index, string biome) {
+		if (biomeMap [index] == biome) {
+			return;
+		}
 		biomeMap[index] = biome;
 		Color[] colors = filter.mesh.colors;
 		if (colors.Length != filter.mesh.vertices.Length) {
