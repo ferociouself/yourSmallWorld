@@ -36,6 +36,7 @@ public class SphereTerrain : MonoBehaviour {
 	List<Color> greays;
 	List<Color> whites;
 	List<Color> browns;
+	List<Color> stones;
 	List<Color> oils;
 
 	MeshFilter filter;
@@ -94,6 +95,12 @@ public class SphereTerrain : MonoBehaviour {
 		browns.Add(lazyColor(60,34,16));
 		browns.Add(lazyColor(71,40,18));
 		browns.Add(lazyColor(84,48,22));
+
+		stones = new List<Color> ();
+		stones.Add(lazyColor(199,203,210));
+		stones.Add(lazyColor(196,196,196));
+		stones.Add(lazyColor(186,195,201));
+		stones.Add(lazyColor(152,160,167));
 
 		oils = new List<Color> ();
 		oils.Add (lazyColor (43,4,4));
@@ -325,7 +332,7 @@ public class SphereTerrain : MonoBehaviour {
 			colors [index] = browns[Random.Range(0, browns.Count)];
 			break;
 		case STONE_BIOME:
-			colors [index] = greays [Random.Range (0, greays.Count)];
+			colors [index] = stones [Random.Range (0, stones.Count)];
 			break;
 		case OIL_BIOME:
 			colors [index] = oils [Random.Range (0, oils.Count)];
