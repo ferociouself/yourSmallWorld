@@ -173,12 +173,12 @@ public class SphereTerrain : MonoBehaviour {
 		if (editableMap[index]) {
 			heightMap[index] = Mathf.Max(Mathf.Min(height, maxHeight), minHeight);
 			if (heightMap[index] > 0.0f) {
-				biomeMap[index] = HIGH_BIOME;
+				markAtIndex(index, HIGH_BIOME);
 			} else if (heightMap[index] < 0.0f) {
-				biomeMap[index] = LOW_BIOME;
+				markAtIndex(index, LOW_BIOME);
 			} else {
 				if (biomeMap[index] != MED_BIOME) {
-					biomeMap[index] = DESERT_BIOME;
+					markAtIndex(index, DESERT_BIOME);
 				}
 			}
 			updateMesh();
@@ -189,12 +189,12 @@ public class SphereTerrain : MonoBehaviour {
 		if (editableMap[index]) {
 			heightMap[index] = Mathf.Max(Mathf.Min(heightMap[index] + height, maxHeight), minHeight);
 			if (heightMap[index] > 0.0f) {
-				biomeMap[index] = HIGH_BIOME;
+				markAtIndex(index, HIGH_BIOME);
 			} else if (heightMap[index] < 0.0f) {
-				biomeMap[index] = LOW_BIOME;
+				markAtIndex(index, LOW_BIOME);
 			} else {
 				if (biomeMap[index] != MED_BIOME) {
-					biomeMap[index] = DESERT_BIOME;
+					markAtIndex(index, DESERT_BIOME);
 				}
 			}
 			updateMesh();
