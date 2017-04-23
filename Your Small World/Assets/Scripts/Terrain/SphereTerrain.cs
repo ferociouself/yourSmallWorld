@@ -187,13 +187,19 @@ public class SphereTerrain : MonoBehaviour {
 				markAtIndex(index, LOW_BIOME);
 				int[] neighbors = neighborsOf (index);
 				bool nextToWater = false;
+				bool nextToOil = false;
 				for (int i = 0; i < neighbors.Length; i++) {
 					if (biomeMap [neighbors [i]] == WATER_BIOME) {
 						nextToWater = true;
 					}
+					if(biomeMap[neighbors[i]] == OIL_BIOME) {
+						nextToOil = true;
+					}
 				}
 				if (nextToWater) {
 					spreadWaterBiome (index);
+				} else if (nextToOil) {
+					SpreadOilBiome (index);
 				}
 			} else {
 				if (biomeMap[index] != MED_BIOME) {
@@ -213,13 +219,19 @@ public class SphereTerrain : MonoBehaviour {
 				markAtIndex(index, LOW_BIOME);
 				int[] neighbors = neighborsOf (index);
 				bool nextToWater = false;
+				bool nextToOil = false;
 				for (int i = 0; i < neighbors.Length; i++) {
 					if (biomeMap [neighbors [i]] == WATER_BIOME) {
 						nextToWater = true;
 					}
+					if(biomeMap[neighbors[i]] == OIL_BIOME) {
+						nextToOil = true;
+					}
 				}
 				if (nextToWater) {
 					spreadWaterBiome (index);
+				} else if (nextToOil) {
+					SpreadOilBiome (index);
 				}
 			} else {
 				if (biomeMap[index] != MED_BIOME) {
