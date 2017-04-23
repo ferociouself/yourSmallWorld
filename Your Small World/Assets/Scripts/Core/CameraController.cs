@@ -60,7 +60,7 @@ public class CameraController : MonoBehaviour {
 			}
 			finalTimer += Time.deltaTime;
 			if (finalTimer >= 3.0f) {
-				TitleText.color = new Color(TitleText.color.r, TitleText.color.g, TitleText.color.b, (float)Mathf.Lerp(1,0,finalTimer/5.0f));
+				TitleText.color = new Color(TitleText.color.r, TitleText.color.g, TitleText.color.b, (float)Mathf.Lerp(1,0,finalTimer/7.0f));
 			}
 		} else {
 			float dT = Time.deltaTime;

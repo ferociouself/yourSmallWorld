@@ -17,6 +17,7 @@ public class TerrainEditor : MonoBehaviour {
 
 	enum BuildType {
 		Terrain,
+		Smooth,
 		Water,
 		Stone,
 		Sand,
@@ -45,11 +46,14 @@ public class TerrainEditor : MonoBehaviour {
 			int layerMask = 1 << 8;
 			if (Physics.Raycast(ray, out hitInfo, layerMask)) {
 				switch (curType) {
-				case BuildType.Water:
-					st.waterAtIndex(st.findIndexOfNearest(hitInfo.point));
-					break;
 				case BuildType.Terrain:
 					st.incHeightAtIndex(st.findIndexOfNearest(hitInfo.point), incrDir * 0.1f);
+					break;
+				case BuildType.Smooth:
+					st.setHeightAtIndex(st.findIndexOfNearest(hitInfo.point), 0.0f);
+					break;
+				case BuildType.Water:
+					st.waterAtIndex(st.findIndexOfNearest(hitInfo.point));
 					break;
 				case BuildType.Stone:
 					// st.StoneAtIndex(st.findIndexOfNearest(hitInfo.point));
@@ -97,6 +101,10 @@ public class TerrainEditor : MonoBehaviour {
 	public void GoingDown(){
 		curType = BuildType.Terrain;
 		incrDir =-1 * Mathf.Abs (incrDir);
+	}
+
+	public void NotGoingAnywhere(){
+		curType = BuildType.Smooth;
 	}
 
 	public void SelectBuildType(string type) {
