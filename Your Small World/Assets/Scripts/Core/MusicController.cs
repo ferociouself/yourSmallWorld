@@ -65,8 +65,8 @@ public class MusicController : MonoBehaviour {
 	float fadeTimer;
 	int placingTonePos;
 	double placingTimer;
-	const float placeToneIncrementer = 3; //in seconds
-	const float maxFXVOL = 5.0f;
+	const float placeToneIncrementer = 2; //in seconds
+	const float maxFXVOL = 3.0f; //in decibles
 
 	// Use this for initialization
 	void Start () {
@@ -168,7 +168,6 @@ public class MusicController : MonoBehaviour {
 		loop1.clip = loop3Clip;
 
 		drums.clip = drumClip;
-		drums.loop = true;
 
 		pedalTimer = 0.0;
 		pedals.clip = pedal2Clip;
@@ -240,6 +239,12 @@ public class MusicController : MonoBehaviour {
 			pedalTimer = pedal1Clip.length;
 		}
 		pedals.Play ();
+		drums.time = 0.0f;
+		if (Random.Range (0, 20) == 0) {
+			drums.Play ();
+		} else {
+			drums.Stop ();
+		}
 	}
 
 	void CrossNewLoop(){
@@ -262,7 +267,7 @@ public class MusicController : MonoBehaviour {
 		return loops[Random.Range (0, 13)];
 	}
 
-	void StartPlacing(){
+	public void StartPlacing(){
 		placing = true;
 		fading = false;
 		AM.SetFloat ("FXVolume", maxFXVOL);
@@ -290,7 +295,7 @@ public class MusicController : MonoBehaviour {
 		}
 	}
 
-	void StopPlacing(){
+	public void StopPlacing(){
 		placing = false;
 		if (paint1.isPlaying) {
 			paint1.Stop ();
@@ -310,7 +315,7 @@ public class MusicController : MonoBehaviour {
 		}
 	}
 
-	void PlaceSingle(){
+	public void PlaceSingle(){
 		AM.SetFloat ("FXVolume", maxFXVOL);
 		fadeTimer = 0.0f;
 		placingTonePos = Random.Range (0, 8);
@@ -318,4 +323,5 @@ public class MusicController : MonoBehaviour {
 		paint1.Play ();
 		fading = true;
 	}
+		
 }

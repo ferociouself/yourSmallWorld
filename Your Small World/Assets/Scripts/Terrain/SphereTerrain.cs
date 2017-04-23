@@ -314,14 +314,16 @@ public class SphereTerrain : MonoBehaviour {
 		if (getBiomeAtIndex(index) == MED_BIOME) {
 			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Forest")) {
 				DestroyImmediate(resourceMap[index]);
-				GameObject tree = Resources.Load("Prefabs/Forest", typeof(GameObject)) as GameObject;
+				GameObject tree = Resources.Load("Prefabs/Forest" + Random.Range(0,5), typeof(GameObject)) as GameObject;
 				float randRot = Random.Range(0.0f, 180.0f);
-				tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.Euler(0.0f, randRot, 0.0f)) as GameObject;
+				tree.transform.GetChild (0).transform.rotation = Quaternion.Euler (0.0f, randRot, 0.0f);
+				tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
 				resourceMap[index] = tree;
 			} else if (resourceMap[index] == null) {
-				GameObject tree = Resources.Load("Prefabs/Forest", typeof(GameObject)) as GameObject;
+				GameObject tree = Resources.Load("Prefabs/Forest" + Random.Range(0,5), typeof(GameObject)) as GameObject;
 				float randRot = Random.Range(0.0f, 180.0f);
-				tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.Euler(0.0f, randRot, 0.0f)) as GameObject;
+				tree.transform.GetChild (0).transform.rotation = Quaternion.Euler (0.0f, randRot, 0.0f);
+				tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
 				resourceMap[index] = tree;
 			}
 		}
