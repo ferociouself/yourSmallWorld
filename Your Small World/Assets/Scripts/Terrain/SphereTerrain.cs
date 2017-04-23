@@ -12,6 +12,7 @@ public class SphereTerrain : MonoBehaviour {
 	public int[] curTriangles;
 	public float[] heightMap;
 	public bool[] buildableMap;
+	public bool[] editableMap;
 	public string[] biomeMap;
 
 	public List<int> buildingIndices;
@@ -38,9 +39,11 @@ public class SphereTerrain : MonoBehaviour {
 		buildableMap = new bool[planetMesh.vertices.Length];
 		biomeMap = new string[planetMesh.vertices.Length];
 		buildingIndices = new List<int> ();
+		editableMap = new bool[planetMesh.vertices.Length];
 		for (int i = 0; i < planetMesh.vertices.Length; i++) {
 			heightMap[i] = 0.0f;
 			buildableMap[i] = true;
+			editableMap[i] = true;
 			biomeMap[i] = "Desert";
 		}
 		updateMesh ();
@@ -99,7 +102,7 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void setHeightAtIndex(int index, float height) {
-		if (buildableMap[index]) {
+		if (editableMap[index]) {
 			heightMap[index] = Mathf.Max(Mathf.Min(height, maxHeight), minHeight);
 			if (heightMap[index] >= maxHeight || heightMap[index] <= 0) {
 				buildableMap[index] = false;
@@ -109,7 +112,7 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void incHeightAtIndex(int index, float height) {
-		if (buildableMap[index]) {
+		if (editableMap[index]) {
 			heightMap[index] = Mathf.Max(Mathf.Min(heightMap[index] + height, maxHeight), minHeight);
 			if (heightMap[index] >= maxHeight || heightMap[index] <= 0) {
 				buildableMap[index] = false;
@@ -126,6 +129,7 @@ public class SphereTerrain : MonoBehaviour {
 			building.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
 			buildableMap[index] = false;
 			buildingIndices.Add (index);
+			editableMap[index] = false;
 		}
 	}
 
