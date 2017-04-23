@@ -16,8 +16,20 @@ public class TerrainEditor : MonoBehaviour {
 	int incrDir = 1;
 
 	enum BuildType {
-
+		Terrain,
+		Water,
+		Stone,
+		Sand,
+		Tree,
+		Wheat,
+		Oil,
+		Iron,
+		Copper,
+		Coal,
+		Deiton
 	}
+
+	BuildType curType;
 
 	// Use this for initialization
 	void Start () {
@@ -41,12 +53,50 @@ public class TerrainEditor : MonoBehaviour {
 	}
 
 	public void GoingUp(){
+		curType = BuildType.Terrain;
 		incrDir = Mathf.Abs (incrDir);
 	}
 
 	public void GoingDown(){
+		curType = BuildType.Terrain;
 		incrDir =-1 * Mathf.Abs (incrDir);
 	}
 
+	public void SelectBuildType(string type) {
+		switch(type) {
+		case "Water":
+			curType = BuildType.Water;
+			break;
+		case "Stone":
+			curType = BuildType.Stone;
+			break;
+		case "Sand":
+			curType = BuildType.Sand;
+			break;
+		case "Tree":
+			curType = BuildType.Tree;
+			break;
+		case "Wheat":
+			curType = BuildType.Wheat;
+			break;
+		case "Oil":
+			curType = BuildType.Oil;
+			break;
+		case "Iron":
+			curType = BuildType.Iron;
+			break;
+		case "Copper":
+			curType = BuildType.Copper;
+			break;
+		case "Coal":
+			curType = BuildType.Coal;
+			break;
+		case "Deiton":
+			curType = BuildType.Deiton;
+			break;
+		default:
+			Debug.LogError("Build Type of " + type + " not recognized!");
+		}
+	}
 
 }
