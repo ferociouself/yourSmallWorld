@@ -222,10 +222,6 @@ public class SphereTerrain : MonoBehaviour {
 	public void SpreadStoneBiome(Vertex v) {
 		if (v.getBiome() == LOW_BIOME) {
 			v.setBiome (STONE_BIOME);
-			GameObject stone = Resources.Load("Prefabs/Stone" + Random.Range(0,5), typeof(GameObject)) as GameObject;
-			stone = Instantiate(stone, transform.TransformPoint(v.getSphereVector()), Quaternion.identity) as GameObject;
-			v.removeResource ();
-			v.setResource (stone);
 			Vertex[] neighbors = v.getNeighbors ();
 			for (int i = 0; i < neighbors.Length; i++) {
 				if (neighbors[i].getHeight() < 0 && neighbors[i].getBiome() != STONE_BIOME) {
