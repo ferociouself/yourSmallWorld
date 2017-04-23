@@ -9,9 +9,12 @@ public class SphereTerrain : MonoBehaviour {
 	//private List<QuadTree> sides;
 	public int radius;
 	public Vector3[] curVertices;
+	public int[] curTriangles;
 	public float[] heightMap;
 	public bool[] buildableMap;
 	public string[] biomeMap;
+
+	public List<int> buildingIndices;
 
 	public float maxHeight = 0.5f;
 	public float minHeight = -0.5f;
@@ -34,6 +37,7 @@ public class SphereTerrain : MonoBehaviour {
 		heightMap = new float[planetMesh.vertices.Length];
 		buildableMap = new bool[planetMesh.vertices.Length];
 		biomeMap = new string[planetMesh.vertices.Length];
+		buildingIndices = new List<int> ();
 		for (int i = 0; i < planetMesh.vertices.Length; i++) {
 			heightMap[i] = 0.0f;
 			buildableMap[i] = true;
@@ -51,6 +55,7 @@ public class SphereTerrain : MonoBehaviour {
 		Mesh planetMesh = GetComponent<MeshFilter> ().mesh;
 		planetMesh.vertices = expandCube (planetMesh.vertices, heightMap);
 		curVertices = planetMesh.vertices;
+		curTriangles = planetMesh.triangles;
 		planetMesh.RecalculateNormals ();
 		DestroyImmediate(GetComponent<MeshCollider>());
 		gameObject.AddComponent(typeof(MeshCollider));
@@ -120,6 +125,7 @@ public class SphereTerrain : MonoBehaviour {
 			building.transform.parent = transform.FindChild("Planet Objects");
 			building.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
 			buildableMap[index] = false;
+			buildingIndices.Add (index);
 		}
 	}
 
@@ -136,5 +142,54 @@ public class SphereTerrain : MonoBehaviour {
 
 	public string getBiomeAtIndex(int index) {
 		return biomeMap[index];
+	}
+
+	public List<Vector3> neighborsOf(Vector3 v) {
+		for (int i = 0; i < curVertices.Length; i++) {
+			if (curVertices [i] == v) {
+				return neighborsOf (i);
+			}
+		}
+		return null;
+	}
+
+	public int[] neigborsOf(int index) {
+		List<int> neighborIndices = new List<int> (); 
+		for (int i = 0; i < curTriangles.Length; i++) {
+			if (curTriangles [i] == index) {
+				int relativePosition = i % 3;
+				switch (relativePosition) {
+				case 0:
+					if (i + 1 < curTriangles.Length && !neighborIndices.Contains (curTriangles[i + 1])) {
+						neighborIndices.Add (curTriangles[i + 1]);
+					}
+					if (i + 2 < curTriangles.Length && !neighborIndices.Contains (curTriangles[i + 2])) {
+						neighborIndices.Add (curTriangles[i + 2]);
+					}
+					break;
+				case 1:
+					if (!neighborIndices.Contains (curTriangles[i - 1])) {
+						neighborIndices.Add (curTriangles[i - 1]);
+					}
+					if (i + 1 < curTriangles.Length && !neighborIndices.Contains (curTriangles[i + 1])) {
+						neighborIndices.Add (curTriangles[i + 1]);
+					}
+					break;
+				case 2:
+					if (!neighborIndices.Contains (curTriangles[i - 1])) {
+						neighborIndices.Add (curTriangles[i - 1]);
+					}
+					if (!neighborIndices.Contains (curTriangles[i - 2])) {
+						neighborIndices.Add (curTriangles[i - 2]);
+					}
+					break;
+				}
+			}
+		}
+		return neighborIndices.ToArray ();
+	}
+
+	public int[] currentBuildings() {
+		return buildingIndices.ToArray ();
 	}
 }

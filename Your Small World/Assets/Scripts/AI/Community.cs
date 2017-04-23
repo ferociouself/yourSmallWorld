@@ -57,4 +57,26 @@ public class Community : MonoBehaviour {
 		return false;
 	}
 
+	public int chooseNextBuildingLocation() {
+		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
+		int[] buildingIndices = terrain.currentBuildings ();
+		int randomBuildingIndex = Random.Range (0, buildingIndices.Length);
+		int numBuildingsChecked = 0;
+		while (numBuildingsChecked < buildingIndices.Length) {
+			int randomBuilding = buildingIndices [randomBuildingIndex];
+			int[] neighbors = terrain.neigborsOf (randomBuilding);
+			int randomNeighborIndex = Random.Range (0, neighbors.Length);
+			int numNeighborsChecked = 0;
+			while (numNeighborsChecked < neighbors.Length) {
+				if (terrain.buildableMap [neighbors [randomNeighborIndex]]) {
+					return neighbors [randomNeighborIndex];
+				}
+				randomNeighborIndex = (randomNeighborIndex + 1) % neighbors.Length;
+				numNeighborsChecked++;
+			}
+			randomBuildingIndex = (randomBuildingIndex + 1) % buildingIndices.Length;
+			numBuildingsChecked++;
+		}
+		return -1;
+	}
 }
