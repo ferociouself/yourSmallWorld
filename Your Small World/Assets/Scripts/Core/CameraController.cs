@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour {
 
 	Vector3 lastMousePos;
 
-	float timer;
+	public float timer;
 
 	public Text LatinText;
 	public Text EnglishText;
@@ -52,6 +52,12 @@ public class CameraController : MonoBehaviour {
 				Vector3 awayFromSphere = Camera.main.transform.position - gameObject.transform.position;
 				Camera.main.transform.position = awayFromSphere.normalized * zoomAmt + gameObject.transform.position;
 			}
+			if (stage < 4) {
+				stage = 4;
+				TitleText.text = "Ludum Dei";
+				TitleText.fontSize = 80;
+				TitleText.color = Color.black;
+			}
 			finalTimer += Time.deltaTime;
 			if (finalTimer >= 3.0f) {
 				TitleText.color = new Color(TitleText.color.r, TitleText.color.g, TitleText.color.b, (float)Mathf.Lerp(1,0,finalTimer/5.0f));
@@ -73,7 +79,7 @@ public class CameraController : MonoBehaviour {
 			} else if (stage == 2 && timer / MusicController.introClip.length >= percentTimeBetween*3) {
 				stage = 3;
 				fadeTimer = 0;
-			} else if (stage == 3 && timer / MusicController.introClip.length >= percentTimeBetween*4) {
+			} else if (stage == 3 && timer / MusicController.introClip.length >= 1.0) {
 				stage = 4;
 				fadeTimer = 0;
 			}
