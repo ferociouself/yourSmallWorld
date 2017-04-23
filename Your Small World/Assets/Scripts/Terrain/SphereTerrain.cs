@@ -271,7 +271,7 @@ public class SphereTerrain : MonoBehaviour {
 			if(vertices[index].getResource() != null && vertices[index].getResource().name.Contains("SandHills")) {
 				return;
 			}
-			GameObject sand = Resources.Load("Prefabs/SandHill" + Random.Range(0,2), typeof(GameObject)) as GameObject;
+			GameObject sand = Resources.Load("Prefabs/SandHill" + Random.Range(0,1), typeof(GameObject)) as GameObject;
 			sand = Instantiate(sand, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
 			vertices [index].removeResource ();
 			vertices [index].setResource (sand);
