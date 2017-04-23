@@ -96,18 +96,18 @@ public class Community : MonoBehaviour {
 		return goods.ContainsKey (good);
 	}
 
-	public int ChooseNextBuildingLocation() {
+	public Vertex ChooseNextBuildingLocation() {
 		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
-		int[] buildingIndices = terrain.currentBuildings ();
+		Vertex[] buildingIndices = terrain.currentBuildings ();
 		int randomBuildingIndex = Random.Range (0, buildingIndices.Length);
 		int numBuildingsChecked = 0;
 		while (numBuildingsChecked < buildingIndices.Length) {
-			int randomBuilding = buildingIndices [randomBuildingIndex];
-			int[] neighbors = terrain.neighborsOf (randomBuilding);
+			Vertex randomBuilding = buildingIndices [randomBuildingIndex];
+			Vertex[] neighbors = randomBuilding.getNeighbors ();
 			int randomNeighborIndex = Random.Range (0, neighbors.Length);
 			int numNeighborsChecked = 0;
 			while (numNeighborsChecked < neighbors.Length) {
-				if (terrain.editableMap [neighbors [randomNeighborIndex]]) {
+				if (neighbors [randomNeighborIndex].getHeight() == 0 && neighbors[randomNeighborIndex].getResource() == null) {
 					return neighbors [randomNeighborIndex];
 				}
 				randomNeighborIndex = (randomNeighborIndex + 1) % neighbors.Length;
@@ -116,6 +116,6 @@ public class Community : MonoBehaviour {
 			randomBuildingIndex = (randomBuildingIndex + 1) % buildingIndices.Length;
 			numBuildingsChecked++;
 		}
-		return -1;
+		return null;
 	}
 }
