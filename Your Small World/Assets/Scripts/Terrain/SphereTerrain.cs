@@ -292,14 +292,14 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void SandAtIndex(int index) {
-		if (getBiomeAtIndex(index) == MED_BIOME) {
-			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Sand")) {
+		if (getBiomeAtIndex(index) == DESERT_BIOME || getBiomeAtIndex(index) == MED_BIOME) {
+			if (resourceMap[index] != null && !resourceMap[index].name.Contains("SandHills")) {
 				DestroyImmediate(resourceMap[index]);
-				GameObject sand = Resources.Load("Prefabs/Sand", typeof(GameObject)) as GameObject;
+				GameObject sand = Resources.Load("Prefabs/SandHills", typeof(GameObject)) as GameObject;
 				sand = Instantiate(sand, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
 				resourceMap[index] = sand;
 			} else if (resourceMap[index] == null) {
-				GameObject sand = Resources.Load("Prefabs/Sand", typeof(GameObject)) as GameObject;
+				GameObject sand = Resources.Load("Prefabs/SandHills", typeof(GameObject)) as GameObject;
 				sand = Instantiate(sand, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
 				resourceMap[index] = sand;
 			}
@@ -311,11 +311,13 @@ public class SphereTerrain : MonoBehaviour {
 			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Forest")) {
 				DestroyImmediate(resourceMap[index]);
 				GameObject tree = Resources.Load("Prefabs/Forest", typeof(GameObject)) as GameObject;
-				tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				float randRot = Random.Range(0.0f, 180.0f);
+				tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.Euler(0.0f, randRot, 0.0f)) as GameObject;
 				resourceMap[index] = tree;
 			} else if (resourceMap[index] == null) {
 				GameObject tree = Resources.Load("Prefabs/Forest", typeof(GameObject)) as GameObject;
-				tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				float randRot = Random.Range(0.0f, 180.0f);
+				tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.Euler(0.0f, randRot, 0.0f)) as GameObject;
 				resourceMap[index] = tree;
 			}
 		}
@@ -323,13 +325,13 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void WheatAtIndex(int index) {
 		if (getBiomeAtIndex(index) == MED_BIOME) {
-			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Wheat")) {
+			if (resourceMap[index] != null && !resourceMap[index].name.Contains("WheatField")) {
 				DestroyImmediate(resourceMap[index]);
-				GameObject wheat = Resources.Load("Prefabs/Wheat", typeof(GameObject)) as GameObject;
+				GameObject wheat = Resources.Load("Prefabs/WheatField", typeof(GameObject)) as GameObject;
 				wheat = Instantiate(wheat, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
 				resourceMap[index] = wheat;
 			} else if (resourceMap[index] == null) {
-				GameObject wheat = Resources.Load("Prefabs/Wheat", typeof(GameObject)) as GameObject;
+				GameObject wheat = Resources.Load("Prefabs/WheatField", typeof(GameObject)) as GameObject;
 				wheat = Instantiate(wheat, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
 				resourceMap[index] = wheat;
 			}

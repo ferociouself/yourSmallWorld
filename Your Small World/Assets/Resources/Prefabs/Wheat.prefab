@@ -5092,7 +5092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c69f14ecfc946629cf5460cc76a17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {fileID: 0}
+  center: {fileID: 4922970605027450, guid: c5e4e448a77954d52b6107a295d02446, type: 2}
 --- !u!114 &114920063571383114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5105,4 +5105,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTimer: 0.5
-  finalScale: {x: 0.02, y: 0.02, z: 0.02}
+  finalScale: {x: 0.7, y: 0.3, z: 0.7}

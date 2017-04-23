@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872716, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -533,6 +533,56 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 466134321}
+    - target: {fileID: 114279000379015764, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114085546819690834, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114393202940627186, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114983522962871760, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114018875525396160, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114117282074872010, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114831239337626202, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114676392945246522, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114735032102348134, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114279746904886820, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0ef61df3a44734b4e874c5b6ece7bc7b, type: 2}
   m_IsPrefabParent: 0
