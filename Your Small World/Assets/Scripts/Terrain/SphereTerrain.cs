@@ -261,8 +261,16 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void StoneAtIndex(int index) {
-		if (getBiomeAtIndex(index) == LOW_BIOME) {
-			markAtIndex(index, STONE_BIOME);
+		SpreadStoneBiome (index);
+	}
+
+	public void SpreadStoneBiome(int index) {
+		markAtIndex (index, STONE_BIOME);
+		int[] neighbors = neighborsOf (index);
+		for (int i = 0; i < neighbors.Length; i++) {
+			if (heightMap [neighbors[i]] < 0 && getBiomeAtIndex(neighbors[i]) != STONE_BIOME) {
+				SpreadStoneBiome (neighbors[i]);
+			}
 		}
 	}
 
@@ -291,8 +299,17 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void OilAtIndex(int index) {
-		if (getBiomeAtIndex(index) == LOW_BIOME) {
-			markAtIndex(index, OIL_BIOME);
+		SpreadOilBiome (index);
+	}
+
+	public void SpreadOilBiome(int index) {
+		markAtIndex (index, OIL_BIOME);
+		int[] neighbors = neighborsOf (index);
+		for (int i = 0; i < neighbors.Length; i++) {
+			Debug.Log (heightMap [neighbors[1]]);
+			if (heightMap [neighbors[i]] < 0 && getBiomeAtIndex(neighbors[i]) != OIL_BIOME) {
+				SpreadOilBiome (neighbors[i]);
+			}
 		}
 	}
 
