@@ -14,13 +14,14 @@ public class Select : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	public void SelectResource(){
 		parentImage.gameObject.SetActive (false);
-		Cursor.SetCursor ((Resources.Load ("Textures/" + this.gameObject.name) as Texture2D), Vector2.zero, CursorMode.Auto);
+		Texture2D t2d = Resources.Load ("Textures/" + this.gameObject.name) as Texture2D;
+		Vector2 cursorHotspot = new Vector2 (t2d.width / 2, t2d.height / 2);
+		Cursor.SetCursor (t2d, cursorHotspot, CursorMode.Auto);
 		Camera.main.GetComponent<TerrainEditor> ().SelectBuildType (this.gameObject.name);
-		// TODO:send name of button to terraineditor for enum
 	}
 }
