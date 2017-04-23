@@ -29,7 +29,7 @@ public class TerrainEditor : MonoBehaviour {
 		Deiton
 	}
 
-	BuildType curType;
+	BuildType curType = BuildType.Terrain;
 
 	// Use this for initialization
 	void Start () {
@@ -38,13 +38,50 @@ public class TerrainEditor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	 
+		
 		if (Input.GetMouseButton(1) && buffer > maxBuffer) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hitInfo;
 			int layerMask = 1 << 8;
 			if (Physics.Raycast(ray, out hitInfo, layerMask)) {
-				st.incHeightAtIndex(st.findIndexOfNearest(hitInfo.point), incrDir * 0.1f);
+				switch (curType) {
+				case BuildType.Water:
+					st.waterAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Terrain:
+					st.incHeightAtIndex(st.findIndexOfNearest(hitInfo.point), incrDir * 0.1f);
+					break;
+				case BuildType.Stone:
+					// st.StoneAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Sand:
+					// st.SandAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Tree:
+					// st.TreeAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Wheat:
+					// st.WheatAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Oil:
+					// st.OilAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Iron:
+					// st.IronAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Copper:
+					// st.CopperAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Coal:
+					// st.CoalAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Deiton:
+					// st.DeitonAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				default:
+					break;
+				}
+
 			}
 			buffer = 0.0f;
 		}
