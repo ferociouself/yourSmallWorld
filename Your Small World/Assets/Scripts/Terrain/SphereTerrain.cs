@@ -428,7 +428,7 @@ public class SphereTerrain : MonoBehaviour {
 		return vertices [i];
 	}
 
-	public void generateNeighborFieldsAsync() {
+	public IEnumerator generateNeighborFieldsAsync() {
 		for (int i = 0; i < vertices.Length; i++) {
 			vertices [i].calculateNeighbors ();
 			if (i % 2 == 0) {
