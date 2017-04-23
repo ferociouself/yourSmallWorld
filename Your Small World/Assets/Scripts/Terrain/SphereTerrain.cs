@@ -25,6 +25,10 @@ public class SphereTerrain : MonoBehaviour {
 	public const string MED_BIOME = "Medium";
 	public const string HIGH_BIOME = "High";
 	public const string WATER_BIOME = "Water";
+	public const string OIL_BIOME = "Oil";
+	public const string STONE_BIOME = "Stone";
+
+
 
 	MeshFilter filter;
 
@@ -170,7 +174,7 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void StoneAtIndex(int index) {
 		if (getBiomeAtIndex(index) == LOW_BIOME) {
-			
+			markAtIndex(index, STONE_BIOME);
 		}
 	}
 
@@ -200,7 +204,7 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void OilAtIndex(int index) {
 		if (getBiomeAtIndex(index) == LOW_BIOME) {
-			resourceMap[index] = oil;
+			markAtIndex(index, OIL_BIOME);
 		}
 	}
 
