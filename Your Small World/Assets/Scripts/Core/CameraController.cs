@@ -13,6 +13,9 @@ public class CameraController : MonoBehaviour {
 
 	public float timer;
 
+	bool downInPreviousFrame = false;
+	bool isDragActive = false;
+
 	public Text LatinText;
 	public Text EnglishText;
 	public Text TitleText;
@@ -116,15 +119,39 @@ public class CameraController : MonoBehaviour {
 				break;
 			}
 		}
+
+		if (Input.GetMouseButton(1))
+		{
+			if (downInPreviousFrame)
+			{
+				if (isDragActive)
+				{
+					MouseDrag();
+				}
+				else
+				{
+					isDragActive = true;
+					MouseDown();
+				}
+			}
+			downInPreviousFrame = true;
+		}
+		else
+		{
+			if (isDragActive)
+			{
+				isDragActive = false;
+				MouseUp();
+			}
+			downInPreviousFrame = false;
+		}
 	}
 
-	IEnumerator OnMouseDown() {
+	void MouseDown() {
 		lastMousePos = Input.mousePosition;
-
-		yield return null;
 	}
 
-	IEnumerator OnMouseDrag() {
+	void MouseDrag() {
 
 		Vector3 curMousePos = Input.mousePosition;
 
@@ -135,12 +162,9 @@ public class CameraController : MonoBehaviour {
 		child.rotation = child.rotation * Quaternion.Euler(-mouseDelta.y * (zoomAmt / 100.0f), mouseDelta.x * (zoomAmt / 100.0f), 0.0f);
 
 		lastMousePos = curMousePos;
-		yield return null;
 	}
 
-	IEnumerator OnMouseUp() {
+	void MouseUp() {
 		lastMousePos = Vector3.zero;
-
-		yield return null;
 	}
 }

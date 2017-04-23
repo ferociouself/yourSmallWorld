@@ -266,13 +266,15 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void spreadWaterBiome(int index) {
-		markAtIndex (index, WATER_BIOME);
-		int[] neighbors = neighborsOf (index);
-		Debug.Log (neighbors.Length);
-		for (int i = 0; i < neighbors.Length; i++) {
-			Debug.Log (heightMap [neighbors[1]]);
-			if (heightMap [neighbors[i]] < 0 && getBiomeAtIndex(neighbors[i]) != WATER_BIOME) {
-				spreadWaterBiome (neighbors[i]);
+		if (getBiomeAtIndex(index) == LOW_BIOME) {
+			markAtIndex (index, WATER_BIOME);
+			int[] neighbors = neighborsOf (index);
+			Debug.Log (neighbors.Length);
+			for (int i = 0; i < neighbors.Length; i++) {
+				Debug.Log (heightMap [neighbors[1]]);
+				if (heightMap [neighbors[i]] < 0 && getBiomeAtIndex(neighbors[i]) != WATER_BIOME) {
+					spreadWaterBiome (neighbors[i]);
+				}
 			}
 		}
 	}
@@ -282,11 +284,13 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void SpreadStoneBiome(int index) {
-		markAtIndex (index, STONE_BIOME);
-		int[] neighbors = neighborsOf (index);
-		for (int i = 0; i < neighbors.Length; i++) {
-			if (heightMap [neighbors[i]] < 0 && getBiomeAtIndex(neighbors[i]) != STONE_BIOME) {
-				SpreadStoneBiome (neighbors[i]);
+		if (getBiomeAtIndex(index) == LOW_BIOME) {
+			markAtIndex (index, STONE_BIOME);
+			int[] neighbors = neighborsOf (index);
+			for (int i = 0; i < neighbors.Length; i++) {
+				if (heightMap [neighbors[i]] < 0 && getBiomeAtIndex(neighbors[i]) != STONE_BIOME) {
+					SpreadStoneBiome (neighbors[i]);
+				}
 			}
 		}
 	}
@@ -343,12 +347,14 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void SpreadOilBiome(int index) {
-		markAtIndex (index, OIL_BIOME);
-		int[] neighbors = neighborsOf (index);
-		for (int i = 0; i < neighbors.Length; i++) {
-			Debug.Log (heightMap [neighbors[1]]);
-			if (heightMap [neighbors[i]] < 0 && getBiomeAtIndex(neighbors[i]) != OIL_BIOME) {
-				SpreadOilBiome (neighbors[i]);
+		if (getBiomeAtIndex(index) == LOW_BIOME) {
+			markAtIndex (index, OIL_BIOME);
+			int[] neighbors = neighborsOf (index);
+			for (int i = 0; i < neighbors.Length; i++) {
+				Debug.Log (heightMap [neighbors[1]]);
+				if (heightMap [neighbors[i]] < 0 && getBiomeAtIndex(neighbors[i]) != OIL_BIOME) {
+					SpreadOilBiome (neighbors[i]);
+				}
 			}
 		}
 	}
@@ -453,7 +459,6 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void rebuildColors() {
-		Debug.Log ("rebuilding....");
 		Color[] c = new Color[filter.mesh.vertices.Length];
 		for (int i = 0; i < filter.mesh.vertices.Length; i++) {
 			switch (getBiomeAtIndex(i)) {

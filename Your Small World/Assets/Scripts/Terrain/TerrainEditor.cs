@@ -10,6 +10,7 @@ public class TerrainEditor : MonoBehaviour {
 	public Text dirIndicator;
 	public Text buildIndicator;
 
+
 	float buffer = 0.0f;
 	public float maxBuffer = 1.0f;
 
@@ -30,7 +31,7 @@ public class TerrainEditor : MonoBehaviour {
 		Deiton
 	}
 
-	BuildType curType = BuildType.Terrain;
+	BuildType curType = BuildType.Smooth;
 
 	// Use this for initialization
 	void Start () {
@@ -40,7 +41,7 @@ public class TerrainEditor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if (Input.GetMouseButton(1) && buffer > maxBuffer) {
+		if (Input.GetMouseButton(0) && buffer > maxBuffer) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hitInfo;
 			int layerMask = 1 << 8;
@@ -89,6 +90,7 @@ public class TerrainEditor : MonoBehaviour {
 			}
 			buffer = 0.0f;
 		}
+	
 
 		buffer += Time.deltaTime;
 	}
