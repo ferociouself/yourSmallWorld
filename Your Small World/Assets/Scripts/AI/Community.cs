@@ -5,15 +5,50 @@ using UnityEngine;
 public class Community : MonoBehaviour {
 
 	private Dictionary<BaseResource,int> goods;
+	int bois;
+	int busybois;
 
 	// Use this for initialization
 	void Start () {
 		goods = new Dictionary<BaseResource, int> ();
+		bois = 5;
+		busybois = 0;
+		//TODO: make the bois
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void AddBois(int toAdd){
+		toAdd = Mathf.Abs (toAdd);
+		bois += toAdd;
+		//TODO: make more bois
+	}
+
+	public int GetBois(){
+		return bois;
+	}
+
+	public bool MakeBusyBoi(){
+		if (busybois < bois) {
+			busybois++;
+			return true;
+		}
+		return false;
+	}
+
+	public int GetBusyBois(){
+		return busybois;
+	}
+
+	public bool IsThereAFreeBoi(){
+		return busybois < bois;
+	}
+
+	public void FreeBois(){
+		busybois = 0;
 	}
 
 	/// <summary>
@@ -57,7 +92,11 @@ public class Community : MonoBehaviour {
 		return false;
 	}
 
-	public int chooseNextBuildingLocation() {
+	public bool ContainsKey(BaseResource good){
+		return goods.ContainsKey (good);
+	}
+
+	public int ChooseNextBuildingLocation() {
 		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
 		int[] buildingIndices = terrain.currentBuildings ();
 		int randomBuildingIndex = Random.Range (0, buildingIndices.Length);
