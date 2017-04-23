@@ -30,6 +30,14 @@ public class SphereTerrain : MonoBehaviour {
 
 
 
+	List<Color> blues;
+	List<Color> greens;
+	List<Color> yellows;
+	List<Color> greays;
+	List<Color> whites;
+	List<Color> browns;
+	List<Color> oils;
+
 	MeshFilter filter;
 
 	// Use this for initialization
@@ -45,8 +53,61 @@ public class SphereTerrain : MonoBehaviour {
 			editableMap[i] = true;
 			biomeMap[i] = "Desert";
 		}
+
+
+		blues = new List<Color> ();
+		blues.Add(lazyColor(15,94,156));
+		blues.Add(lazyColor(35,137,218));
+		blues.Add(lazyColor(28,163,236));
+		blues.Add(lazyColor(90,188,216));
+		blues.Add(lazyColor(116,204,244));
+
+		greens = new List<Color> ();
+		greens.Add(lazyColor(79,141,47));
+		greens.Add(lazyColor(58,124,37));
+		greens.Add(lazyColor(19,99,33));
+		greens.Add(lazyColor(22,99,54));
+		greens.Add(lazyColor(8,88,58));
+
+		yellows = new List<Color> ();
+		yellows.Add(lazyColor(236,216,98));
+		yellows.Add(lazyColor(242,203,80));
+		//yellows.Add(lazyColor(221,171,51));
+
+		greays = new List<Color> ();
+		greays.Add(lazyColor(204,216,218));
+		greays.Add(lazyColor(143,152,171));
+		greays.Add(lazyColor(120,126,149));
+		greays.Add(lazyColor(120,126,149));
+		greays.Add(lazyColor(120,126,149));
+
+		whites = new List<Color> ();
+		whites.Add(lazyColor(235,252,255));
+		whites.Add(lazyColor(224,252,255));
+		whites.Add(lazyColor(208,255,255));
+		whites.Add(lazyColor(204,251,255));
+		whites.Add(lazyColor(188,255,255));
+
+		browns = new List<Color> ();
+		browns.Add(lazyColor(41,24,10));
+		browns.Add(lazyColor(45,26,12));
+		browns.Add(lazyColor(60,34,16));
+		browns.Add(lazyColor(71,40,18));
+		browns.Add(lazyColor(84,48,22));
+
+		oils = new List<Color> ();
+		oils.Add (lazyColor (43,4,4));
+		oils.Add (lazyColor (43,26,4));
+		oils.Add (lazyColor (11,43,4));
+		oils.Add (lazyColor (4,11,43));
+		oils.Add (lazyColor (31,4,43));
+
 		updateMesh ();
 		rebuildColors ();
+	}
+
+	private Color lazyColor(int r, int g, int b){
+		return new Color(((float)r)/255.0f, ((float)g)/255.0f, ((float)b)/255.0f);
 	}
 	
 	// Update is called once per frame
@@ -249,22 +310,28 @@ public class SphereTerrain : MonoBehaviour {
 		colors = filter.mesh.colors;
 		switch (biome) {
 		case WATER_BIOME:
-			colors [index] = new Color (0, 0, 1);
+			colors [index] = blues[Random.Range(0, blues.Count)];
 			break;
 		case DESERT_BIOME:
-			colors [index] = new Color (1, 1, 0);
+			colors [index] = yellows[Random.Range(0, yellows.Count)];
 			break;
 		case HIGH_BIOME:
-			colors [index] = new Color (0.75f, 0.75f, 0.75f);
+			colors [index] = greays[Random.Range(0, greays.Count)];
 			break;
 		case MED_BIOME:
-			colors [index] = new Color (0, 1, 0);
+			colors [index] = greens[Random.Range(0, greens.Count)];
 			break;
 		case LOW_BIOME:
-			colors [index] = new Color (0.2f, 0.2f, 0);
+			colors [index] = browns[Random.Range(0, browns.Count)];
+			break;
+		case STONE_BIOME:
+			colors [index] = greays [Random.Range (0, greays.Count)];
+			break;
+		case OIL_BIOME:
+			colors [index] = oils [Random.Range (0, oils.Count)];
 			break;
 		default:
-			colors [index] = new Color (1, 1, 0);
+			colors [index] = yellows[Random.Range(0, yellows.Count)];
 			break;
 		}
 		filter.mesh.colors = colors;
@@ -276,22 +343,28 @@ public class SphereTerrain : MonoBehaviour {
 		for (int i = 0; i < filter.mesh.vertices.Length; i++) {
 			switch (getBiomeAtIndex(i)) {
 			case WATER_BIOME:
-				c [i] = new Color (0, 0, 1);
+				c [i] = blues[Random.Range(0, blues.Count)];
 				break;
 			case DESERT_BIOME:
-				c [i] = new Color (1, 1, 0);
+				c [i] = yellows[Random.Range(0, yellows.Count)];
 				break;
 			case HIGH_BIOME:
-				c [i] = new Color (0.75f, 0.75f, 0.75f);
+				c [i] = greays[Random.Range(0, greays.Count)];
 				break;
 			case MED_BIOME:
-				c [i] = new Color (0, 1, 0);
+				c [i] = greens[Random.Range(0, greens.Count)];
 				break;
 			case LOW_BIOME:
-				c [i] = new Color (0.2f, 0.2f, 0);
+				c [i] = browns[Random.Range(0, browns.Count)];
+				break;
+			case STONE_BIOME:
+				c [i] = greays [Random.Range (0, greays.Count)];
+				break;
+			case OIL_BIOME:
+				c [i] = oils [Random.Range (0, oils.Count)];
 				break;
 			default:
-				c [i] = new Color (1, 1, 0);
+				c [i] = yellows[Random.Range(0, yellows.Count)];
 				break;
 			}
 		}
