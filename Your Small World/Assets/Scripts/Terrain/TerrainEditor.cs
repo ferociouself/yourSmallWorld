@@ -56,31 +56,31 @@ public class TerrainEditor : MonoBehaviour {
 					st.waterAtIndex(st.findIndexOfNearest(hitInfo.point));
 					break;
 				case BuildType.Stone:
-					// st.StoneAtIndex(st.findIndexOfNearest(hitInfo.point));
+					st.StoneAtIndex(st.findIndexOfNearest(hitInfo.point));
 					break;
 				case BuildType.Sand:
-					// st.SandAtIndex(st.findIndexOfNearest(hitInfo.point));
+					st.SandAtIndex(st.findIndexOfNearest(hitInfo.point));
 					break;
 				case BuildType.Tree:
-					// st.TreeAtIndex(st.findIndexOfNearest(hitInfo.point));
+					st.TreeAtIndex(st.findIndexOfNearest(hitInfo.point));
 					break;
 				case BuildType.Wheat:
-					// st.WheatAtIndex(st.findIndexOfNearest(hitInfo.point));
+					st.WheatAtIndex(st.findIndexOfNearest(hitInfo.point));
 					break;
 				case BuildType.Oil:
-					// st.OilAtIndex(st.findIndexOfNearest(hitInfo.point));
+					st.OilAtIndex(st.findIndexOfNearest(hitInfo.point));
 					break;
 				case BuildType.Iron:
-					// st.IronAtIndex(st.findIndexOfNearest(hitInfo.point));
+					st.IronAtIndex(st.findIndexOfNearest(hitInfo.point));
 					break;
 				case BuildType.Copper:
-					// st.CopperAtIndex(st.findIndexOfNearest(hitInfo.point));
+					st.CopperAtIndex(st.findIndexOfNearest(hitInfo.point));
 					break;
 				case BuildType.Coal:
-					// st.CoalAtIndex(st.findIndexOfNearest(hitInfo.point));
+					st.CoalAtIndex(st.findIndexOfNearest(hitInfo.point));
 					break;
 				case BuildType.Deiton:
-					// st.DeitonAtIndex(st.findIndexOfNearest(hitInfo.point));
+					st.DeitonAtIndex(st.findIndexOfNearest(hitInfo.point));
 					break;
 				default:
 					break;

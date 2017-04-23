@@ -49,10 +49,12 @@ public class SphereTerrain : MonoBehaviour {
 		biomeMap = new string[planetMesh.vertices.Length];
 		buildingIndices = new List<int> ();
 		editableMap = new bool[planetMesh.vertices.Length];
+		resourceMap = new GameObject[planetMesh.vertices.Length];
 		for (int i = 0; i < planetMesh.vertices.Length; i++) {
 			heightMap[i] = 0.0f;
 			editableMap[i] = true;
 			biomeMap[i] = "Desert";
+			resourceMap[i] = null;
 		}
 
 
@@ -230,6 +232,9 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void buildAtIndex(int index, string prefabName) {
 		if (editableMap[index]) {
+			if (resourceMap[index] != null) {
+				DestroyImmediate(resourceMap[index]);
+			}
 			GameObject building = Resources.Load("Prefabs/" + prefabName, typeof(GameObject)) as GameObject;
 			building = Instantiate(building, transform.TransformPoint(curVertices[index]), Quaternion.identity);
 			building.transform.parent = transform.FindChild("Planet Objects");
@@ -276,25 +281,46 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void SandAtIndex(int index) {
 		if (getBiomeAtIndex(index) == MED_BIOME) {
-			GameObject sand = Resources.Load("Prefabs/Sand", typeof(GameObject)) as GameObject;
-			sand = Instantiate(sand, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-			resourceMap[index] = sand;
+			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Sand")) {
+				DestroyImmediate(resourceMap[index]);
+				GameObject sand = Resources.Load("Prefabs/Sand", typeof(GameObject)) as GameObject;
+				sand = Instantiate(sand, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				resourceMap[index] = sand;
+			} else if (resourceMap[index] == null) {
+				GameObject sand = Resources.Load("Prefabs/Sand", typeof(GameObject)) as GameObject;
+				sand = Instantiate(sand, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				resourceMap[index] = sand;
+			}
 		}
 	}
 
 	public void TreeAtIndex(int index) {
 		if (getBiomeAtIndex(index) == MED_BIOME) {
-			GameObject tree = Resources.Load("Prefabs/Tree", typeof(GameObject)) as GameObject;
-			tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-			resourceMap[index] = tree;
+			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Forest")) {
+				DestroyImmediate(resourceMap[index]);
+				GameObject tree = Resources.Load("Prefabs/Forest", typeof(GameObject)) as GameObject;
+				tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				resourceMap[index] = tree;
+			} else if (resourceMap[index] == null) {
+				GameObject tree = Resources.Load("Prefabs/Forest", typeof(GameObject)) as GameObject;
+				tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				resourceMap[index] = tree;
+			}
 		}
 	}
 
 	public void WheatAtIndex(int index) {
 		if (getBiomeAtIndex(index) == MED_BIOME) {
-			GameObject wheat = Resources.Load("Prefabs/Wheat", typeof(GameObject)) as GameObject;
-			wheat = Instantiate(wheat, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-			resourceMap[index] = wheat;
+			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Wheat")) {
+				DestroyImmediate(resourceMap[index]);
+				GameObject wheat = Resources.Load("Prefabs/Wheat", typeof(GameObject)) as GameObject;
+				wheat = Instantiate(wheat, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				resourceMap[index] = wheat;
+			} else if (resourceMap[index] == null) {
+				GameObject wheat = Resources.Load("Prefabs/Wheat", typeof(GameObject)) as GameObject;
+				wheat = Instantiate(wheat, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				resourceMap[index] = wheat;
+			}
 		}
 	}
 
@@ -315,33 +341,61 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void IronAtIndex(int index) {
 		if (getBiomeAtIndex(index) == HIGH_BIOME) {
-			GameObject iron = Resources.Load("Prefabs/Iron", typeof(GameObject)) as GameObject;
-			iron = Instantiate(iron, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-			resourceMap[index] = iron;
+			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Iron")) {
+				DestroyImmediate(resourceMap[index]);
+				GameObject iron = Resources.Load("Prefabs/Iron", typeof(GameObject)) as GameObject;
+				iron = Instantiate(iron, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				resourceMap[index] = iron;
+			} else if (resourceMap[index] == null) {
+				GameObject iron = Resources.Load("Prefabs/Iron", typeof(GameObject)) as GameObject;
+				iron = Instantiate(iron, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				resourceMap[index] = iron;
+			}
 		}
 	}
 
 	public void CopperAtIndex(int index) {
 		if (getBiomeAtIndex(index) == HIGH_BIOME) {
-			GameObject copper = Resources.Load("Prefabs/Copper", typeof(GameObject)) as GameObject;
-			copper = Instantiate(copper, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-			resourceMap[index] = copper;
+			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Copper")) {
+				DestroyImmediate(resourceMap[index]);
+				GameObject copper = Resources.Load("Prefabs/Copper", typeof(GameObject)) as GameObject;
+				copper = Instantiate(copper, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				resourceMap[index] = copper;
+			} else if (resourceMap[index] == null) {
+				GameObject copper = Resources.Load("Prefabs/Copper", typeof(GameObject)) as GameObject;
+				copper = Instantiate(copper, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				resourceMap[index] = copper;
+			}
 		}
 	}
 
 	public void CoalAtIndex(int index) {
 		if (getBiomeAtIndex(index) == HIGH_BIOME) {
-			GameObject coal = Resources.Load("Prefabs/Coal", typeof(GameObject)) as GameObject;
-			coal = Instantiate(coal, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-			resourceMap[index] = coal;
+			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Coal")) {
+				DestroyImmediate(resourceMap[index]);
+				GameObject coal = Resources.Load("Prefabs/Coal", typeof(GameObject)) as GameObject;
+				coal = Instantiate(coal, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				resourceMap[index] = coal;
+			} else if (resourceMap[index] == null) {
+				GameObject coal = Resources.Load("Prefabs/Coal", typeof(GameObject)) as GameObject;
+				coal = Instantiate(coal, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+				resourceMap[index] = coal;
+			}
 		}
 	}
 
 	public void DeitonAtIndex(int index) {
 		if (getBiomeAtIndex(index) == HIGH_BIOME) {
-			GameObject deiton = Resources.Load("Prefabs/Deiton", typeof(GameObject)) as GameObject;
-			deiton = Instantiate(deiton, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity) as GameObject;
-			resourceMap[index] = deiton;
+			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Deiton")) {
+				DestroyImmediate(resourceMap[index]);
+				GameObject deiton = Resources.Load("Prefabs/Deiton", typeof(GameObject)) as GameObject;
+				deiton = Instantiate(deiton, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity) as GameObject;
+				resourceMap[index] = deiton;
+			} else if (resourceMap[index] == null) {
+				GameObject deiton = Resources.Load("Prefabs/Deiton", typeof(GameObject)) as GameObject;
+				deiton = Instantiate(deiton, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity) as GameObject;
+				resourceMap[index] = deiton;
+			}
 		}
 	}
 
