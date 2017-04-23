@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33479896636894654}
   - component: {fileID: 23219663170377616}
   - component: {fileID: 114409148876716734}
+  - component: {fileID: 114210201493796630}
   m_Layer: 0
   m_Name: Stone
   m_TagString: Untagged
@@ -81,6 +82,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956168560955016}
   m_Mesh: {fileID: 4300000, guid: e29bd67779afb47e29115d5390a6240f, type: 3}
+--- !u!114 &114210201493796630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956168560955016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c69f14ecfc946629cf5460cc76a17f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  center: {fileID: 4922970605027450, guid: c5e4e448a77954d52b6107a295d02446, type: 2}
 --- !u!114 &114409148876716734
 MonoBehaviour:
   m_ObjectHideFlags: 1

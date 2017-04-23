@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33199010278520806}
   - component: {fileID: 23068888628979512}
   - component: {fileID: 114930562948943488}
+  - component: {fileID: 114826306084668336}
   m_Layer: 0
   m_Name: Flint
   m_TagString: Untagged
@@ -81,6 +82,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1599259429583934}
   m_Mesh: {fileID: 4300000, guid: bb77078ea7c754964b233be9d710f629, type: 3}
+--- !u!114 &114826306084668336
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1599259429583934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c69f14ecfc946629cf5460cc76a17f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  center: {fileID: 4922970605027450, guid: c5e4e448a77954d52b6107a295d02446, type: 2}
 --- !u!114 &114930562948943488
 MonoBehaviour:
   m_ObjectHideFlags: 1
