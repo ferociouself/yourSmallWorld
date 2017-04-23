@@ -132,7 +132,8 @@ public class TerrainEditor : MonoBehaviour {
 			curType = BuildType.Deiton;
 			break;
 		default:
-			Debug.LogError("Build Type of " + type + " not recognized!");
+			Debug.LogError ("Build Type of " + type + " not recognized!");
+			break;
 		}
 	}
 
