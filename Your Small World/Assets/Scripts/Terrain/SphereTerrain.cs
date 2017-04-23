@@ -222,6 +222,10 @@ public class SphereTerrain : MonoBehaviour {
 	public void SpreadStoneBiome(Vertex v) {
 		if (v.getBiome() == LOW_BIOME) {
 			v.setBiome (STONE_BIOME);
+			GameObject stone = Resources.Load("Prefabs/Stone" + Random.Range(0,5), typeof(GameObject)) as GameObject;
+			stone = Instantiate(stone, transform.TransformPoint(v.getSphereVector()), Quaternion.identity) as GameObject;
+			v.removeResource ();
+			v.setResource (stone);
 			Vertex[] neighbors = v.getNeighbors ();
 			for (int i = 0; i < neighbors.Length; i++) {
 				if (neighbors[i].getHeight() < 0 && neighbors[i].getBiome() != STONE_BIOME) {
@@ -236,7 +240,7 @@ public class SphereTerrain : MonoBehaviour {
 			if(vertices[index].getResource() != null && vertices[index].getResource().name.Contains("SandHills")) {
 				return;
 			}
-			GameObject sand = Resources.Load("Prefabs/SandHills", typeof(GameObject)) as GameObject;
+			GameObject sand = Resources.Load("Prefabs/SandHill" + Random.Range(0,2), typeof(GameObject)) as GameObject;
 			sand = Instantiate(sand, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
 			vertices [index].removeResource ();
 			vertices [index].setResource (sand);
@@ -263,7 +267,7 @@ public class SphereTerrain : MonoBehaviour {
 				return;
 			}
 			GameObject wheat = Resources.Load("Prefabs/WheatField" + Random.Range(0, 2), typeof(GameObject)) as GameObject;
-			float randRot = Random.Range(0.0f, 180.0f);
+			float randRot = 0.0f;//Random.Range(0.0f, 180.0f);
 			wheat.transform.GetChild (0).transform.rotation = Quaternion.Euler (0.0f, randRot, 0.0f);
 			wheat = Instantiate(wheat, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
 			vertices [index].removeResource ();
@@ -292,7 +296,7 @@ public class SphereTerrain : MonoBehaviour {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Iron")) {
 				return;
 			}
-			GameObject iron = Resources.Load("Prefabs/Iron", typeof(GameObject)) as GameObject;
+			GameObject iron = Resources.Load("Prefabs/IronVein" + Random.Range(0,3), typeof(GameObject)) as GameObject;
 			iron = Instantiate(iron, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
 			vertices [index].removeResource ();
 			vertices [index].setResource (iron);
@@ -304,7 +308,7 @@ public class SphereTerrain : MonoBehaviour {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Copper")) {
 				return;
 			}
-			GameObject copper = Resources.Load("Prefabs/Copper", typeof(GameObject)) as GameObject;
+			GameObject copper = Resources.Load("Prefabs/CopperVein" + Random.Range(0,4), typeof(GameObject)) as GameObject;
 			copper = Instantiate(copper, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
 			vertices [index].removeResource ();
 			vertices [index].setResource (copper);
