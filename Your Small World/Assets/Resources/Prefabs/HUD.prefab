@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114694205335452422}
   - component: {fileID: 114279000379015764}
   - component: {fileID: 114769377382968026}
+  - component: {fileID: 114179061667075806}
   m_Layer: 5
   m_Name: Oil
   m_TagString: Untagged
@@ -110,6 +111,7 @@ GameObject:
   - component: {fileID: 114346195412015676}
   - component: {fileID: 114735032102348134}
   - component: {fileID: 114049158873035186}
+  - component: {fileID: 114691108339836046}
   m_Layer: 5
   m_Name: Stone
   m_TagString: Untagged
@@ -163,6 +165,7 @@ GameObject:
   - component: {fileID: 114794673061561152}
   - component: {fileID: 114279746904886820}
   - component: {fileID: 114390549373120036}
+  - component: {fileID: 114703582047245594}
   m_Layer: 5
   m_Name: Water
   m_TagString: Untagged
@@ -182,6 +185,7 @@ GameObject:
   - component: {fileID: 114616947261090158}
   - component: {fileID: 114117282074872010}
   - component: {fileID: 114231847321373554}
+  - component: {fileID: 114394199180700788}
   m_Layer: 5
   m_Name: Sand
   m_TagString: Untagged
@@ -270,6 +274,7 @@ GameObject:
   - component: {fileID: 114162023985187282}
   - component: {fileID: 114831239337626202}
   - component: {fileID: 114693836453061766}
+  - component: {fileID: 114704492048248442}
   m_Layer: 5
   m_Name: Tree
   m_TagString: Untagged
@@ -289,6 +294,7 @@ GameObject:
   - component: {fileID: 114636923554459754}
   - component: {fileID: 114018875525396160}
   - component: {fileID: 114925806985367262}
+  - component: {fileID: 114576824810421650}
   m_Layer: 5
   m_Name: Deiton
   m_TagString: Untagged
@@ -326,6 +332,7 @@ GameObject:
   - component: {fileID: 114291699294895076}
   - component: {fileID: 114085546819690834}
   - component: {fileID: 114503041301120984}
+  - component: {fileID: 114942792011004460}
   m_Layer: 5
   m_Name: Copper
   m_TagString: Untagged
@@ -363,6 +370,7 @@ GameObject:
   - component: {fileID: 114946635739790186}
   - component: {fileID: 114393202940627186}
   - component: {fileID: 114586568027477434}
+  - component: {fileID: 114643752032135072}
   m_Layer: 5
   m_Name: Coal
   m_TagString: Untagged
@@ -578,6 +586,7 @@ GameObject:
   - component: {fileID: 114653236683785578}
   - component: {fileID: 114983522962871760}
   - component: {fileID: 114053055962462112}
+  - component: {fileID: 114252994326163904}
   m_Layer: 5
   m_Name: Iron
   m_TagString: Untagged
@@ -597,6 +606,7 @@ GameObject:
   - component: {fileID: 114293362070112052}
   - component: {fileID: 114676392945246522}
   - component: {fileID: 114948102399680138}
+  - component: {fileID: 114298796524852058}
   m_Layer: 5
   m_Name: Wheat
   m_TagString: Untagged
@@ -704,7 +714,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114636923554459754}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114576824810421650}
+        m_MethodName: SelectResource
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114024909685086718
@@ -837,7 +858,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114291699294895076}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114942792011004460}
+        m_MethodName: SelectResource
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114117282074872010
@@ -878,7 +910,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114616947261090158}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114394199180700788}
+        m_MethodName: SelectResource
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114162023985187282
@@ -993,6 +1036,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114179061667075806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1007876389227908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de59d1df4d88c42fa993bfb14607ce16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentImage: {fileID: 114549554900688842}
 --- !u!114 &114179219415195718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1241,6 +1296,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Wheat
+--- !u!114 &114252994326163904
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1908385178273204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de59d1df4d88c42fa993bfb14607ce16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentImage: {fileID: 114549554900688842}
 --- !u!114 &114255914603819768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1313,7 +1380,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114694205335452422}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114179061667075806}
+        m_MethodName: SelectResource
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114279746904886820
@@ -1354,7 +1432,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114794673061561152}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114703582047245594}
+        m_MethodName: SelectResource
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114291699294895076
@@ -1452,6 +1541,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114298796524852058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926734632827658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de59d1df4d88c42fa993bfb14607ce16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentImage: {fileID: 114549554900688842}
 --- !u!114 &114310245592070320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1610,9 +1711,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114946635739790186}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114643752032135072}
+        m_MethodName: SelectResource
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114394199180700788
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1277482131974570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de59d1df4d88c42fa993bfb14607ce16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentImage: {fileID: 114549554900688842}
 --- !u!114 &114439178863145816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1778,6 +1902,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Water
+--- !u!114 &114576824810421650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1407629631182550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de59d1df4d88c42fa993bfb14607ce16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentImage: {fileID: 114549554900688842}
 --- !u!114 &114586568027477434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1871,6 +2007,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114643752032135072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1546775660181208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de59d1df4d88c42fa993bfb14607ce16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentImage: {fileID: 114549554900688842}
 --- !u!114 &114653224920887024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2010,7 +2158,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114293362070112052}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114298796524852058}
+        m_MethodName: SelectResource
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114687577899726138
@@ -2076,6 +2235,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Copper
+--- !u!114 &114691108339836046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1140954846981698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de59d1df4d88c42fa993bfb14607ce16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentImage: {fileID: 114549554900688842}
 --- !u!114 &114692751055626268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2148,6 +2319,30 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114703582047245594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1241721758200244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de59d1df4d88c42fa993bfb14607ce16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentImage: {fileID: 114549554900688842}
+--- !u!114 &114704492048248442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1376691586286598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de59d1df4d88c42fa993bfb14607ce16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentImage: {fileID: 114549554900688842}
 --- !u!114 &114711232126888384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2219,7 +2414,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114346195412015676}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114691108339836046}
+        m_MethodName: SelectResource
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114759812565091894
@@ -2391,7 +2597,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114162023985187282}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114704492048248442}
+        m_MethodName: SelectResource
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114856810392634168
@@ -2486,6 +2703,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   realtext: Dieton
+--- !u!114 &114942792011004460
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1459693964616858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de59d1df4d88c42fa993bfb14607ce16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentImage: {fileID: 114549554900688842}
 --- !u!114 &114946635739790186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2563,7 +2792,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114653236683785578}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114252994326163904}
+        m_MethodName: SelectResource
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!222 &222013629229380380
