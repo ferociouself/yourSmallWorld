@@ -15,7 +15,9 @@ public class TerrainEditor : MonoBehaviour {
 
 	int incrDir = 1;
 
-	bool buildMode = false;
+	enum BuildType {
+
+	}
 
 	// Use this for initialization
 	void Start () {
