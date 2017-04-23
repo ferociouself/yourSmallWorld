@@ -61,7 +61,7 @@ public class SphereTerrain : MonoBehaviour {
 		blues.Add(lazyColor(35,137,218));
 		blues.Add(lazyColor(28,163,236));
 		blues.Add(lazyColor(90,188,216));
-		blues.Add(lazyColor(116,204,244));
+		//blues.Add(lazyColor(116,204,244));
 
 		greens = new List<Color> ();
 		greens.Add(lazyColor(79,141,47));
