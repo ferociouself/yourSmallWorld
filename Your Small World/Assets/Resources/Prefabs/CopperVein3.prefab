@@ -254,6 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4978255314732984}
   - component: {fileID: 95300475837814160}
+  - component: {fileID: 114321862145135860}
   m_Layer: 0
   m_Name: CopperVein3
   m_TagString: Untagged
@@ -1643,3 +1644,15 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114321862145135860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1467696721932670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c69f14ecfc946629cf5460cc76a17f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  center: {fileID: 0}
