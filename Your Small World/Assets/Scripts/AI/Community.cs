@@ -68,7 +68,7 @@ public class Community : MonoBehaviour {
 			int randomNeighborIndex = Random.Range (0, neighbors.Length);
 			int numNeighborsChecked = 0;
 			while (numNeighborsChecked < neighbors.Length) {
-				if (terrain.buildableMap [neighbors [randomNeighborIndex]]) {
+				if (terrain.editableMap [neighbors [randomNeighborIndex]]) {
 					return neighbors [randomNeighborIndex];
 				}
 				randomNeighborIndex = (randomNeighborIndex + 1) % neighbors.Length;
