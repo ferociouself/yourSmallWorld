@@ -204,7 +204,7 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void spreadWaterBiome(Vertex v) {
-		if (v.getBiome() == LOW_BIOME) {
+		if (v.getBiome() == LOW_BIOME || v.getBiome() == OIL_BIOME || v.getBiome() == STONE_BIOME) {
 			v.setBiome (WATER_BIOME);
 			Vertex[] neighbors = v.getNeighbors ();
 			for (int i = 0; i < neighbors.Length; i++) {
@@ -220,7 +220,7 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void SpreadStoneBiome(Vertex v) {
-		if (v.getBiome() == LOW_BIOME) {
+		if (v.getBiome() == LOW_BIOME || v.getBiome() == OIL_BIOME || v.getBiome() == WATER_BIOME) {
 			v.setBiome (STONE_BIOME);
 			Vertex[] neighbors = v.getNeighbors ();
 			for (int i = 0; i < neighbors.Length; i++) {
@@ -276,7 +276,7 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void SpreadOilBiome(Vertex v) {
-		if (v.getBiome() == LOW_BIOME) {
+		if (v.getBiome() == LOW_BIOME || v.getBiome() == WATER_BIOME || v.getBiome() == STONE_BIOME) {
 			v.setBiome (OIL_BIOME);
 			Vertex[] neighbors = v.getNeighbors ();
 			for (int i = 0; i < neighbors.Length; i++) {

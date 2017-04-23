@@ -41,7 +41,7 @@ public class Vertex {
 	public void setHeight(float h) {
 		if (isEditable) {
 			height = Mathf.Max(Mathf.Min(h, parent.maxHeight), parent.minHeight);
-			if (height >= 0) {
+			if (height > 0) {
 				setTerrain (SphereTerrain.HIGH_BIOME);
 			} else if (height < 0.0f) {
 				setTerrain(SphereTerrain.LOW_BIOME);
