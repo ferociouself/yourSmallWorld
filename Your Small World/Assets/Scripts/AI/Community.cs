@@ -64,7 +64,7 @@ public class Community : MonoBehaviour {
 		int numBuildingsChecked = 0;
 		while (numBuildingsChecked < buildingIndices.Length) {
 			int randomBuilding = buildingIndices [randomBuildingIndex];
-			int[] neighbors = terrain.neigborsOf (randomBuilding);
+			int[] neighbors = terrain.neighborsOf (randomBuilding);
 			int randomNeighborIndex = Random.Range (0, neighbors.Length);
 			int numNeighborsChecked = 0;
 			while (numNeighborsChecked < neighbors.Length) {
