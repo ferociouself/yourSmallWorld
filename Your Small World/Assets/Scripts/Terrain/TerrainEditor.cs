@@ -26,47 +26,27 @@ public class TerrainEditor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (buildMode) {
-			if (Input.GetMouseButton(1) && buffer > maxBuffer) {
-				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				RaycastHit hitInfo;
-				int layerMask = 1 << 8;
-				if (Physics.Raycast(ray, out hitInfo, layerMask)) {
-					st.waterAtIndex(st.findIndexOfNearest(hitInfo.point));
-				}
-				buffer = 0.0f;
+	 
+		if (Input.GetMouseButton(1) && buffer > maxBuffer) {
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hitInfo;
+			int layerMask = 1 << 8;
+			if (Physics.Raycast(ray, out hitInfo, layerMask)) {
+				st.incHeightAtIndex(st.findIndexOfNearest(hitInfo.point), incrDir * 0.1f);
 			}
-		} else {
-			if (Input.GetMouseButton(1) && buffer > maxBuffer) {
-				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				RaycastHit hitInfo;
-				int layerMask = 1 << 8;
-				if (Physics.Raycast(ray, out hitInfo, layerMask)) {
-					st.incHeightAtIndex(st.findIndexOfNearest(hitInfo.point), incrDir * 0.1f);
-				}
-				buffer = 0.0f;
-			}
+			buffer = 0.0f;
 		}
-		if (Input.GetButtonDown("Activate")) {
-			incrDir *= -1;
-			if (dirIndicator != null) {
-				if (incrDir > 0) {
-					dirIndicator.text = "Direction: Up";
-				} else {
-					dirIndicator.text = "Direction: Down";
-				}
-			}
-		}
-		if (Input.GetButtonDown("Build_Mode")) {
-			buildMode = !buildMode;
-			if (buildIndicator != null) {
-				if (buildMode) {
-					buildIndicator.text = "Water Mode: On";
-				} else {
-					buildIndicator.text = "Water Mode: Off";
-				}
-			}
-		}
+
 		buffer += Time.deltaTime;
 	}
+
+	public void GoingUp(){
+		incrDir = Mathf.Abs (incrDir);
+	}
+
+	public void GoingDown(){
+		incrDir =-1 * Mathf.Abs (incrDir);
+	}
+
+
 }
