@@ -205,25 +205,25 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224603447970316260, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+    - target: {fileID: 114175576455890054, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
         type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: -109
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1418470966}
+    - target: {fileID: 114175576455890054, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoingUp
       objectReference: {fileID: 0}
-    - target: {fileID: 224603447970316260, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+    - target: {fileID: 114179219415195718, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
         type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -40
-      objectReference: {fileID: 0}
-    - target: {fileID: 224603447970316260, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1418470966}
+    - target: {fileID: 114179219415195718, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
         type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224603447970316260, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 1
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoingDown
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0ef61df3a44734b4e874c5b6ece7bc7b, type: 2}
@@ -389,6 +389,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1418470966 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114483717114369244, guid: c5e4e448a77954d52b6107a295d02446,
+    type: 2}
+  m_PrefabInternal: {fileID: 1125129568}
+  m_Script: {fileID: 11500000, guid: 11ef23f7209dd47569e09847df073b43, type: 3}
 --- !u!1 &1451093260
 GameObject:
   m_ObjectHideFlags: 0

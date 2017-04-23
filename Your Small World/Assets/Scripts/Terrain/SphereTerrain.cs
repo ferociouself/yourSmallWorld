@@ -24,10 +24,14 @@ public class SphereTerrain : MonoBehaviour {
 	public const string LOW_BIOME = "Low";
 	public const string MED_BIOME = "Medium";
 	public const string HIGH_BIOME = "High";
+	public const string WATER_BIOME = "Water";
+
+	MeshFilter filter;
 
 	// Use this for initialization
 	void Start () {
-		Mesh planetMesh = GetComponent<MeshFilter> ().mesh;
+		filter = GetComponent<MeshFilter> ();
+		Mesh planetMesh = filter.mesh;
 		heightMap = new float[planetMesh.vertices.Length];
 		biomeMap = new string[planetMesh.vertices.Length];
 		buildingIndices = new List<int> ();
@@ -38,15 +42,31 @@ public class SphereTerrain : MonoBehaviour {
 			biomeMap[i] = "Desert";
 		}
 		updateMesh ();
+		rebuildColors ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		List<int> waterVertices = new List<int> ();
+		for (int i = 0; i < biomeMap.Length; i++) {
+			if (biomeMap [i] == WATER_BIOME) {
+				waterVertices.Add (i);
+			}
+		}
+		foreach (int k in waterVertices) {
+			int[] neighbors = neighborsOf (k);
+			for(int l = 0; l < neighbors.Length; l++) {
+				if (biomeMap [neighbors [l]] != WATER_BIOME && heightMap [neighbors [l]] == 0) {
+					if (Random.Range (0, 500) < 1) {
+						markAtIndex (neighbors [l], MED_BIOME);
+					}
+				}
+			}
+		}
 	}
 
 	public void updateMesh() {
-		Mesh planetMesh = GetComponent<MeshFilter> ().mesh;
+		Mesh planetMesh = filter.mesh;
 		planetMesh.vertices = expandCube (planetMesh.vertices, heightMap);
 		curVertices = planetMesh.vertices;
 		curTriangles = planetMesh.triangles;
@@ -130,8 +150,21 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void waterAtIndex(int index) {
 		if (heightMap[index] < 0) {
-			GameObject water = Resources.Load("Prefabs/Water", typeof(GameObject)) as GameObject;
-			water = Instantiate(water, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity);
+			//GameObject water = Resources.Load("Prefabs/Water", typeof(GameObject)) as GameObject;
+			//water = Instantiate(water, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity);
+			spreadWaterBiome (index);
+		}
+	}
+
+	public void spreadWaterBiome(int index) {
+		markAtIndex (index, WATER_BIOME);
+		int[] neighbors = neighborsOf (index);
+		Debug.Log (neighbors.Length);
+		for (int i = 0; i < neighbors.Length; i++) {
+			Debug.Log (heightMap [neighbors[1]]);
+			if (heightMap [neighbors[i]] < 0 && getBiomeAtIndex(neighbors[i]) != WATER_BIOME) {
+				spreadWaterBiome (neighbors[i]);
+			}
 		}
 	}
 
@@ -209,6 +242,61 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void markAtIndex(int index, string biome) {
 		biomeMap[index] = biome;
+		Color[] colors = filter.mesh.colors;
+		if (colors.Length != filter.mesh.vertices.Length) {
+			rebuildColors ();
+		}
+		colors = filter.mesh.colors;
+		switch (biome) {
+		case WATER_BIOME:
+			colors [index] = new Color (0, 0, 1);
+			break;
+		case DESERT_BIOME:
+			colors [index] = new Color (1, 1, 0);
+			break;
+		case HIGH_BIOME:
+			colors [index] = new Color (0.75f, 0.75f, 0.75f);
+			break;
+		case MED_BIOME:
+			colors [index] = new Color (0, 1, 0);
+			break;
+		case LOW_BIOME:
+			colors [index] = new Color (0.2f, 0.2f, 0);
+			break;
+		default:
+			colors [index] = new Color (1, 1, 0);
+			break;
+		}
+		filter.mesh.colors = colors;
+	}
+
+	public void rebuildColors() {
+		Debug.Log ("rebuilding....");
+		Color[] c = new Color[filter.mesh.vertices.Length];
+		for (int i = 0; i < filter.mesh.vertices.Length; i++) {
+			switch (getBiomeAtIndex(i)) {
+			case WATER_BIOME:
+				c [i] = new Color (0, 0, 1);
+				break;
+			case DESERT_BIOME:
+				c [i] = new Color (1, 1, 0);
+				break;
+			case HIGH_BIOME:
+				c [i] = new Color (0.75f, 0.75f, 0.75f);
+				break;
+			case MED_BIOME:
+				c [i] = new Color (0, 1, 0);
+				break;
+			case LOW_BIOME:
+				c [i] = new Color (0.2f, 0.2f, 0);
+				break;
+			default:
+				c [i] = new Color (1, 1, 0);
+				break;
+			}
+		}
+		filter.mesh.colors = c;
+		filter.mesh.RecalculateBounds ();
 	}
 
 	public string getBiomeAtIndex(int index) {
@@ -264,3 +352,4 @@ public class SphereTerrain : MonoBehaviour {
 		return buildingIndices.ToArray ();
 	}
 }
+	
