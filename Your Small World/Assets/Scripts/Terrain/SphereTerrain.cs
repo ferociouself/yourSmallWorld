@@ -148,7 +148,7 @@ public class SphereTerrain : MonoBehaviour {
 		return biomeMap[index];
 	}
 
-	public List<Vector3> neighborsOf(Vector3 v) {
+	public int[] neighborsOf(Vector3 v) {
 		for (int i = 0; i < curVertices.Length; i++) {
 			if (curVertices [i] == v) {
 				return neighborsOf (i);
@@ -157,7 +157,7 @@ public class SphereTerrain : MonoBehaviour {
 		return null;
 	}
 
-	public int[] neigborsOf(int index) {
+	public int[] neighborsOf(int index) {
 		List<int> neighborIndices = new List<int> (); 
 		for (int i = 0; i < curTriangles.Length; i++) {
 			if (curTriangles [i] == index) {
