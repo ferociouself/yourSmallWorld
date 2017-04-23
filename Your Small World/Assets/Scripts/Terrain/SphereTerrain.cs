@@ -111,7 +111,7 @@ public class SphereTerrain : MonoBehaviour {
 		generateNeighborFieldsAsync ();
 
 		updateMesh ();
-		rebuildColors ();
+		updateColors ();
 	}
 
 	private Color lazyColor(int r, int g, int b){
