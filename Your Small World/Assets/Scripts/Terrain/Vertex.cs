@@ -135,10 +135,10 @@ public class Vertex {
 		return this.resource;
 	}
 
-	public GameObject removeResource() {
+	public void removeResource() {
 		GameObject temp = this.resource;
 		this.resource = null;
-		return temp;
+		GameObject.Destroy (temp);
 	}
 
 	public void setResource(GameObject g) {
