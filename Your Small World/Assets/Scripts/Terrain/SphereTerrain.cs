@@ -45,7 +45,7 @@ public class SphereTerrain : MonoBehaviour {
 	public bool hasCommunity;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		filter = GetComponent<MeshFilter> ();
 		Mesh planetMesh = filter.mesh;
 
@@ -182,6 +182,16 @@ public class SphereTerrain : MonoBehaviour {
 	public int findIndexOfNearest(Vector3 point) {
 		float minMag = float.MaxValue;
 		int minIndex = -1;
+
+		if (vertices == null) {
+			filter = GetComponent<MeshFilter> ();
+			Mesh planetMesh = filter.mesh;
+			vertices = new Vertex[planetMesh.vertices.Length];
+
+			for (int i = 0; i < vertices.Length; i++) {
+				vertices [i] = new Vertex (i, planetMesh.vertices [i], this);
+			}
+		}
 
 		for (int i = 0; i < vertices.Length; i++) {
 			float curMag = (transform.TransformPoint(vertices[i].getSphereVector()) - point).magnitude;
@@ -418,11 +428,22 @@ public class SphereTerrain : MonoBehaviour {
 		return vertices [i];
 	}
 
-	public IEnumerator generateNeighborFieldsAsync() {
+	public void generateNeighborFieldsAsync() {
 		for (int i = 0; i < vertices.Length; i++) {
 			vertices [i].calculateNeighbors ();
 			if (i % 2 == 0) {
 				yield return null;
+			}
+		}
+	}
+
+	void OnDrawGizmos() {
+		Gizmos.color = Color.red;
+		if (vertices != null) {
+			for (int i = 0; i < vertices.Length; i++) {
+				if (vertices[i].getTransversable()) {
+					Gizmos.DrawSphere(vertices[i].getTransformedPoint(), 0.1f);
+				}
 			}
 		}
 	}

@@ -30,5 +30,7 @@ public class SmolMan : MonoBehaviour {
 		if (Input.GetKey(KeyCode.DownArrow)) {
 			rb.AddRelativeForce(Vector3.back * speed);
 		}
+
+
 	}
 }

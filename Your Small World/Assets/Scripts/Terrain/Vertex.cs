@@ -121,6 +121,10 @@ public class Vertex {
 		return (this.vert - center).normalized * (radius + this.height);
 	}
 
+	public Vector3 getTransformedPoint() {
+		return parent.transform.TransformPoint(getSphereVector (parent.radius, parent.gameObject.transform.position));
+	}
+
 	public GameObject getResource() {
 		return this.resource;
 	}
@@ -142,6 +146,10 @@ public class Vertex {
 	public void setColor(Color c) {
 		this.color = c;
 		parent.updateColors ();
+	}
+
+	public bool getTransversable() {
+		return (biome == SphereTerrain.DESERT_BIOME || biome == SphereTerrain.MED_BIOME);
 	}
 
 	public Vertex[] getNeighbors() {
