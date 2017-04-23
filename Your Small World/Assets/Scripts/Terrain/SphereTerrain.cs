@@ -11,9 +11,9 @@ public class SphereTerrain : MonoBehaviour {
 	public Vector3[] curVertices;
 	public int[] curTriangles;
 	public float[] heightMap;
-	public bool[] buildableMap;
 	public bool[] editableMap;
 	public string[] biomeMap;
+	public GameObject[] resourceMap;
 
 	public List<int> buildingIndices;
 
@@ -29,13 +29,11 @@ public class SphereTerrain : MonoBehaviour {
 	void Start () {
 		Mesh planetMesh = GetComponent<MeshFilter> ().mesh;
 		heightMap = new float[planetMesh.vertices.Length];
-		buildableMap = new bool[planetMesh.vertices.Length];
 		biomeMap = new string[planetMesh.vertices.Length];
 		buildingIndices = new List<int> ();
 		editableMap = new bool[planetMesh.vertices.Length];
 		for (int i = 0; i < planetMesh.vertices.Length; i++) {
 			heightMap[i] = 0.0f;
-			buildableMap[i] = true;
 			editableMap[i] = true;
 			biomeMap[i] = "Desert";
 		}
@@ -89,9 +87,6 @@ public class SphereTerrain : MonoBehaviour {
 	public void setHeightAtIndex(int index, float height) {
 		if (editableMap[index]) {
 			heightMap[index] = Mathf.Max(Mathf.Min(height, maxHeight), minHeight);
-			if (heightMap[index] >= maxHeight || heightMap[index] <= 0) {
-				buildableMap[index] = false;
-			}
 			updateMesh();
 		}
 	}
@@ -99,21 +94,18 @@ public class SphereTerrain : MonoBehaviour {
 	public void incHeightAtIndex(int index, float height) {
 		if (editableMap[index]) {
 			heightMap[index] = Mathf.Max(Mathf.Min(heightMap[index] + height, maxHeight), minHeight);
-			if (heightMap[index] >= maxHeight || heightMap[index] <= 0) {
-				buildableMap[index] = false;
-			}
 			updateMesh();
 		}
 	}
 
 	public void buildAtIndex(int index, string prefabName) {
-		if (buildableMap[index]) {
+		if (editableMap[index]) {
 			GameObject building = Resources.Load("Prefabs/" + prefabName, typeof(GameObject)) as GameObject;
 			building = Instantiate(building, transform.TransformPoint(curVertices[index]), Quaternion.identity);
 			building.transform.parent = transform.FindChild("Planet Objects");
 			building.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
-			buildableMap[index] = false;
 			buildingIndices.Add (index);
+			resourceMap[index] = building;
 			editableMap[index] = false;
 		}
 	}
@@ -124,54 +116,76 @@ public class SphereTerrain : MonoBehaviour {
 			water = Instantiate(water, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity);
 		}
 	}
-	/*
-	 * case BuildType.Water:
-					st.waterAtIndex(st.findIndexOfNearest(hitInfo.point));
-					break;
-				case BuildType.Terrain:
-					st.incHeightAtIndex(st.findIndexOfNearest(hitInfo.point), incrDir * 0.1f);
-					break;
-				case BuildType.Stone:
-					// st.StoneAtIndex(st.findIndexOfNearest(hitInfo.point));
-					break;
-				case BuildType.Sand:
-					// st.SandAtIndex(st.findIndexOfNearest(hitInfo.point));
-					break;
-				case BuildType.Tree:
-					// st.TreeAtIndex(st.findIndexOfNearest(hitInfo.point));
-					break;
-				case BuildType.Wheat:
-					// st.WheatAtIndex(st.findIndexOfNearest(hitInfo.point));
-					break;
-				case BuildType.Oil:
-					// st.OilAtIndex(st.findIndexOfNearest(hitInfo.point));
-					break;
-				case BuildType.Iron:
-					// st.IronAtIndex(st.findIndexOfNearest(hitInfo.point));
-					break;
-				case BuildType.Copper:
-					// st.CopperAtIndex(st.findIndexOfNearest(hitInfo.point));
-					break;
-				case BuildType.Coal:
-					// st.CoalAtIndex(st.findIndexOfNearest(hitInfo.point));
-					break;
-				case BuildType.Deiton:
-					// st.DeitonAtIndex(st.findIndexOfNearest(hitInfo.point));
-					break;
-				default:
-					break;
-					*/
+
 	public void StoneAtIndex(int index) {
 		if (getBiomeAtIndex(index) == LOW_BIOME) {
 			GameObject stone = Resources.Load("Prefabs/Stone", typeof(GameObject)) as GameObject;
-			stone = Instantiate(stone, transform.TransformPoint(curVertices[index]), Quaternion.identity);
+			stone = Instantiate(stone, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+			resourceMap[index] = stone;
 		}
 	}
 
 	public void SandAtIndex(int index) {
+		if (getBiomeAtIndex(index) == MED_BIOME) {
+			GameObject sand = Resources.Load("Prefabs/Sand", typeof(GameObject)) as GameObject;
+			sand = Instantiate(sand, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+			resourceMap[index] = sand;
+		}
+	}
+
+	public void TreeAtIndex(int index) {
+		if (getBiomeAtIndex(index) == MED_BIOME) {
+			GameObject tree = Resources.Load("Prefabs/Tree", typeof(GameObject)) as GameObject;
+			tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+			resourceMap[index] = tree;
+		}
+	}
+
+	public void WheatAtIndex(int index) {
+		if (getBiomeAtIndex(index) == MED_BIOME) {
+			GameObject wheat = Resources.Load("Prefabs/Wheat", typeof(GameObject)) as GameObject;
+			wheat = Instantiate(wheat, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+			resourceMap[index] = wheat;
+		}
+	}
+
+	public void OilAtIndex(int index) {
 		if (getBiomeAtIndex(index) == LOW_BIOME) {
-			GameObject stone = Resources.Load("Prefabs/Stone", typeof(GameObject)) as GameObject;
-			stone = Instantiate(stone, transform.TransformPoint(curVertices[index]), Quaternion.identity);
+			GameObject oil = Resources.Load("Prefabs/Oil", typeof(GameObject)) as GameObject;
+			oil = Instantiate(oil, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity) as GameObject;
+			resourceMap[index] = oil;
+		}
+	}
+
+	public void IronAtIndex(int index) {
+		if (getBiomeAtIndex(index) == HIGH_BIOME) {
+			GameObject iron = Resources.Load("Prefabs/Iron", typeof(GameObject)) as GameObject;
+			iron = Instantiate(iron, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+			resourceMap[index] = iron;
+		}
+	}
+
+	public void CopperAtIndex(int index) {
+		if (getBiomeAtIndex(index) == HIGH_BIOME) {
+			GameObject copper = Resources.Load("Prefabs/Copper", typeof(GameObject)) as GameObject;
+			copper = Instantiate(copper, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+			resourceMap[index] = copper;
+		}
+	}
+
+	public void CoalAtIndex(int index) {
+		if (getBiomeAtIndex(index) == HIGH_BIOME) {
+			GameObject coal = Resources.Load("Prefabs/Coal", typeof(GameObject)) as GameObject;
+			coal = Instantiate(coal, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
+			resourceMap[index] = coal;
+		}
+	}
+
+	public void DeitonAtIndex(int index) {
+		if (getBiomeAtIndex(index) == HIGH_BIOME) {
+			GameObject deiton = Resources.Load("Prefabs/Deiton", typeof(GameObject)) as GameObject;
+			deiton = Instantiate(deiton, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity) as GameObject;
+			resourceMap[index] = deiton;
 		}
 	}
 
