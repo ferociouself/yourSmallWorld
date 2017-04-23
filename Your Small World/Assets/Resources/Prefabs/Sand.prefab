@@ -9,20 +9,19 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1370285017569206}
+  m_RootGameObject: {fileID: 1156728387751924}
   m_IsPrefabParent: 1
---- !u!1 &1370285017569206
+--- !u!1 &1156728387751924
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4119672088007584}
-  - component: {fileID: 33541155849377856}
-  - component: {fileID: 23130697590804694}
-  - component: {fileID: 114261309564385934}
-  - component: {fileID: 114760760654144240}
+  - component: {fileID: 4583761447504394}
+  - component: {fileID: 33549345918305908}
+  - component: {fileID: 23585878002316990}
+  - component: {fileID: 95887307304335988}
   m_Layer: 0
   m_Name: Sand
   m_TagString: Untagged
@@ -30,25 +29,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4119672088007584
+--- !u!4 &4583761447504394
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1370285017569206}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -0.000000008742278}
-  m_LocalScale: {x: 0.015, y: 0.02, z: 0.02}
+  m_GameObject: {fileID: 1156728387751924}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 812.39545, y: 243.91364, z: -1547.5037}
+  m_LocalScale: {x: 3.6848521, y: 3.6848521, z: 3.6848521}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23130697590804694
+--- !u!23 &23585878002316990
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1370285017569206}
+  m_GameObject: {fileID: 1156728387751924}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -56,7 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 300c150dd587a4d249724e415610d564, type: 2}
+  - {fileID: 2100000, guid: 8365fd729d36347a5ac3585a5197c07f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,35 +74,27 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33541155849377856
+--- !u!33 &33549345918305908
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1370285017569206}
-  m_Mesh: {fileID: 4300000, guid: 00102ec8118144df1bad24bc9c4c4bf9, type: 3}
---- !u!114 &114261309564385934
-MonoBehaviour:
+  m_GameObject: {fileID: 1156728387751924}
+  m_Mesh: {fileID: 4300000, guid: 00efbb1ca1409482aa142c32dfffaf2e, type: 3}
+--- !u!95 &95887307304335988
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1370285017569206}
+  m_GameObject: {fileID: 1156728387751924}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b19515b573f146d4bc0971d1cb3b192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxTimer: 0.5
-  finalScale: {x: 1, y: 1, z: 1}
---- !u!114 &114760760654144240
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1370285017569206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c69f14ecfc946629cf5460cc76a17f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  center: {fileID: 4922970605027450, guid: c5e4e448a77954d52b6107a295d02446, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 00efbb1ca1409482aa142c32dfffaf2e, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1

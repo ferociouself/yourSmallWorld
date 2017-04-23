@@ -8,7 +8,12 @@ public class RotateTowardsCenter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		if (center == null) {
+			GameObject p = GameObject.Find ("Planet");
+			if (p != null) {
+				center = p.transform;
+			}
+		}
 	}
 	
 	// Update is called once per frame
