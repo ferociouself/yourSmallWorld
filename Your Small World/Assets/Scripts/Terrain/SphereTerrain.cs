@@ -170,9 +170,7 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void StoneAtIndex(int index) {
 		if (getBiomeAtIndex(index) == LOW_BIOME) {
-			GameObject stone = Resources.Load("Prefabs/Stone", typeof(GameObject)) as GameObject;
-			stone = Instantiate(stone, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-			resourceMap[index] = stone;
+			
 		}
 	}
 
@@ -202,8 +200,6 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void OilAtIndex(int index) {
 		if (getBiomeAtIndex(index) == LOW_BIOME) {
-			GameObject oil = Resources.Load("Prefabs/Oil", typeof(GameObject)) as GameObject;
-			oil = Instantiate(oil, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity) as GameObject;
 			resourceMap[index] = oil;
 		}
 	}
