@@ -6,16 +6,17 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 public class SphereTerrain : MonoBehaviour {
 
-	//private List<QuadTree> sides;
 	public int radius;
-	public Vector3[] curVertices;
+	public Vertex[] vertices;
 	public int[] curTriangles;
+
+	/*public Vector3[] curVertices;
 	public float[] heightMap;
 	public bool[] editableMap;
 	public string[] biomeMap;
-	public GameObject[] resourceMap;
+	public GameObject[] resourceMap;*/
 
-	public List<int> buildingIndices;
+	public List<Vertex> buildingIndices;
 
 	public float maxHeight = 0.5f;
 	public float minHeight = -0.5f;
@@ -30,33 +31,21 @@ public class SphereTerrain : MonoBehaviour {
 
 
 
-	List<Color> blues;
-	List<Color> greens;
-	List<Color> yellows;
-	List<Color> greays;
-	List<Color> whites;
-	List<Color> browns;
-	List<Color> stones;
-	List<Color> oils;
+	public static List<Color> blues;
+	public static List<Color> greens;
+	public static List<Color> yellows;
+	public static List<Color> greays;
+	public static List<Color> whites;
+	public static List<Color> browns;
+	public static List<Color> stones;
+	public static List<Color> oils;
 
-	MeshFilter filter;
+	public MeshFilter filter;
 
 	// Use this for initialization
 	void Start () {
 		filter = GetComponent<MeshFilter> ();
 		Mesh planetMesh = filter.mesh;
-		heightMap = new float[planetMesh.vertices.Length];
-		biomeMap = new string[planetMesh.vertices.Length];
-		buildingIndices = new List<int> ();
-		editableMap = new bool[planetMesh.vertices.Length];
-		resourceMap = new GameObject[planetMesh.vertices.Length];
-		for (int i = 0; i < planetMesh.vertices.Length; i++) {
-			heightMap[i] = 0.0f;
-			editableMap[i] = true;
-			biomeMap[i] = "Desert";
-			resourceMap[i] = null;
-		}
-
 
 		blues = new List<Color> ();
 		blues.Add(lazyColor(15,94,156));
@@ -111,6 +100,16 @@ public class SphereTerrain : MonoBehaviour {
 		oils.Add (lazyColor (4,11,43));
 		oils.Add (lazyColor (31,4,43));
 
+		vertices = new Vertex[planetMesh.vertices.Length];
+
+		for (int i = 0; i < vertices.Length; i++) {
+			vertices [i] = new Vertex (i, planetMesh.vertices [i], this);
+		}
+
+		buildingIndices = new List<Vertex> ();
+
+		generateNeighborFieldsAsync ();
+
 		updateMesh ();
 		rebuildColors ();
 	}
@@ -121,18 +120,18 @@ public class SphereTerrain : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		List<int> waterVertices = new List<int> ();
-		for (int i = 0; i < biomeMap.Length; i++) {
-			if (biomeMap [i] == WATER_BIOME) {
-				waterVertices.Add (i);
+		List<Vertex> waterVertices = new List<Vertex> ();
+		for (int i = 0; i < vertices.Length; i++) {
+			if (vertices[i].getBiome() == WATER_BIOME) {
+				waterVertices.Add (vertices[i]);
 			}
 		}
-		foreach (int k in waterVertices) {
-			int[] neighbors = neighborsOf (k);
+		foreach (Vertex k in waterVertices) {
+			Vertex[] neighbors = k.getNeighbors ();
 			for(int l = 0; l < neighbors.Length; l++) {
-				if (biomeMap [neighbors [l]] != WATER_BIOME && heightMap [neighbors [l]] == 0) {
+				if (neighbors[l].getBiome() != WATER_BIOME && neighbors[l].getHeight() == 0) {
 					if (Random.Range (0, 500) < 1) {
-						markAtIndex (neighbors [l], MED_BIOME);
+						neighbors [l].setBiome (MED_BIOME);
 					}
 				}
 			}
@@ -141,8 +140,7 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void updateMesh() {
 		Mesh planetMesh = filter.mesh;
-		planetMesh.vertices = expandCube (planetMesh.vertices, heightMap);
-		curVertices = planetMesh.vertices;
+		planetMesh.vertices = generateMesh ();
 		curTriangles = planetMesh.triangles;
 		planetMesh.RecalculateNormals ();
 		DestroyImmediate(GetComponent<MeshCollider>());
@@ -152,20 +150,20 @@ public class SphereTerrain : MonoBehaviour {
 		transform.parent.gameObject.GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter> ().mesh;
 	}
 
-	public Vector3[] expandCube(Vector3[] cubeVertices, float[] heightmap) {
-		Vector3[] endVertices = new Vector3[cubeVertices.Length];
-		for (int i = 0; i < cubeVertices.Length; i++) {
-			endVertices [i] = (cubeVertices [i] - gameObject.transform.position).normalized * (radius + heightmap [i % heightmap.Length]);
+	public Vector3[] generateMesh() {
+		Vector3[] points = new Vector3[vertices.Length];
+		for(int i = 0; i < points.Length; i++) {
+			points [i] = vertices [i].getSphereVector (this.radius, this.gameObject.transform.position);
 		}
-		return endVertices;
+		return points;
 	}
 
 	public int findIndexOfNearest(Vector3 point) {
 		float minMag = float.MaxValue;
 		int minIndex = -1;
 
-		for (int i = 0; i < curVertices.Length; i++) {
-			float curMag = (transform.TransformPoint(curVertices[i]) - point).magnitude;
+		for (int i = 0; i < vertices.Length; i++) {
+			float curMag = (transform.TransformPoint(vertices[i].getSphereVector()) - point).magnitude;
 			if (curMag < minMag) {
 				minMag = curMag;
 				minIndex = i;
@@ -175,104 +173,42 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public float heightAtIndex(int index) {
-		return heightMap[index];
+		return vertices[index].getHeight();
 	}
 
 	public void setHeightAtIndex(int index, float height) {
-		if (editableMap[index]) {
-			heightMap[index] = Mathf.Max(Mathf.Min(height, maxHeight), minHeight);
-			if (heightMap[index] > 0.0f) {
-				markAtIndex(index, HIGH_BIOME);
-			} else if (heightMap[index] < 0.0f) {
-				markAtIndex(index, LOW_BIOME);
-				int[] neighbors = neighborsOf (index);
-				bool nextToWater = false;
-				bool nextToOil = false;
-				for (int i = 0; i < neighbors.Length; i++) {
-					if (biomeMap [neighbors [i]] == WATER_BIOME) {
-						nextToWater = true;
-					}
-					if(biomeMap[neighbors[i]] == OIL_BIOME) {
-						nextToOil = true;
-					}
-				}
-				if (nextToWater) {
-					spreadWaterBiome (index);
-				} else if (nextToOil) {
-					SpreadOilBiome (index);
-				}
-			} else {
-				if (biomeMap[index] != MED_BIOME) {
-					markAtIndex(index, DESERT_BIOME);
-				}
-			}
-			updateMesh();
-		}
+		vertices [index].setHeight (height);
+		updateMesh ();
 	}
 
 	public void incHeightAtIndex(int index, float height) {
-		if (editableMap[index]) {
-			heightMap[index] = Mathf.Max(Mathf.Min(heightMap[index] + height, maxHeight), minHeight);
-			if (heightMap[index] > 0.0f) {
-				markAtIndex(index, HIGH_BIOME);
-			} else if (heightMap[index] < 0.0f) {
-				markAtIndex(index, LOW_BIOME);
-				int[] neighbors = neighborsOf (index);
-				bool nextToWater = false;
-				bool nextToOil = false;
-				for (int i = 0; i < neighbors.Length; i++) {
-					if (biomeMap [neighbors [i]] == WATER_BIOME) {
-						nextToWater = true;
-					}
-					if(biomeMap[neighbors[i]] == OIL_BIOME) {
-						nextToOil = true;
-					}
-				}
-				if (nextToWater) {
-					spreadWaterBiome (index);
-				} else if (nextToOil) {
-					SpreadOilBiome (index);
-				}
-			} else {
-				if (biomeMap[index] != MED_BIOME) {
-					markAtIndex(index, DESERT_BIOME);
-				}
-			}
-			updateMesh();
-		}
+		setHeightAtIndex (index, vertices [index].getHeight () + height);
 	}
 
 	public void buildAtIndex(int index, string prefabName) {
-		if (editableMap[index]) {
-			if (resourceMap[index] != null) {
-				DestroyImmediate(resourceMap[index]);
-			}
+		if (vertices[index].getIsEditable()) {
+			vertices [index].removeResource ();
 			GameObject building = Resources.Load("Prefabs/" + prefabName, typeof(GameObject)) as GameObject;
-			building = Instantiate(building, transform.TransformPoint(curVertices[index]), Quaternion.identity);
+			building = Instantiate(building, transform.TransformPoint(vertices[index].getSphereVector(this.radius, this.gameObject.transform.position)), Quaternion.identity);
 			building.transform.parent = transform.FindChild("Planet Objects");
 			building.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
-			buildingIndices.Add (index);
-			resourceMap[index] = building;
-			editableMap[index] = false;
+			buildingIndices.Add (vertices[index]);
+			vertices [index].setIsEditable (false);
 		}
 	}
 
 	public void waterAtIndex(int index) {
-		if (heightMap[index] < 0) {
-			//GameObject water = Resources.Load("Prefabs/Water", typeof(GameObject)) as GameObject;
-			//water = Instantiate(water, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity);
-			spreadWaterBiome (index);
+		if (vertices[index].getHeight() < 0) {
+			spreadWaterBiome (vertices[index]);
 		}
 	}
 
-	public void spreadWaterBiome(int index) {
-		if (getBiomeAtIndex(index) == LOW_BIOME) {
-			markAtIndex (index, WATER_BIOME);
-			int[] neighbors = neighborsOf (index);
-			Debug.Log (neighbors.Length);
+	public void spreadWaterBiome(Vertex v) {
+		if (v.getBiome() == LOW_BIOME) {
+			v.setBiome (WATER_BIOME);
+			Vertex[] neighbors = v.getNeighbors ();
 			for (int i = 0; i < neighbors.Length; i++) {
-				Debug.Log (heightMap [neighbors[1]]);
-				if (heightMap [neighbors[i]] < 0 && getBiomeAtIndex(neighbors[i]) != WATER_BIOME) {
+				if (neighbors[i].getHeight() < 0 && neighbors[i].getBiome() != WATER_BIOME) {
 					spreadWaterBiome (neighbors[i]);
 				}
 			}
@@ -280,15 +216,15 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void StoneAtIndex(int index) {
-		SpreadStoneBiome (index);
+		SpreadStoneBiome (vertices[index]);
 	}
 
-	public void SpreadStoneBiome(int index) {
-		if (getBiomeAtIndex(index) == LOW_BIOME) {
-			markAtIndex (index, STONE_BIOME);
-			int[] neighbors = neighborsOf (index);
+	public void SpreadStoneBiome(Vertex v) {
+		if (v.getBiome() == LOW_BIOME) {
+			v.setBiome (STONE_BIOME);
+			Vertex[] neighbors = v.getNeighbors ();
 			for (int i = 0; i < neighbors.Length; i++) {
-				if (heightMap [neighbors[i]] < 0 && getBiomeAtIndex(neighbors[i]) != STONE_BIOME) {
+				if (neighbors[i].getHeight() < 0 && neighbors[i].getBiome() != STONE_BIOME) {
 					SpreadStoneBiome (neighbors[i]);
 				}
 			}
@@ -296,65 +232,55 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void SandAtIndex(int index) {
-		if (getBiomeAtIndex(index) == DESERT_BIOME || getBiomeAtIndex(index) == MED_BIOME) {
-			if (resourceMap[index] != null && !resourceMap[index].name.Contains("SandHills")) {
-				DestroyImmediate(resourceMap[index]);
-				GameObject sand = Resources.Load("Prefabs/SandHills", typeof(GameObject)) as GameObject;
-				sand = Instantiate(sand, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-				resourceMap[index] = sand;
-			} else if (resourceMap[index] == null) {
-				GameObject sand = Resources.Load("Prefabs/SandHills", typeof(GameObject)) as GameObject;
-				sand = Instantiate(sand, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-				resourceMap[index] = sand;
+		if (vertices[index].getBiome() == DESERT_BIOME || vertices[index].getBiome() == MED_BIOME) {
+			if(vertices[index].getResource() != null && vertices[index].getResource().name.Contains("SandHills")) {
+				return;
 			}
+			GameObject sand = Resources.Load("Prefabs/SandHills", typeof(GameObject)) as GameObject;
+			sand = Instantiate(sand, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
+			vertices [index].removeResource ();
+			vertices [index].setResource (sand);
 		}
 	}
 
 	public void TreeAtIndex(int index) {
-		if (getBiomeAtIndex(index) == MED_BIOME) {
-			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Forest")) {
-				DestroyImmediate(resourceMap[index]);
-				GameObject tree = Resources.Load("Prefabs/Forest" + Random.Range(0,5), typeof(GameObject)) as GameObject;
-				float randRot = Random.Range(0.0f, 180.0f);
-				tree.transform.GetChild (0).transform.rotation = Quaternion.Euler (0.0f, randRot, 0.0f);
-				tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-				resourceMap[index] = tree;
-			} else if (resourceMap[index] == null) {
-				GameObject tree = Resources.Load("Prefabs/Forest" + Random.Range(0,5), typeof(GameObject)) as GameObject;
-				float randRot = Random.Range(0.0f, 180.0f);
-				tree.transform.GetChild (0).transform.rotation = Quaternion.Euler (0.0f, randRot, 0.0f);
-				tree = Instantiate(tree, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-				resourceMap[index] = tree;
+		if (vertices[index].getBiome() == MED_BIOME) {
+			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Forest")) {
+				return;
 			}
+			GameObject tree = Resources.Load("Prefabs/Forest" + Random.Range(0,5), typeof(GameObject)) as GameObject;
+			float randRot = Random.Range(0.0f, 180.0f);
+			tree.transform.GetChild (0).transform.rotation = Quaternion.Euler (0.0f, randRot, 0.0f);
+			tree = Instantiate(tree, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
+			vertices [index].removeResource ();
+			vertices [index].setResource (tree);
 		}
 	}
 
 	public void WheatAtIndex(int index) {
-		if (getBiomeAtIndex(index) == MED_BIOME) {
-			if (resourceMap[index] != null && !resourceMap[index].name.Contains("WheatField")) {
-				DestroyImmediate(resourceMap[index]);
-				GameObject wheat = Resources.Load("Prefabs/WheatField", typeof(GameObject)) as GameObject;
-				wheat = Instantiate(wheat, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-				resourceMap[index] = wheat;
-			} else if (resourceMap[index] == null) {
-				GameObject wheat = Resources.Load("Prefabs/WheatField", typeof(GameObject)) as GameObject;
-				wheat = Instantiate(wheat, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-				resourceMap[index] = wheat;
+		if (vertices[index].getBiome() == MED_BIOME) {
+			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("WheatField")) {
+				return;
 			}
+			GameObject wheat = Resources.Load("Prefabs/WheatField" + Random.Range(0, 2), typeof(GameObject)) as GameObject;
+			float randRot = Random.Range(0.0f, 180.0f);
+			wheat.transform.GetChild (0).transform.rotation = Quaternion.Euler (0.0f, randRot, 0.0f);
+			wheat = Instantiate(wheat, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
+			vertices [index].removeResource ();
+			vertices [index].setResource (wheat);
 		}
 	}
 
 	public void OilAtIndex(int index) {
-		SpreadOilBiome (index);
+		SpreadOilBiome (vertices[index]);
 	}
 
-	public void SpreadOilBiome(int index) {
-		if (getBiomeAtIndex(index) == LOW_BIOME) {
-			markAtIndex (index, OIL_BIOME);
-			int[] neighbors = neighborsOf (index);
+	public void SpreadOilBiome(Vertex v) {
+		if (v.getBiome() == LOW_BIOME) {
+			v.setBiome (OIL_BIOME);
+			Vertex[] neighbors = v.getNeighbors ();
 			for (int i = 0; i < neighbors.Length; i++) {
-				Debug.Log (heightMap [neighbors[1]]);
-				if (heightMap [neighbors[i]] < 0 && getBiomeAtIndex(neighbors[i]) != OIL_BIOME) {
+				if (neighbors[i].getHeight() < 0 && neighbors[i].getBiome() != OIL_BIOME) {
 					SpreadOilBiome (neighbors[i]);
 				}
 			}
@@ -362,100 +288,61 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void IronAtIndex(int index) {
-		if (getBiomeAtIndex(index) == HIGH_BIOME) {
-			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Iron")) {
-				DestroyImmediate(resourceMap[index]);
-				GameObject iron = Resources.Load("Prefabs/Iron", typeof(GameObject)) as GameObject;
-				iron = Instantiate(iron, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-				resourceMap[index] = iron;
-			} else if (resourceMap[index] == null) {
-				GameObject iron = Resources.Load("Prefabs/Iron", typeof(GameObject)) as GameObject;
-				iron = Instantiate(iron, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-				resourceMap[index] = iron;
+		if (vertices[index].getBiome() == HIGH_BIOME) {
+			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Iron")) {
+				return;
 			}
+			GameObject iron = Resources.Load("Prefabs/Iron", typeof(GameObject)) as GameObject;
+			iron = Instantiate(iron, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
+			vertices [index].removeResource ();
+			vertices [index].setResource (iron);
 		}
 	}
 
 	public void CopperAtIndex(int index) {
 		if (getBiomeAtIndex(index) == HIGH_BIOME) {
-			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Copper")) {
-				DestroyImmediate(resourceMap[index]);
-				GameObject copper = Resources.Load("Prefabs/Copper", typeof(GameObject)) as GameObject;
-				copper = Instantiate(copper, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-				resourceMap[index] = copper;
-			} else if (resourceMap[index] == null) {
-				GameObject copper = Resources.Load("Prefabs/Copper", typeof(GameObject)) as GameObject;
-				copper = Instantiate(copper, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-				resourceMap[index] = copper;
+			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Copper")) {
+				return;
 			}
+			GameObject copper = Resources.Load("Prefabs/Copper", typeof(GameObject)) as GameObject;
+			copper = Instantiate(copper, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
+			vertices [index].removeResource ();
+			vertices [index].setResource (copper);
 		}
 	}
 
 	public void CoalAtIndex(int index) {
 		if (getBiomeAtIndex(index) == HIGH_BIOME) {
-			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Coal")) {
-				DestroyImmediate(resourceMap[index]);
-				GameObject coal = Resources.Load("Prefabs/Coal", typeof(GameObject)) as GameObject;
-				coal = Instantiate(coal, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-				resourceMap[index] = coal;
-			} else if (resourceMap[index] == null) {
-				GameObject coal = Resources.Load("Prefabs/Coal", typeof(GameObject)) as GameObject;
-				coal = Instantiate(coal, transform.TransformPoint(curVertices[index]), Quaternion.identity) as GameObject;
-				resourceMap[index] = coal;
+			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Coal")) {
+				return;
 			}
+			GameObject coal = Resources.Load("Prefabs/Coal", typeof(GameObject)) as GameObject;
+			coal = Instantiate(coal, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
+			vertices [index].removeResource ();
+			vertices [index].setResource (coal);
 		}
 	}
 
 	public void DeitonAtIndex(int index) {
-		if (getBiomeAtIndex(index) == HIGH_BIOME) {
-			if (resourceMap[index] != null && !resourceMap[index].name.Contains("Deiton")) {
-				DestroyImmediate(resourceMap[index]);
-				GameObject deiton = Resources.Load("Prefabs/Deiton", typeof(GameObject)) as GameObject;
-				deiton = Instantiate(deiton, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity) as GameObject;
-				resourceMap[index] = deiton;
-			} else if (resourceMap[index] == null) {
-				GameObject deiton = Resources.Load("Prefabs/Deiton", typeof(GameObject)) as GameObject;
-				deiton = Instantiate(deiton, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity) as GameObject;
-				resourceMap[index] = deiton;
+		if (vertices[index].getBiome() == HIGH_BIOME) {
+			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Deiton")) {
+				return;
 			}
+			GameObject deiton = Resources.Load("Prefabs/Deiton", typeof(GameObject)) as GameObject;
+			deiton = Instantiate(deiton, transform.TransformPoint(vertices[index].getSphereVector()) + (transform.TransformPoint(vertices[index].getSphereVector()) - transform.position).normalized * 0.5f, Quaternion.identity) as GameObject;
+			vertices [index].removeResource ();
+			vertices [index].setResource (deiton);
 		}
 	}
 
 	public void markAtIndex(int index, string biome) {
-		if (biomeMap [index] == biome) {
-			return;
-		}
-		biomeMap[index] = biome;
-		Color[] colors = filter.mesh.colors;
-		if (colors.Length != filter.mesh.vertices.Length) {
-			rebuildColors ();
-		}
-		colors = filter.mesh.colors;
-		switch (biome) {
-		case WATER_BIOME:
-			colors [index] = blues[Random.Range(0, blues.Count)];
-			break;
-		case DESERT_BIOME:
-			colors [index] = yellows[Random.Range(0, yellows.Count)];
-			break;
-		case HIGH_BIOME:
-			colors [index] = greays[Random.Range(0, greays.Count)];
-			break;
-		case MED_BIOME:
-			colors [index] = greens[Random.Range(0, greens.Count)];
-			break;
-		case LOW_BIOME:
-			colors [index] = browns[Random.Range(0, browns.Count)];
-			break;
-		case STONE_BIOME:
-			colors [index] = stones [Random.Range (0, stones.Count)];
-			break;
-		case OIL_BIOME:
-			colors [index] = oils [Random.Range (0, oils.Count)];
-			break;
-		default:
-			colors [index] = yellows[Random.Range(0, yellows.Count)];
-			break;
+		vertices [index].setBiome (biome);
+	}
+
+	public void updateColors() {
+		Color[] colors = new Color[vertices.Length];
+		for (int i = 0; i < vertices.Length; i++) {
+			colors [i] = vertices [i].getColor ();
 		}
 		filter.mesh.colors = colors;
 	}
@@ -495,56 +382,22 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public string getBiomeAtIndex(int index) {
-		return biomeMap[index];
+		return vertices[index].getBiome();
 	}
 
-	public int[] neighborsOf(Vector3 v) {
-		for (int i = 0; i < curVertices.Length; i++) {
-			if (curVertices [i] == v) {
-				return neighborsOf (i);
-			}
-		}
-		return null;
-	}
-
-	public int[] neighborsOf(int index) {
-		List<int> neighborIndices = new List<int> (); 
-		for (int i = 0; i < curTriangles.Length; i++) {
-			if (curTriangles [i] == index) {
-				int relativePosition = i % 3;
-				switch (relativePosition) {
-				case 0:
-					if (i + 1 < curTriangles.Length && !neighborIndices.Contains (curTriangles[i + 1])) {
-						neighborIndices.Add (curTriangles[i + 1]);
-					}
-					if (i + 2 < curTriangles.Length && !neighborIndices.Contains (curTriangles[i + 2])) {
-						neighborIndices.Add (curTriangles[i + 2]);
-					}
-					break;
-				case 1:
-					if (!neighborIndices.Contains (curTriangles[i - 1])) {
-						neighborIndices.Add (curTriangles[i - 1]);
-					}
-					if (i + 1 < curTriangles.Length && !neighborIndices.Contains (curTriangles[i + 1])) {
-						neighborIndices.Add (curTriangles[i + 1]);
-					}
-					break;
-				case 2:
-					if (!neighborIndices.Contains (curTriangles[i - 1])) {
-						neighborIndices.Add (curTriangles[i - 1]);
-					}
-					if (!neighborIndices.Contains (curTriangles[i - 2])) {
-						neighborIndices.Add (curTriangles[i - 2]);
-					}
-					break;
-				}
-			}
-		}
-		return neighborIndices.ToArray ();
-	}
-
-	public int[] currentBuildings() {
+	public Vertex[] currentBuildings() {
 		return buildingIndices.ToArray ();
+	}
+
+	public Vertex getVertex(int i) {
+		return vertices [i];
+	}
+
+	public IEnumerator generateNeighborFieldsAsync() {
+		for (int i = 0; i < vertices.Length; i++) {
+			vertices [i].calculateNeighbors ();
+			yield return null;
+		}
 	}
 }
 	
