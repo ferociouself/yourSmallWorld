@@ -10,6 +10,8 @@ public class TerrainEditor : MonoBehaviour {
 	public Text dirIndicator;
 	public Text buildIndicator;
 
+	bool downInPreviousFrame = false;
+	bool isDragActive = false;
 
 	float buffer = 0.0f;
 	public float maxBuffer = 1.0f;
