@@ -45,20 +45,10 @@ public class Vertex {
 				setTerrain (SphereTerrain.HIGH_BIOME);
 			} else if (height < 0.0f) {
 				setTerrain(SphereTerrain.LOW_BIOME);
-				bool nextToWater = false;
-				bool nextToOil = false;
 				calculateNeighbors ();
-				for (int i = 0; i < neighbors.Length; i++) {
-					if (neighbors[i].biome == SphereTerrain.WATER_BIOME) {
-						nextToWater = true;
-					}
-					if(neighbors[i].biome == SphereTerrain.OIL_BIOME) {
-						nextToOil = true;
-					}
-				}
-				if (nextToWater) {
+				if (nextTo(SphereTerrain.WATER_BIOME)) {
 					parent.spreadWaterBiome (this);
-				} else if (nextToOil) {
+				} else if (nextTo(SphereTerrain.OIL_BIOME)) {
 					parent.SpreadOilBiome (this);
 				}
 			} else {
@@ -202,5 +192,19 @@ public class Vertex {
 		for (int j = 0; j < neighbors.Length; j++) {
 			neighbors [j] = parent.getVertex (neighborIndices [j]);
 		}
+	}
+
+	public int getIndex() {
+		return this.index;
+	}
+
+	public bool nextTo(string biom) {
+		calculateNeighbors ();
+		for (int i = 0; i < neighbors.Length; i++) {
+			if (neighbors [i].getBiome () == biom) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

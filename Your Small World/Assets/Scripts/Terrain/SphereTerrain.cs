@@ -42,10 +42,14 @@ public class SphereTerrain : MonoBehaviour {
 
 	public MeshFilter filter;
 
+	public bool hasCommunity;
+
 	// Use this for initialization
 	void Start () {
 		filter = GetComponent<MeshFilter> ();
 		Mesh planetMesh = filter.mesh;
+
+		hasCommunity = false;
 
 		blues = new List<Color> ();
 		blues.Add(lazyColor(15,94,156));
@@ -132,18 +136,22 @@ public class SphereTerrain : MonoBehaviour {
 				}
 			} else if (vertices [i].getBiome () == MED_BIOME) {
 				Vertex[] neighbors = vertices [i].getNeighbors ();
-				bool hasWaterNeighbor = false;
-				for (int l = 0; l < neighbors.Length; l++) {
-					if (neighbors [l].getBiome () == WATER_BIOME) {
-						hasWaterNeighbor = true;
-					}
-				}
-				if (hasWaterNeighbor) {
+				if (vertices[i].nextTo(WATER_BIOME)) {
 					for (int k = 0; k < neighbors.Length; k++) {
 						if (neighbors [k].getBiome () != WATER_BIOME && neighbors [k].getHeight () == 0) {
 							if (Random.Range (0, 10000) < 1) {
 								neighbors [k].setBiome (MED_BIOME);
 							}
+						}
+					}
+				}
+				if (!hasCommunity && vertices[i].getResource() != null && (vertices [i].getResource ().name.Contains ("Forest") || vertices [i].getResource ().name.Contains ("WheatField"))) {
+					int randomStart = Random.Range(0, vertices[i].getNeighbors().Length);
+					int length = vertices [i].getNeighbors ().Length;
+					for (int j = 0; j < vertices [i].getNeighbors ().Length; j++) {
+						if (Random.Range (0, 10000) == 0 && !hasCommunity && vertices[i].getNeighbors()[(randomStart + j) % length].getHeight() == 0 && !vertices[i].getNeighbors()[(randomStart + j) % length].nextTo(WATER_BIOME)) {
+							hasCommunity = true;
+							buildAtIndex(vertices[i].getNeighbors()[(randomStart + j) % length].getIndex(), "campfire");
 						}
 					}
 				}
@@ -413,7 +421,9 @@ public class SphereTerrain : MonoBehaviour {
 	public IEnumerator generateNeighborFieldsAsync() {
 		for (int i = 0; i < vertices.Length; i++) {
 			vertices [i].calculateNeighbors ();
-			yield return null;
+			if (i % 2 == 0) {
+				yield return null;
+			}
 		}
 	}
 }
