@@ -120,18 +120,31 @@ public class SphereTerrain : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		List<Vertex> waterVertices = new List<Vertex> ();
 		for (int i = 0; i < vertices.Length; i++) {
-			if (vertices[i].getBiome() == WATER_BIOME) {
-				waterVertices.Add (vertices[i]);
-			}
-		}
-		foreach (Vertex k in waterVertices) {
-			Vertex[] neighbors = k.getNeighbors ();
-			for(int l = 0; l < neighbors.Length; l++) {
-				if (neighbors[l].getBiome() != WATER_BIOME && neighbors[l].getHeight() == 0) {
-					if (Random.Range (0, 500) < 1) {
-						neighbors [l].setBiome (MED_BIOME);
+			if (vertices [i].getBiome () == WATER_BIOME) {
+				Vertex[] neighbors = vertices [i].getNeighbors ();
+				for (int l = 0; l < neighbors.Length; l++) {
+					if (neighbors [l].getBiome () != WATER_BIOME && neighbors [l].getHeight () == 0) {
+						if (Random.Range (0, 500) < 1) {
+							neighbors [l].setBiome (MED_BIOME);
+						}
+					}
+				}
+			} else if (vertices [i].getBiome () == MED_BIOME) {
+				Vertex[] neighbors = vertices [i].getNeighbors ();
+				bool hasWaterNeighbor = false;
+				for (int l = 0; l < neighbors.Length; l++) {
+					if (neighbors [l].getBiome () == WATER_BIOME) {
+						hasWaterNeighbor = true;
+					}
+				}
+				if (hasWaterNeighbor) {
+					for (int k = 0; k < neighbors.Length; k++) {
+						if (neighbors [k].getBiome () != WATER_BIOME && neighbors [k].getHeight () == 0) {
+							if (Random.Range (0, 10000) < 1) {
+								neighbors [k].setBiome (MED_BIOME);
+							}
+						}
 					}
 				}
 			}
