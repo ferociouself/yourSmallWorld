@@ -27,13 +27,6 @@ public class SphereTerrain : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		/*sides = new List<QuadTree> ();
-		sides.Add (new QuadTree (gameObject.transform.position + Vector3.down, 1, Vector3.right, Vector3.forward));
-		sides.Add (new QuadTree (gameObject.transform.position + Vector3.up, 1, Vector3.right, Vector3.forward));
-		sides.Add (new QuadTree (gameObject.transform.position + Vector3.back, 1, Vector3.right, Vector3.up));
-		sides.Add (new QuadTree (gameObject.transform.position + Vector3.forward, 1, Vector3.right, Vector3.up));
-		sides.Add (new QuadTree (gameObject.transform.position + Vector3.left, 1, Vector3.forward, Vector3.up));
-		sides.Add (new QuadTree (gameObject.transform.position + Vector3.right, 1, Vector3.forward, Vector3.up));*/
 		Mesh planetMesh = GetComponent<MeshFilter> ().mesh;
 		heightMap = new float[planetMesh.vertices.Length];
 		buildableMap = new bool[planetMesh.vertices.Length];
@@ -66,14 +59,6 @@ public class SphereTerrain : MonoBehaviour {
 		transform.parent.gameObject.AddComponent(typeof(MeshCollider));
 		transform.parent.gameObject.GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter> ().mesh;
 	}
-
-	/*public Vector3[] vertices() {
-		List<Vector3> vertexes = new List<Vector3> ();
-		foreach (QuadTree q in sides) {
-			vertexes.AddRange (q.getSphericalVertices (4, gameObject.transform.position, 1));
-		}
-		return vertexes.ToArray ();
-	}*/
 
 	public Vector3[] expandCube(Vector3[] cubeVertices, float[] heightmap) {
 		Vector3[] endVertices = new Vector3[cubeVertices.Length];
@@ -137,6 +122,56 @@ public class SphereTerrain : MonoBehaviour {
 		if (heightMap[index] < 0) {
 			GameObject water = Resources.Load("Prefabs/Water", typeof(GameObject)) as GameObject;
 			water = Instantiate(water, transform.TransformPoint(curVertices[index]) + (transform.TransformPoint(curVertices[index]) - transform.position).normalized * 0.5f, Quaternion.identity);
+		}
+	}
+	/*
+	 * case BuildType.Water:
+					st.waterAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Terrain:
+					st.incHeightAtIndex(st.findIndexOfNearest(hitInfo.point), incrDir * 0.1f);
+					break;
+				case BuildType.Stone:
+					// st.StoneAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Sand:
+					// st.SandAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Tree:
+					// st.TreeAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Wheat:
+					// st.WheatAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Oil:
+					// st.OilAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Iron:
+					// st.IronAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Copper:
+					// st.CopperAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Coal:
+					// st.CoalAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				case BuildType.Deiton:
+					// st.DeitonAtIndex(st.findIndexOfNearest(hitInfo.point));
+					break;
+				default:
+					break;
+					*/
+	public void StoneAtIndex(int index) {
+		if (getBiomeAtIndex(index) == LOW_BIOME) {
+			GameObject stone = Resources.Load("Prefabs/Stone", typeof(GameObject)) as GameObject;
+			stone = Instantiate(stone, transform.TransformPoint(curVertices[index]), Quaternion.identity);
+		}
+	}
+
+	public void SandAtIndex(int index) {
+		if (getBiomeAtIndex(index) == LOW_BIOME) {
+			GameObject stone = Resources.Load("Prefabs/Stone", typeof(GameObject)) as GameObject;
+			stone = Instantiate(stone, transform.TransformPoint(curVertices[index]), Quaternion.identity);
 		}
 	}
 
