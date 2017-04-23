@@ -53,6 +53,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4172539203537852}
+  - component: {fileID: 114668262267360758}
   m_Layer: 0
   m_Name: CopperMound
   m_TagString: Untagged
@@ -529,3 +530,16 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1968207200522756}
   m_Mesh: {fileID: 4300004, guid: 1384096cea24a446e9f5543d0f2e695d, type: 3}
+--- !u!114 &114668262267360758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1576263716927378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b19515b573f146d4bc0971d1cb3b192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTimer: 0.5
+  finalScale: {x: 0.02, y: 0.02, z: 0.02}

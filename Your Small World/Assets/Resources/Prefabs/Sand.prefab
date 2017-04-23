@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33549345918305908}
   - component: {fileID: 23585878002316990}
   - component: {fileID: 95887307304335988}
+  - component: {fileID: 114695106353753940}
   m_Layer: 0
   m_Name: Sand
   m_TagString: Untagged
@@ -98,3 +99,16 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114695106353753940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1156728387751924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b19515b573f146d4bc0971d1cb3b192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTimer: 0.5
+  finalScale: {x: 0.02, y: 0.02, z: 0.02}

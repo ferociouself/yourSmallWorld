@@ -153,6 +153,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4661861971868872}
+  - component: {fileID: 114369398776817348}
   m_Layer: 0
   m_Name: coppermound
   m_TagString: Untagged
@@ -262,7 +263,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1948124605745098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 808.73816, y: 252.82785, z: -1547.876}
+  m_LocalPosition: {x: 826.6045, y: 6328.259, z: -1572.3386}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4072486975389422}
@@ -275,9 +276,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1843420631956052}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4941945070148536}
   - {fileID: 4020726224339164}
@@ -288,7 +289,7 @@ Transform:
   - {fileID: 4781740165715708}
   m_Father: {fileID: 4072486975389422}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4781740165715708
 Transform:
   m_ObjectHideFlags: 1
@@ -605,3 +606,16 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114369398776817348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1843420631956052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b19515b573f146d4bc0971d1cb3b192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTimer: 0.5
+  finalScale: {x: 0.06, y: 0.06, z: 0.06}

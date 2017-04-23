@@ -312,15 +312,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1
-  curVertices: []
   curTriangles: 
-  heightMap: []
-  buildableMap: 
-  editableMap: 
-  biomeMap: []
-  buildingIndices: 
   maxHeight: 0.2
   minHeight: -0.1
+  filter: {fileID: 0}
 --- !u!114 &114788214704362390
 MonoBehaviour:
   m_ObjectHideFlags: 1

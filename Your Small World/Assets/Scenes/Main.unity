@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -147,16 +147,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114483717114369244, guid: c5e4e448a77954d52b6107a295d02446,
-        type: 2}
-      propertyPath: dirIndicator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114483717114369244, guid: c5e4e448a77954d52b6107a295d02446,
-        type: 2}
-      propertyPath: buildIndicator
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 114788214704362390, guid: c5e4e448a77954d52b6107a295d02446,
         type: 2}
       propertyPath: LatinText
@@ -172,35 +162,6 @@ Prefab:
       propertyPath: TitleText
       value: 
       objectReference: {fileID: 2142313011}
-    - target: {fileID: 4635124039601194, guid: c5e4e448a77954d52b6107a295d02446, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20659085883000400, guid: c5e4e448a77954d52b6107a295d02446,
-        type: 2}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 20659085883000400, guid: c5e4e448a77954d52b6107a295d02446,
-        type: 2}
-      propertyPath: m_BackGroundColor.r
-      value: 0.5735294
-      objectReference: {fileID: 0}
-    - target: {fileID: 20659085883000400, guid: c5e4e448a77954d52b6107a295d02446,
-        type: 2}
-      propertyPath: m_BackGroundColor.g
-      value: 0.5626522
-      objectReference: {fileID: 0}
-    - target: {fileID: 20659085883000400, guid: c5e4e448a77954d52b6107a295d02446,
-        type: 2}
-      propertyPath: m_BackGroundColor.b
-      value: 0.50183827
-      objectReference: {fileID: 0}
-    - target: {fileID: 114788214704362390, guid: c5e4e448a77954d52b6107a295d02446,
-        type: 2}
-      propertyPath: titleImage
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5e4e448a77954d52b6107a295d02446, type: 2}
   m_IsPrefabParent: 0

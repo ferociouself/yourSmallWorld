@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4415038840458386}
   - component: {fileID: 95472460152319076}
+  - component: {fileID: 114310343507434686}
   m_Layer: 0
   m_Name: IronVein0
   m_TagString: Untagged
@@ -169,6 +170,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4264228963449024}
+  - component: {fileID: 114322796809175566}
   m_Layer: 0
   m_Name: ironrock
   m_TagString: Untagged
@@ -210,7 +212,7 @@ Transform:
   m_GameObject: {fileID: 1868970124307154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4027506521225882}
   - {fileID: 4722086884654020}
@@ -243,7 +245,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1685118520362000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 811.0405, y: 247.42116, z: -1547.9838}
+  m_LocalPosition: {x: 829.1235, y: 6340.3555, z: -1571.9211}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4304068114788462}
@@ -605,3 +607,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114310343507434686
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1685118520362000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c69f14ecfc946629cf5460cc76a17f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  center: {fileID: 0}
+--- !u!114 &114322796809175566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1868970124307154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b19515b573f146d4bc0971d1cb3b192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTimer: 0.5
+  finalScale: {x: 0.06, y: 0.06, z: 0.06}
