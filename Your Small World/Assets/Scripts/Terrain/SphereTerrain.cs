@@ -29,6 +29,7 @@ public class SphereTerrain : MonoBehaviour {
 	public const string OIL_BIOME = "Oil";
 	public const string STONE_BIOME = "Stone";
 	public const string CITY_BIOME = "City";
+	public const string DEITON_BIOME = "Deiton";
 
 
 
@@ -243,6 +244,10 @@ public class SphereTerrain : MonoBehaviour {
 	public void spreadWaterBiome(Vertex v) {
 		if (v.getBiome() == LOW_BIOME || v.getBiome() == OIL_BIOME || v.getBiome() == STONE_BIOME) {
 			v.setBiome (WATER_BIOME);
+			ResourceController resourceCont = (GameObject.FindObjectOfType(typeof(ResourceController)) as ResourceController);
+			if (resourceCont != null) {
+				resourceCont.WaterMade(v);
+			}
 			Vertex[] neighbors = v.getNeighbors ();
 			for (int i = 0; i < neighbors.Length; i++) {
 				if (neighbors[i].getHeight() < 0 && neighbors[i].getBiome() != WATER_BIOME) {
@@ -262,7 +267,10 @@ public class SphereTerrain : MonoBehaviour {
 	public void SpreadStoneBiome(Vertex v) {
 		if (v.getBiome() == LOW_BIOME || v.getBiome() == OIL_BIOME || v.getBiome() == WATER_BIOME) {
 			v.setBiome (STONE_BIOME);
-			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
+			ResourceController resourceCont = (GameObject.FindObjectOfType(typeof(ResourceController)) as ResourceController);
+			if (resourceCont != null) {
+				resourceCont.StoneMade(v);
+			}
 			GameObject stone = Resources.Load("Prefabs/Stone" + Random.Range(0,1), typeof(GameObject)) as GameObject;
 			stone = Instantiate(stone, transform.TransformPoint(v.getSphereVector()), Quaternion.identity) as GameObject;
 			v.removeResource ();
@@ -276,10 +284,38 @@ public class SphereTerrain : MonoBehaviour {
 		}
 	}
 
+	public void DeitonAtIndex(int index) {
+		if (vertices[index].getHeight() < 0) {
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
+		}
+		SpreadDeitonBiome (vertices[index]);
+	}
+
+	public void SpreadDeitonBiome(Vertex v) {
+		if (v.getBiome() == LOW_BIOME || v.getBiome() == OIL_BIOME || v.getBiome() == WATER_BIOME || v.getBiome() == STONE_BIOME) {
+			v.setBiome (DEITON_BIOME);
+			ResourceController resourceCont = (GameObject.FindObjectOfType(typeof(ResourceController)) as ResourceController);
+			if (resourceCont != null) {
+				resourceCont.DeitonMade(v);
+			}
+			Vertex[] neighbors = v.getNeighbors ();
+			for (int i = 0; i < neighbors.Length; i++) {
+				if (neighbors[i].getHeight() < 0 && neighbors[i].getBiome() != STONE_BIOME) {
+					SpreadDeitonBiome (neighbors[i]);
+				}
+			}
+		}
+	}
+
+
 	public void SandAtIndex(int index) {
 		if (vertices[index].getBiome() == DESERT_BIOME || vertices[index].getBiome() == MED_BIOME) {
 			if(vertices[index].getResource() != null && vertices[index].getResource().name.Contains("SandHill")) {
 				return;
+			}
+			ResourceController resourceCont = (GameObject.FindObjectOfType(typeof(ResourceController)) as ResourceController);
+			if (resourceCont != null) {
+				resourceCont.SandMade(vertices [index]);
 			}
 			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject sand = Resources.Load("Prefabs/SandHill" + Random.Range(0,1), typeof(GameObject)) as GameObject;
@@ -293,6 +329,10 @@ public class SphereTerrain : MonoBehaviour {
 		if (vertices[index].getBiome() == MED_BIOME) {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Forest")) {
 				return;
+			}
+			ResourceController resourceCont = (GameObject.FindObjectOfType(typeof(ResourceController)) as ResourceController);
+			if (resourceCont != null) {
+				resourceCont.TreeMade(vertices [index]);
 			}
 			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject tree = Resources.Load("Prefabs/Forest" + Random.Range(0,5), typeof(GameObject)) as GameObject;
@@ -308,6 +348,10 @@ public class SphereTerrain : MonoBehaviour {
 		if (vertices[index].getBiome() == MED_BIOME) {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("WheatField")) {
 				return;
+			}
+			ResourceController resourceCont = (GameObject.FindObjectOfType(typeof(ResourceController)) as ResourceController);
+			if (resourceCont != null) {
+				resourceCont.WheatMade(vertices[index]);
 			}
 			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject wheat = Resources.Load("Prefabs/WheatField0", typeof(GameObject)) as GameObject;
@@ -329,6 +373,10 @@ public class SphereTerrain : MonoBehaviour {
 	public void SpreadOilBiome(Vertex v) {
 		if (v.getBiome() == LOW_BIOME || v.getBiome() == WATER_BIOME || v.getBiome() == STONE_BIOME) {
 			v.setBiome (OIL_BIOME);
+			ResourceController resourceCont = (GameObject.FindObjectOfType(typeof(ResourceController)) as ResourceController);
+			if (resourceCont != null) {
+				resourceCont.OilMade(v);
+			}
 			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			Vertex[] neighbors = v.getNeighbors ();
 			for (int i = 0; i < neighbors.Length; i++) {
@@ -344,6 +392,10 @@ public class SphereTerrain : MonoBehaviour {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Iron")) {
 				return;
 			}
+			ResourceController resourceCont = (GameObject.FindObjectOfType(typeof(ResourceController)) as ResourceController);
+			if (resourceCont != null) {
+				resourceCont.IronMade(vertices [index]);
+			}
 			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject iron = Resources.Load("Prefabs/IronVein" + Random.Range(0,1), typeof(GameObject)) as GameObject;
 			iron = Instantiate(iron, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
@@ -356,6 +408,10 @@ public class SphereTerrain : MonoBehaviour {
 		if (getBiomeAtIndex(index) == HIGH_BIOME) {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Copper")) {
 				return;
+			}
+			ResourceController resourceCont = (GameObject.FindObjectOfType(typeof(ResourceController)) as ResourceController);
+			if (resourceCont != null) {
+				resourceCont.CopperMade(vertices [index]);
 			}
 			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject copper = Resources.Load("Prefabs/CopperVein" + Random.Range(0,1), typeof(GameObject)) as GameObject;
@@ -370,24 +426,15 @@ public class SphereTerrain : MonoBehaviour {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Coal")) {
 				return;
 			}
+			ResourceController resourceCont = (GameObject.FindObjectOfType(typeof(ResourceController)) as ResourceController);
+			if (resourceCont != null) {
+				resourceCont.CoalMade(vertices [index]);
+			}
 			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject coal = Resources.Load("Prefabs/CoalVein" + Random.Range(0,1), typeof(GameObject)) as GameObject;
 			coal = Instantiate(coal, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
 			vertices [index].removeResource ();
 			vertices [index].setResource (coal);
-		}
-	}
-
-	public void DeitonAtIndex(int index) {
-		if (vertices[index].getBiome() == HIGH_BIOME) {
-			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Deiton")) {
-				return;
-			}
-			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
-			GameObject deiton = Resources.Load("Prefabs/Deiton", typeof(GameObject)) as GameObject;
-			deiton = Instantiate(deiton, transform.TransformPoint(vertices[index].getSphereVector()) + (transform.TransformPoint(vertices[index].getSphereVector()) - transform.position).normalized * 0.5f, Quaternion.identity) as GameObject;
-			vertices [index].removeResource ();
-			vertices [index].setResource (deiton);
 		}
 	}
 
@@ -427,6 +474,9 @@ public class SphereTerrain : MonoBehaviour {
 				break;
 			case OIL_BIOME:
 				c [i] = oils [Random.Range (0, oils.Count)];
+				break;
+			case DEITON_BIOME:
+				c [i] = new Color(1.0f, 0.0f, 1.0f, 1.0f);
 				break;
 			default:
 				c [i] = yellows[Random.Range(0, yellows.Count)];

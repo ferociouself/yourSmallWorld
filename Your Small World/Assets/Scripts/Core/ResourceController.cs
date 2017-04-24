@@ -14,50 +14,67 @@ public class ResourceController : MonoBehaviour {
 		
 	}
 
-	public void ResourceMade(BaseResource b, Vertex v) {
-		Debug.Log("Resource made");
-		if (GetComponent<TierController>().CheckIfWant(b)) {
-			GetComponent<Community>().SendBoiToGood(b, v);
-		}
-	}
-
-	void WaterMade() {
-		Debug.Log("Water Made");
-	}
-
 	public void WaterMade(Vertex v) {
-		if (GetComponent<TierController>().CheckIfWant(Water.instance)) {
-			GetComponent<Community>().SendBoiToGood(Water.instance, v);
+		if (GetComponent<TierController>().CheckIfWant("Water")) {
+			Debug.Log("Water Desired");
+			GetComponent<Community>().SendBoiToGood("Water", v);
 		}
 	}
 
 	public void StoneMade(Vertex v) {
-		if (GetComponent<TierController>().CheckIfWant(Stone.instance)) {
-			GetComponent<Community>().SendBoiToGood(Stone.instance, v);
+		if (GetComponent<TierController>().CheckIfWant("Stone")) {
+			Debug.Log("Stone Desired");
+			GetComponent<Community>().SendBoiToGood("Stone", v);
 		}
 	}
 
 	public void OilMade(Vertex v) {
-		if (GetComponent<TierController>().CheckIfWant(Oil.instance)) {
-			GetComponent<Community>().SendBoiToGood(Oil.instance, v);
+		if (GetComponent<TierController>().CheckIfWant("Oil")) {
+			Debug.Log("Oil Desired");
+			GetComponent<Community>().SendBoiToGood("Oil", v);
 		}
 	}
 
 	public void TreeMade(Vertex v) {
-		if (GetComponent<TierController>().CheckIfWant(Tree.instance)) {
-			GetComponent<Community>().SendBoiToGood(Tree.instance, v);
+		if (GetComponent<TierController>().CheckIfWant("Tree")) {
+			Debug.Log("Tree Desired");
+			GetComponent<Community>().SendBoiToGood("Tree", v);
 		}
 	}
 
 	public void WheatMade(Vertex v) {
-		if (GetComponent<TierController>().CheckIfWant(Wheat.instance)) {
-			GetComponent<Community>().SendBoiToGood(Wheat.instance, v);
+		if (GetComponent<TierController>().CheckIfWant("Wheat")) {
+			GetComponent<Community>().SendBoiToGood("Wheat", v);
 		}
 	}
 
 	public void SandMade(Vertex v) {
-		if (GetComponent<TierController>().CheckIfWant(Sand.instance)) {
-			GetComponent<Community>().SendBoiToGood(Sand.instance, v);
+		if (GetComponent<TierController>().CheckIfWant("Sand")) {
+			GetComponent<Community>().SendBoiToGood("Sand", v);
+		}
+	}
+
+	public void IronMade(Vertex v) {
+		if (GetComponent<TierController>().CheckIfWant("Iron")) {
+			GetComponent<Community>().SendBoiToGood("Iron", v);
+		}
+	}
+
+	public void CopperMade(Vertex v) {
+		if (GetComponent<TierController>().CheckIfWant("Copper")) {
+			GetComponent<Community>().SendBoiToGood("Copper", v);
+		}
+	}
+
+	public void CoalMade(Vertex v) {
+		if (GetComponent<TierController>().CheckIfWant("Coal")) {
+			GetComponent<Community>().SendBoiToGood("Coal", v);
+		}
+	}
+
+	public void DeitonMade(Vertex v) {
+		if (GetComponent<TierController>().CheckIfWant("Deiton")) {
+			GetComponent<Community>().SendBoiToGood("Deiton", v);
 		}
 	}
 }

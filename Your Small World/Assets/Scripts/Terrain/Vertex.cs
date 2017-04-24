@@ -98,6 +98,9 @@ public class Vertex {
 		case SphereTerrain.OIL_BIOME:
 			color = SphereTerrain.oils [Random.Range (0, SphereTerrain.oils.Count)];
 			break;
+		case SphereTerrain.DEITON_BIOME:
+			color = new Color(1.0f, 0.0f, 1.0f, 1.0f);
+			break;
 		}
 		parent.updateColors ();
 	}

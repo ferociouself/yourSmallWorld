@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Community : MonoBehaviour {
 
-	private Dictionary<BaseResource,int> goods;
+	private Dictionary<string,int> goods;
 
 	private List<Vertex> buildingLocations;
 	private List<Vertex> huts;
@@ -23,7 +23,7 @@ public class Community : MonoBehaviour {
 		if (huts == null) {
 			huts = new List<Vertex> ();
 		}
-		goods = new Dictionary<BaseResource, int> ();
+		goods = new Dictionary<string, int> ();
 		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
 		setCampfireVertex (terrain.getVertex (terrain.findIndexOfNearest (gameObject.transform.position)));
 		AddBois(5);
@@ -79,6 +79,7 @@ public class Community : MonoBehaviour {
 	}
 
 	public bool MakeBusyBoi(){
+		Debug.Log("Making busy boi");
 		if (IsThereAFreeBoi()) {
 			SmolMan becomingBusy = freeBois[0];
 			busyBois.Add(becomingBusy);
@@ -104,10 +105,18 @@ public class Community : MonoBehaviour {
 		busyBois.Clear();
 	}
 
-	public void SendBoiToGood(BaseResource g, Vertex res) {
+	public void SendBoiToGood(string g, Vertex res) {
 		if (IsThereAFreeBoi()) {
-			freeBois[0].setResource(res);
-			AddGoods(g, 1);
+			Vertex[] resNeighbors = res.getNeighbors();
+			for (int i = 0; i < resNeighbors.Length; i++) {
+				if (resNeighbors[i].getTransversable()) {
+					freeBois[0].setResource(resNeighbors[i]);
+					MakeBusyBoi();
+					AddGoods(g, 1);
+					GetComponent<TierController>().CheckTier();
+					break;
+				}
+			}
 		}
 	}
 
@@ -117,9 +126,9 @@ public class Community : MonoBehaviour {
 	/// <returns><c>true</c>, if goods was added, <c>false</c> otherwise.</returns>
 	/// <param name="good">Good.</param>
 	/// <param name="amountToAdd">Amount to add.</param>
-	public bool AddGoods(BaseResource good, int amountToAdd){
+	public bool AddGoods(string good, int amountToAdd){
 		if (goods.ContainsKey (good)) {
-			goods.Add (good, goods [good] + amountToAdd);
+			goods[good] = goods [good] + amountToAdd;
 			return true;
 		}
 		goods.Add (good, amountToAdd);
@@ -132,7 +141,7 @@ public class Community : MonoBehaviour {
 	/// <returns><c>true</c>, if goods was removed, <c>false</c> otherwise.</returns>
 	/// <param name="good">Good.</param>
 	/// <param name="amountToRemove">Amount to remove.</param>
-	public bool RemoveGoods(BaseResource good, int amountToRemove){
+	public bool RemoveGoods(string good, int amountToRemove){
 		if (HasGoodsCheck(good, amountToRemove)) {
 			goods.Add (good, goods[good] - amountToRemove);
 			return true;
@@ -146,13 +155,13 @@ public class Community : MonoBehaviour {
 	/// <returns><c>true</c> if this instance has goods check the specified good amount; otherwise, <c>false</c>.</returns>
 	/// <param name="good">Good to check</param>
 	/// <param name="amount">Amount.</param>
-	public bool HasGoodsCheck(BaseResource good, int amount){
+	public bool HasGoodsCheck(string good, int amount){
 		if (goods.ContainsKey (good) && goods [good] - amount >= 0)
 			return true;
 		return false;
 	}
 
-	public bool ContainsKey(BaseResource good){
+	public bool ContainsKey(string good){
 		return goods.ContainsKey (good);
 	}
 

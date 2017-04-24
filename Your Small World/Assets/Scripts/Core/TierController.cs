@@ -15,14 +15,14 @@ public class TierController : MonoBehaviour {
 	/// <summary>
 	/// The requisites to move on from each tier.
 	/// </summary>
-	List<Dictionary<BaseResource,int>> tierreqs;
+	List<Dictionary<string,int>> tierreqs;
 
 	// Use this for initialization
 	void Start () {
 		if (tierIncreaseEvent == null)
 			tierIncreaseEvent = new UnityEvent();
 
-		tierreqs = new List<Dictionary<BaseResource,int>> ();
+		/*tierreqs = new List<Dictionary<BaseResource,int>> ();
 
 		Dictionary<BaseResource,int> tier0 = new Dictionary<BaseResource,int>();
 		tier0[Tree.instance] = 1;
@@ -72,7 +72,67 @@ public class TierController : MonoBehaviour {
 		tierreqs.Add (tier2);
 		tierreqs.Add (tier3);
 		tierreqs.Add (tier4);
+		tierreqs.Add (tier5);*/
+
+		tierreqs = new List<Dictionary<string,int>> ();
+
+		Dictionary<string,int> tier0 = new Dictionary<string,int>();
+		tier0["Tree"] = 1;
+		tier0["Stone"] = 3;
+		tier0["Water"] = 1;
+
+		Dictionary<string,int> tier1 = new Dictionary<string,int>();
+		tier1 ["Wheat"] = 3;
+		tier1 ["Water"] = 3;
+		tier1 ["Iron"] = 1;
+		tier1 ["Tree"] = 3;
+
+		Dictionary<string, int> tier2 = new Dictionary<string ,int>();
+		tier2 ["Coal"] = 3;
+		tier2 ["Iron"] = 6;
+		tier2 ["Stone"] = 9;
+		tier2 ["Tree"] = 2;
+
+		Dictionary<string, int> tier3 = new Dictionary<string, int>();
+		tier3 ["Sand"] = 11;
+		tier3 ["Stone"] = 12;
+		tier3 ["Iron"] = 4;
+		tier3 ["Wheat"] = 8;
+		tier3 ["Tree"] = 5;
+
+		Dictionary<string,int> tier4 = new Dictionary<string ,int>();
+		tier4 ["Coal"] = 21;
+		tier4 ["Water"] = 14;
+		tier4 ["Iron"] = 15;
+		tier4 ["Copper"] = 14;
+		tier4 ["Stone"] = 8;
+		tier4 ["Sand"] = 8;
+
+		Dictionary<string ,int> tier5 = new Dictionary<string,int>();
+		tier5 ["Oil"] = 43;
+		tier5 ["Stone"] = 9;
+		tier5 ["Water"] = 26;
+		tier5 ["Sand"] = 28;
+		tier5 ["Copper"] = 14;
+		tier5 ["Tree"] = 12;
+		tier5 ["Iron"] = 6;
+
+		Dictionary<string,int> tier6 = new Dictionary<string,int>();
+		tier6 ["Deiton"] = 40;
+		tier6 ["Oil"] = 40;
+		tier6 ["Copper"] = 40;
+		tier6 ["Water"] = 40;
+		tier6 ["Wheat"] = 40;
+		tier6 ["Sand"] = 40;
+		tier6 ["Iron"] = 40;
+
+		tierreqs.Add (tier0);
+		tierreqs.Add (tier1);
+		tierreqs.Add (tier2);
+		tierreqs.Add (tier3);
+		tierreqs.Add (tier4);
 		tierreqs.Add (tier5);
+		tierreqs.Add (tier6);
 
 		//tierIncreaseEvent.AddListener();
 	}
@@ -109,9 +169,9 @@ public class TierController : MonoBehaviour {
 	/// Checks whether or not the requirements to move to the next tier are satisfied; for example: case(2) checks if all of the resources are present to move from 2 to 3
 	/// </summary>
 	/// <returns><c>true</c>, if tier was checked, <c>false</c> otherwise.</returns>
-	private bool CheckTier(){
+	public bool CheckTier(){
 		if (myCommunity != null) {
-			foreach (BaseResource b in tierreqs[curTier].Keys) {
+			foreach (string b in tierreqs[curTier].Keys) {
 				if(!myCommunity.HasGoodsCheck(b, tierreqs[curTier][b])){
 					return false;
 				}
@@ -126,7 +186,8 @@ public class TierController : MonoBehaviour {
 	/// </summary>
 	/// <returns><c>true</c>, if if want was checked, <c>false</c> otherwise.</returns>
 	/// <param name="b">The blue component.</param>
-	public bool CheckIfWant(BaseResource b){
+	public bool CheckIfWant(string b){
+		Debug.Log("Checking if want " + b);
 		if (tierreqs [curTier].ContainsKey (b)) {
 			if (!myCommunity.ContainsKey (b)) {
 				return true;
