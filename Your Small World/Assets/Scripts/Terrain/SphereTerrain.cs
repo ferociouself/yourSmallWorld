@@ -230,6 +230,7 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void waterAtIndex(int index) {
 		if (vertices[index].getHeight() < 0) {
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			spreadWaterBiome (vertices[index]);
 		}
 	}
@@ -247,12 +248,16 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void StoneAtIndex(int index) {
+		if (vertices[index].getHeight() < 0) {
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
+		}
 		SpreadStoneBiome (vertices[index]);
 	}
 
 	public void SpreadStoneBiome(Vertex v) {
 		if (v.getBiome() == LOW_BIOME || v.getBiome() == OIL_BIOME || v.getBiome() == WATER_BIOME) {
 			v.setBiome (STONE_BIOME);
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject stone = Resources.Load("Prefabs/Stone" + Random.Range(0,1), typeof(GameObject)) as GameObject;
 			stone = Instantiate(stone, transform.TransformPoint(v.getSphereVector()), Quaternion.identity) as GameObject;
 			v.removeResource ();
@@ -271,6 +276,7 @@ public class SphereTerrain : MonoBehaviour {
 			if(vertices[index].getResource() != null && vertices[index].getResource().name.Contains("SandHill")) {
 				return;
 			}
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject sand = Resources.Load("Prefabs/SandHill" + Random.Range(0,1), typeof(GameObject)) as GameObject;
 			sand = Instantiate(sand, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
 			vertices [index].removeResource ();
@@ -283,6 +289,7 @@ public class SphereTerrain : MonoBehaviour {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Forest")) {
 				return;
 			}
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject tree = Resources.Load("Prefabs/Forest" + Random.Range(0,5), typeof(GameObject)) as GameObject;
 			float randRot = Random.Range(0.0f, 180.0f);
 			tree.transform.GetChild (0).transform.rotation = Quaternion.Euler (0.0f, randRot, 0.0f);
@@ -297,6 +304,7 @@ public class SphereTerrain : MonoBehaviour {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("WheatField")) {
 				return;
 			}
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject wheat = Resources.Load("Prefabs/WheatField0", typeof(GameObject)) as GameObject;
 			float randRot = 0.0f;//Random.Range(0.0f, 180.0f);
 			wheat.transform.GetChild (0).transform.rotation = Quaternion.Euler (0.0f, randRot, 0.0f);
@@ -307,12 +315,16 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void OilAtIndex(int index) {
+		if (vertices[index].getHeight() < 0) {
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
+		}
 		SpreadOilBiome (vertices[index]);
 	}
 
 	public void SpreadOilBiome(Vertex v) {
 		if (v.getBiome() == LOW_BIOME || v.getBiome() == WATER_BIOME || v.getBiome() == STONE_BIOME) {
 			v.setBiome (OIL_BIOME);
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			Vertex[] neighbors = v.getNeighbors ();
 			for (int i = 0; i < neighbors.Length; i++) {
 				if (neighbors[i].getHeight() < 0 && neighbors[i].getBiome() != OIL_BIOME) {
@@ -327,6 +339,7 @@ public class SphereTerrain : MonoBehaviour {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Iron")) {
 				return;
 			}
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject iron = Resources.Load("Prefabs/IronVein" + Random.Range(0,1), typeof(GameObject)) as GameObject;
 			iron = Instantiate(iron, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
 			vertices [index].removeResource ();
@@ -339,6 +352,7 @@ public class SphereTerrain : MonoBehaviour {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Copper")) {
 				return;
 			}
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject copper = Resources.Load("Prefabs/CopperVein" + Random.Range(0,1), typeof(GameObject)) as GameObject;
 			copper = Instantiate(copper, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
 			vertices [index].removeResource ();
@@ -351,6 +365,7 @@ public class SphereTerrain : MonoBehaviour {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Coal")) {
 				return;
 			}
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject coal = Resources.Load("Prefabs/CoalVein" + Random.Range(0,1), typeof(GameObject)) as GameObject;
 			coal = Instantiate(coal, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
 			vertices [index].removeResource ();
@@ -363,6 +378,7 @@ public class SphereTerrain : MonoBehaviour {
 			if (vertices [index].getResource () != null && vertices [index].getResource ().name.Contains ("Deiton")) {
 				return;
 			}
+			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject deiton = Resources.Load("Prefabs/Deiton", typeof(GameObject)) as GameObject;
 			deiton = Instantiate(deiton, transform.TransformPoint(vertices[index].getSphereVector()) + (transform.TransformPoint(vertices[index].getSphereVector()) - transform.position).normalized * 0.5f, Quaternion.identity) as GameObject;
 			vertices [index].removeResource ();

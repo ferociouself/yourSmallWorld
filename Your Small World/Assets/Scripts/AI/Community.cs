@@ -5,20 +5,21 @@ using UnityEngine;
 public class Community : MonoBehaviour {
 
 	private Dictionary<BaseResource,int> goods;
-	int bois;
-	int busybois;
 
 	private List<Vertex> buildingLocations;
 	private Vertex campfireVertex;
+
+	private List<SmolMan> freeBois;
+	private List<SmolMan> busyBois;
 
 	// Use this for initialization
 	void Start () {
 		if (buildingLocations == null) {
 			buildingLocations = new List<Vertex> ();
 		}
+		freeBois = new List<SmolMan>();
+		busyBois = new List<SmolMan>();
 		goods = new Dictionary<BaseResource, int> ();
-		bois = 5;
-		busybois = 0;
 		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
 		setCampfireVertex (terrain.getVertex (terrain.findIndexOfNearest (gameObject.transform.position)));
 		//TODO: make the bois
@@ -26,7 +27,9 @@ public class Community : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown(KeyCode.Y)) {
+			AddBois(5);
+		}
 	}
 
 	public void setCampfireVertex(Vertex v) {
@@ -48,32 +51,49 @@ public class Community : MonoBehaviour {
 
 	public void AddBois(int toAdd){
 		toAdd = Mathf.Abs (toAdd);
-		bois += toAdd;
-		//TODO: make more bois
+		for (int i = 0; i < toAdd; i++) {
+			GameObject boi = Resources.Load("Prefabs/Person" + Random.Range(0, 8), typeof(GameObject)) as GameObject;
+			boi = Instantiate(boi, transform.position, Quaternion.identity);
+			boi.GetComponent<SmolMan>().findNewBuilding();
+			freeBois.Add(boi.GetComponent<SmolMan>());
+		}
 	}
 
-	public int GetBois(){
-		return bois;
+	public List<SmolMan> GetFreeBois(){
+		return freeBois;
 	}
 
 	public bool MakeBusyBoi(){
-		if (busybois < bois) {
-			busybois++;
+		if (IsThereAFreeBoi()) {
+			SmolMan becomingBusy = freeBois[0];
+			busyBois.Add(becomingBusy);
+			freeBois.RemoveAt(0);
 			return true;
 		}
 		return false;
 	}
 
-	public int GetBusyBois(){
-		return busybois;
+	public List<SmolMan> GetBusyBois(){
+		return busyBois;
 	}
 
 	public bool IsThereAFreeBoi(){
-		return busybois < bois;
+		return freeBois.Count > 0;
 	}
 
 	public void FreeBois(){
-		busybois = 0;
+		foreach (SmolMan m in busyBois) {
+			m.findNewBuilding();
+			freeBois.Add(m);
+		}
+		busyBois.Clear();
+	}
+
+	public void SendBoiToGood(BaseResource g, Vertex res) {
+		if (IsThereAFreeBoi()) {
+			freeBois[0].setResource(res);
+			AddGoods(g, 1);
+		}
 	}
 
 	/// <summary>

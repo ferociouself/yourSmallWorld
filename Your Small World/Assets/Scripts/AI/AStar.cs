@@ -9,6 +9,12 @@ public class AStar {
 	//public static Queue<Node> closedList, openList;
 
 	private static float HeuristicEstimateCost(Vertex curVert, Vertex goalVert) {
+		if (curVert == null || goalVert == null) {
+			return 0.0f;
+		}
+		if (curVert.getTransformedPoint() == null || goalVert.getTransformedPoint() == null) {
+			return 0.0f;
+		}
 		Vector3 vecCost = curVert.getTransformedPoint() - goalVert.getTransformedPoint();
 		return vecCost.magnitude;
 	}

@@ -122,7 +122,7 @@ public class TierController : MonoBehaviour {
 	/// </summary>
 	/// <returns><c>true</c>, if if want was checked, <c>false</c> otherwise.</returns>
 	/// <param name="b">The blue component.</param>
-	private bool CheckIfWant(BaseResource b){
+	public bool CheckIfWant(BaseResource b){
 		if (tierreqs [curTier].ContainsKey (b)) {
 			if (!myCommunity.ContainsKey (b)) {
 				return true;

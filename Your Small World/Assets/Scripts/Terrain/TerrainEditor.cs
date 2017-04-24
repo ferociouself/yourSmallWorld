@@ -45,19 +45,24 @@ public class TerrainEditor : MonoBehaviour {
 
 		if (Input.GetMouseButton(0))
 		{
-			if (downInPreviousFrame)
-			{
-				if (isDragActive)
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hitInfo;
+			int layerMask = 1 << 8;
+			if (Physics.Raycast(ray, out hitInfo, layerMask)) {
+				if (downInPreviousFrame)
 				{
-					//(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).PlaceSingle();
+					if (isDragActive)
+					{
+						//(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).PlaceSingle();
+					}
+					else
+					{
+						isDragActive = true;
+						//(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
+					}
 				}
-				else
-				{
-					isDragActive = true;
-					(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
-				}
+				downInPreviousFrame = true;
 			}
-			downInPreviousFrame = true;
 		}
 		else
 		{
