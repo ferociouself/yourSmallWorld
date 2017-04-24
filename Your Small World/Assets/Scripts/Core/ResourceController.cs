@@ -5,12 +5,8 @@ using UnityEngine.Events;
 
 public class ResourceController : MonoBehaviour {
 
-	UnityAction action;
-
 	// Use this for initialization
 	void Start () {
-		action = new UnityAction(WaterMade);
-		EventManager.StartListening("Resource", action);
 	}
 	
 	// Update is called once per frame
@@ -27,5 +23,41 @@ public class ResourceController : MonoBehaviour {
 
 	void WaterMade() {
 		Debug.Log("Water Made");
+	}
+
+	public void WaterMade(Vertex v) {
+		if (GetComponent<TierController>().CheckIfWant(Water.instance)) {
+			GetComponent<Community>().SendBoiToGood(Water.instance, v);
+		}
+	}
+
+	public void StoneMade(Vertex v) {
+		if (GetComponent<TierController>().CheckIfWant(Stone.instance)) {
+			GetComponent<Community>().SendBoiToGood(Stone.instance, v);
+		}
+	}
+
+	public void OilMade(Vertex v) {
+		if (GetComponent<TierController>().CheckIfWant(Oil.instance)) {
+			GetComponent<Community>().SendBoiToGood(Oil.instance, v);
+		}
+	}
+
+	public void TreeMade(Vertex v) {
+		if (GetComponent<TierController>().CheckIfWant(Tree.instance)) {
+			GetComponent<Community>().SendBoiToGood(Tree.instance, v);
+		}
+	}
+
+	public void WheatMade(Vertex v) {
+		if (GetComponent<TierController>().CheckIfWant(Wheat.instance)) {
+			GetComponent<Community>().SendBoiToGood(Wheat.instance, v);
+		}
+	}
+
+	public void SandMade(Vertex v) {
+		if (GetComponent<TierController>().CheckIfWant(Sand.instance)) {
+			GetComponent<Community>().SendBoiToGood(Sand.instance, v);
+		}
 	}
 }
