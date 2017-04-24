@@ -13,18 +13,29 @@ public class ToggleEraText : MonoBehaviour {
 
 	bool active;
 
+	public bool firstTimeInTier;
+	private float flashTimer;
+
 	// Use this for initialization
 	void Start () {
 		mold = GameObject.Find ("Mold").GetComponent<Button>() as Button;
 		place = GameObject.Find ("Place").GetComponent<Button>() as Button;
 		info.gameObject.SetActive (false);
 		active = false;
+		firstTimeInTier = true;
+		flashTimer = 0.0f;
 	}
 
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (!MusicController.introduction && firstTimeInTier) {
+			flashTimer += Time.deltaTime;
+			if (flashTimer >= 1.0f) {
+				flashTimer = 0.0f;
+				this.gameObject.GetComponent<Text> ().color = (this.gameObject.GetComponent<Text> ().color == Color.red) ? Color.white : Color.red;
+			}
+		}
 	}
 
 	public void Press(){
@@ -32,6 +43,7 @@ public class ToggleEraText : MonoBehaviour {
 		place.interactable = !place.interactable;
 		active = !active;
 		info.gameObject.SetActive (active);
+		firstTimeInTier = false;
 	}
 
 	public void Hover(){

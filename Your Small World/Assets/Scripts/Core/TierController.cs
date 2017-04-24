@@ -154,6 +154,7 @@ public class TierController : MonoBehaviour {
 			g = GameObject.Find ("TierName");
 			if (g != null) {
 				g.GetComponent<ToggleEraText> ().ChangeEraText (curTier);
+				g.GetComponent<ToggleEraText> ().firstTimeInTier = true;
 			}
 			ResourceController cont = GetComponent<ResourceController>();
 			SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();

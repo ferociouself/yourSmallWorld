@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 23026161070249490}
   - component: {fileID: 102550177258024342}
   - component: {fileID: 114415489610295686}
+  - component: {fileID: 114990892926983406}
   m_Layer: 0
   m_Name: Bark
   m_TagString: Untagged
@@ -173,7 +174,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1029782342939136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.4468446, y: -6.3024645, z: -42.82762}
+  m_LocalPosition: {x: 4.6267614, y: -9.015348, z: -40.804688}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 4526388118945698}
@@ -561,8 +562,8 @@ TextMesh:
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
-  m_Anchor: 0
-  m_Alignment: 0
+  m_Anchor: 4
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 0
   m_FontStyle: 0
@@ -593,6 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75134ad4440374f448e044981ced17fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceActive: 0
 --- !u!114 &114486643263098462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -632,6 +634,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerOfGravity: {fileID: 1054191487490688, guid: c5e4e448a77954d52b6107a295d02446,
     type: 2}
+--- !u!114 &114990892926983406
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021094768476368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805c69e7169db45ddbc291fcf9c66fc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToWait: 0
 --- !u!136 &136824237780852254
 CapsuleCollider:
   m_ObjectHideFlags: 1
