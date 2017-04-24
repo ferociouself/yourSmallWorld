@@ -69,7 +69,7 @@ public class Community : MonoBehaviour {
 	public void AddBois(int toAdd){
 		toAdd = Mathf.Abs (toAdd);
 		for (int i = 0; i < toAdd; i++) {
-			GameObject boi = Resources.Load("Prefabs/Person" + Random.Range(0, 8), typeof(GameObject)) as GameObject;
+			GameObject boi = Resources.Load("Prefabs/Person" + Random.Range(0, GetComponent<TierController>().curTier + 1), typeof(GameObject)) as GameObject;
 			boi = Instantiate(boi, transform.position, Quaternion.identity);
 			boi.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 			boi.GetComponent<SmolMan>().findNewBuilding();
@@ -157,6 +157,8 @@ public class Community : MonoBehaviour {
 		if (m.resourceActive) {
 			Debug.Log("Resource Active");
 			Vertex v = m.getResource();
+			Debug.Log(v.getBiome());
+			Debug.Log(SphereTerrain.STONE_BIOME);
 			if (v.getBiome() == SphereTerrain.WATER_BIOME) {
 				RemoveGoods("Water", 1);
 			}
@@ -196,19 +198,29 @@ public class Community : MonoBehaviour {
 	public void SendBoiToGood(string g, Vertex res) {
 		if (IsThereAFreeBoi()) {
 			Debug.Log("There is a free boi.");
-			Vertex[] resNeighbors = res.getNeighbors();
-			for (int i = 0; i < resNeighbors.Length; i++) {
+			//Vertex[] resNeighbors = res.getNeighbors();
+			freeBois[0].setTarget(res);
+			freeBois[0].setResource(res);
+			res.attachMan(freeBois[0]);
+			MakeBusyBoi();
+			//Debug.Log("Community has " + goods[g] + " of " + g);
+			AddGoods(g, 1);
+			Debug.Log("Community has " + goods[g] + " of " + g);
+			GetComponent<TierController>().CheckTier();
+			/*for (int i = 0; i < resNeighbors.Length; i++) {
 				if (resNeighbors[i].getTransversable()) {
-					freeBois[0].setResource(resNeighbors[i]);
+					freeBois[0].setTarget(resNeighbors[i]);
+					Debug.Log(resNeighbors[i].getTransformedPoint());
+					freeBois[0].setResource(res);
 					res.attachMan(freeBois[0]);
-					MakeBusyBoi();
+					Debug.Log(MakeBusyBoi());
 					//Debug.Log("Community has " + goods[g] + " of " + g);
 					AddGoods(g, 1);
 					Debug.Log("Community has " + goods[g] + " of " + g);
 					GetComponent<TierController>().CheckTier();
 					break;
 				}
-			}
+			}*/
 		}
 	}
 

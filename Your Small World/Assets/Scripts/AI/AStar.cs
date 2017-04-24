@@ -57,13 +57,13 @@ public class AStar {
 			Vertex[] neighborVertices = curNode.vert.getNeighbors();
 			for (int i = 0; i < neighborVertices.Length; i++) {
 				Vertex v = neighborVertices[i];
-				if (v.getTransversable()) {
+				//if (v.getTransversable()) {
 					Node newNode = new Node();
 					newNode.vert = v;
 					newNode.estimatedCost = HeuristicEstimateCost(v, goal);
 					newNode.nodeTotalCost = 0.0f;
 					neighbors.Add(newNode);
-				}
+				//}
 			}
 
 			for (int i = 0; i < neighbors.Count; i++) {

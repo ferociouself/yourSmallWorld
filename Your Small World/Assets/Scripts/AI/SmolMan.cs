@@ -10,18 +10,12 @@ public class SmolMan : MonoBehaviour {
 
 	Community comm;
 
-	SphereTerrain st;
-
 	// Use this for initialization
 	void Awake () {
-		st = GameObject.FindObjectOfType(typeof(SphereTerrain)) as SphereTerrain;
 		comm = GameObject.FindObjectOfType(typeof(Community)) as Community;
-		if (st != null && comm != null) {
-			GetComponent<FollowPath> ().start = st.getVertex (st.findIndexOfNearest (comm.gameObject.transform.position));
-			GetComponent<FollowPath> ().targetGoal = st.getVertex (st.findIndexOfNearest (comm.gameObject.transform.position));
-		}
-		if (comm == null) {
-			Debug.LogError("Community does not exist!");
+		if (comm != null) {
+			GetComponent<FollowPath> ().start = comm.getCampfireVertex();
+			GetComponent<FollowPath> ().targetGoal = comm.getCampfireVertex();
 		}
 	}
 	
@@ -32,9 +26,16 @@ public class SmolMan : MonoBehaviour {
 
 	public void setResource(Vertex res) {
 		targetResource = res;
+		resourceActive = true;
+	}
+
+	public void setTarget(Vertex res) {
 		GetComponent<FollowPath>().backAndForth = true;
 		GetComponent<FollowPath>().targetGoal = res;
-		resourceActive = true;
+	}
+
+	public Community getCommunity() {
+		return comm;
 	}
 
 	public void findNewBuilding() {
@@ -45,9 +46,11 @@ public class SmolMan : MonoBehaviour {
 		List<Vertex> buildings = new List<Vertex>(comm.getBuildingLocations());
 		buildings.Remove(comm.getCampfireVertex());
 		if (buildings.Count == 0) {
+			GetComponent<FollowPath>().backAndForth = false;
 			GetComponent<FollowPath>().targetGoal = comm.getCampfireVertex();
 		} else {
 			int randIndex = Random.Range(0, buildings.Count);
+			GetComponent<FollowPath>().backAndForth = false;
 			GetComponent<FollowPath>().targetGoal = buildings[randIndex];
 		}
 		resourceActive = false;
@@ -61,6 +64,7 @@ public class SmolMan : MonoBehaviour {
 			return null;
 		}
 	}
+
 
 
 }

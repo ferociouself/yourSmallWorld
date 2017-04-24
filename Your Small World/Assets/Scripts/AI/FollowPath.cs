@@ -12,6 +12,8 @@ public class FollowPath : MonoBehaviour {
 
 	bool disabled = false;
 
+	public bool showTarget = false;
+
 	public bool backAndForth = false;
 
 	float disabledBuffer = 0.0f;
@@ -82,16 +84,8 @@ public class FollowPath : MonoBehaviour {
 				setPath();
 			}
 		} else {
-			GetComponent<Animator>().SetBool("Walking", false);
-			rb.velocity = Vector3.zero;
-			rb.constraints = RigidbodyConstraints.FreezeAll;
-			if (disabledBuffer > maxDisabledBuffer) {
-				Debug.Log("Checking if path exists.");
-				setPath();
-				disabledBuffer = 0.0f;
-			} else {
-				disabledBuffer += Time.deltaTime;
-			}
+			GetComponent<SmolMan>().getCommunity().FreeOneBoi(GetComponent<SmolMan>());
+			disabled = false;
 		}
 	}
 
@@ -117,7 +111,7 @@ public class FollowPath : MonoBehaviour {
 			}
 		}
 		Gizmos.color = Color.black;
-		if (disabled) {
+		if (disabled || showTarget) {
 			if (targetGoal != null) {
 				Gizmos.DrawSphere (targetGoal.getTransformedPoint (), 0.5f);
 			}

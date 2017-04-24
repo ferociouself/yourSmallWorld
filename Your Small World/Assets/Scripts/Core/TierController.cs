@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class TierController : MonoBehaviour {
 
-	int curTier = 0;
+	public int curTier = 0;
 
 	UnityEvent tierIncreaseEvent;
 
