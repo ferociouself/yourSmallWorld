@@ -26,6 +26,6 @@ public class ToggleToolBar : MonoBehaviour {
 	}
 
 	public void DisableTools(){
-		tools.gameObject.SetActive (false);
+		//tools.gameObject.SetActive (false);
 	}
 }
