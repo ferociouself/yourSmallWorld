@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114409681445636010}
   - component: {fileID: 114499576169988778}
   - component: {fileID: 114316836189695722}
+  - component: {fileID: 114405891885810738}
   m_Layer: 0
   m_Name: campfire
   m_TagString: Untagged
@@ -313,6 +314,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCommunity: {fileID: 114499576169988778}
+--- !u!114 &114405891885810738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1139994177574370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f951a75f5bbc44d158f0368f6cc9b5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114409681445636010
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4990921823663578}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: rot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4235846523115854}
   - component: {fileID: 33289349574664102}
   - component: {fileID: 23470175904655140}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4610664277480494}
   - component: {fileID: 33377463660027400}
   - component: {fileID: 23755466642660618}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4787234043568888}
   - component: {fileID: 33965509977241718}
   - component: {fileID: 23169993223062798}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,10 +87,14 @@ GameObject:
   - component: {fileID: 4629278598924548}
   - component: {fileID: 95080773472485676}
   - component: {fileID: 114461561128053952}
-  - component: {fileID: 114268381320750042}
-  m_Layer: 0
+  - component: {fileID: 114793688207601890}
+  - component: {fileID: 114790658908358044}
+  - component: {fileID: 54526522301499924}
+  - component: {fileID: 114735908362707098}
+  - component: {fileID: 136209451702577064}
+  m_Layer: 9
   m_Name: Person4
-  m_TagString: Untagged
+  m_TagString: SmolMan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,7 +109,7 @@ GameObject:
   - component: {fileID: 4677747115901574}
   - component: {fileID: 33986673440170440}
   - component: {fileID: 23628759082779128}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +126,7 @@ GameObject:
   - component: {fileID: 4036975117162688}
   - component: {fileID: 33290900964730664}
   - component: {fileID: 23350607065174992}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +143,7 @@ GameObject:
   - component: {fileID: 4929331317811010}
   - component: {fileID: 33155242131353082}
   - component: {fileID: 23265215616820556}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +160,7 @@ GameObject:
   - component: {fileID: 4449742749756268}
   - component: {fileID: 33951135499409072}
   - component: {fileID: 23224851511470954}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +177,7 @@ GameObject:
   - component: {fileID: 4686834485172502}
   - component: {fileID: 33573935526610272}
   - component: {fileID: 23357646111177282}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +194,7 @@ GameObject:
   - component: {fileID: 4668750491372016}
   - component: {fileID: 33904984825063258}
   - component: {fileID: 23578204052145542}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +211,7 @@ GameObject:
   - component: {fileID: 4487569934156866}
   - component: {fileID: 33929359083652574}
   - component: {fileID: 23251749951265848}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +291,7 @@ Transform:
   m_GameObject: {fileID: 1276042512188652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 815.93823, y: 259.79202, z: -1553.2971}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 4990921823663578}
   m_Father: {fileID: 0}
@@ -771,6 +775,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1330149106243720}
   m_Mesh: {fileID: 4300016, guid: 6559b8538635d4cc681c83732cdccebe, type: 3}
+--- !u!54 &54526522301499924
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1276042512188652}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &95080773472485676
 Animator:
   serializedVersion: 3
@@ -788,18 +807,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114268381320750042
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1276042512188652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c69f14ecfc946629cf5460cc76a17f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  center: {fileID: 0}
 --- !u!114 &114461561128053952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -812,3 +819,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {fileID: 0}
+--- !u!114 &114735908362707098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1276042512188652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694b782c8aa38495dadd3e477dc3a95c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  centerOfGravity: {fileID: 1054191487490688, guid: c5e4e448a77954d52b6107a295d02446,
+    type: 2}
+--- !u!114 &114790658908358044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1276042512188652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d1e484483a54e8ba3c76bb11950946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backAndForth: 0
+  proxToTarget: 0.1
+  speed: 1
+--- !u!114 &114793688207601890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1276042512188652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75134ad4440374f448e044981ced17fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &136209451702577064
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1276042512188652}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 5
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.5, z: 0}
