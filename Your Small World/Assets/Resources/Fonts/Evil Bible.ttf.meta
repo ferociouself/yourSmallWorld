@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 1145aed44d44c4558a3ffa047b42b414
+timeCreated: 1493058400
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Evil Bible
+  fontNames:
+  - Evil Bible
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
