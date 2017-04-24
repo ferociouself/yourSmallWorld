@@ -23,9 +23,7 @@ public class SmolMan : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.G)) {
-			setResource(st.getVertex(st.findIndexOfNearest(GameObject.Find("Path End").transform.position)));
-		}
+		
 	}
 
 	public void setResource(Vertex res) {
@@ -36,6 +34,11 @@ public class SmolMan : MonoBehaviour {
 
 	public void findNewBuilding() {
 		Debug.Log("Finding new Building!");
+
+		List<Vertex> buildings = comm.getBuildingLocations();
+		int randIndex = Random.Range(0, buildings.Count);
+
+		GetComponent<FollowPath>().targetGoal = buildings[randIndex];
 
 		//GetComponent<FollowPath>().targetGoal = new building
 	}

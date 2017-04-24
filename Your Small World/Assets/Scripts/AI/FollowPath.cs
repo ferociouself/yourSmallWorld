@@ -15,7 +15,7 @@ public class FollowPath : MonoBehaviour {
 	public bool backAndForth = false;
 
 	float disabledBuffer = 0.0f;
-	float maxDisabledBuffer = 0.5f;
+	float maxDisabledBuffer;
 
 	float enabledBuffer = 0.0f;
 	float maxEnabledBuffer = 0.25f;
@@ -33,6 +33,7 @@ public class FollowPath : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		maxDisabledBuffer = Random.Range(3.0f, 10.0f);
 		sphere = GameObject.Find("Planet").GetComponent<SphereTerrain>() as SphereTerrain;
 		rb = GetComponent<Rigidbody>();
 	}
@@ -40,6 +41,7 @@ public class FollowPath : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!disabled) {
+			GetComponent<Animator>().SetBool("Walking", true);
 			rb.constraints = RigidbodyConstraints.FreezeRotation;
 			if (path != null) {
 				if (path.Count > 0) {
@@ -80,10 +82,11 @@ public class FollowPath : MonoBehaviour {
 				setPath();
 			}
 		} else {
+			GetComponent<Animator>().SetBool("Walking", false);
 			rb.velocity = Vector3.zero;
 			rb.constraints = RigidbodyConstraints.FreezeAll;
 			if (disabledBuffer > maxDisabledBuffer) {
-				Debug.Log("Checking if Path exists");
+				Debug.Log("Checking if path exists.");
 				setPath();
 				disabledBuffer = 0.0f;
 			} else {
