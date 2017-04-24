@@ -12,7 +12,7 @@ public class AStar {
 		if (curVert == null || goalVert == null) {
 			return 0.0f;
 		}
-		if (curVert.getTransformedPoint() == null || goalVert.getTransformedPoint() == null) {
+		if (curVert.getTransformedPoint() == Vector3.zero || goalVert.getTransformedPoint() == Vector3.zero) {
 			return 0.0f;
 		}
 		Vector3 vecCost = curVert.getTransformedPoint() - goalVert.getTransformedPoint();
