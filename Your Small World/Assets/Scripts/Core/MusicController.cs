@@ -218,7 +218,7 @@ public class MusicController : MonoBehaviour {
 	}
 
 	void OnGUI(){
-		if (GUI.Button (new Rect (10, 10, 100, 20), "Start Placing")) {
+		/*if (GUI.Button (new Rect (10, 10, 100, 20), "Start Placing")) {
 			StartPlacing ();
 		}
 		if (GUI.Button (new Rect (10, 40, 100, 20), "Stop Placing")) {
@@ -227,7 +227,7 @@ public class MusicController : MonoBehaviour {
 		}
 		if (GUI.Button (new Rect (10, 70, 100, 20), "Tap Place")) {
 			PlaceSingle ();
-		}
+		}*/
 	}
 
 	void AlternatePedals(){
