@@ -287,6 +287,65 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 466134321}
+    - target: {fileID: 1926734632827658, guid: 0ef61df3a44734b4e874c5b6ece7bc7b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007876389227908, guid: 0ef61df3a44734b4e874c5b6ece7bc7b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1908385178273204, guid: 0ef61df3a44734b4e874c5b6ece7bc7b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459693964616858, guid: 0ef61df3a44734b4e874c5b6ece7bc7b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1546775660181208, guid: 0ef61df3a44734b4e874c5b6ece7bc7b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407629631182550, guid: 0ef61df3a44734b4e874c5b6ece7bc7b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114983522962871760, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114085546819690834, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114393202940627186, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114018875525396160, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114279000379015764, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114676392945246522, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114117282074872010, guid: 0ef61df3a44734b4e874c5b6ece7bc7b,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0ef61df3a44734b4e874c5b6ece7bc7b, type: 2}
   m_IsPrefabParent: 0
