@@ -14,9 +14,9 @@ public class ResourceController : MonoBehaviour {
 		
 	}
 
-	public void ResourceMade(BaseResource b) {
+	public void ResourceMade(BaseResource b, Vertex v) {
 		if (GetComponent<TierController>().CheckIfWant(b)) {
-
+			GetComponent<Community>().SendBoiToGood(b, v);
 		}
 	}
 }

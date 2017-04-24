@@ -38,10 +38,14 @@ public class SmolMan : MonoBehaviour {
 			Debug.LogError("Comm is null");
 			comm = GameObject.FindObjectOfType(typeof(Community)) as Community;
 		}
-		List<Vertex> buildings = comm.getBuildingLocations();
+		List<Vertex> buildings = new List<Vertex>(comm.getBuildingLocations());
 		buildings.Remove(comm.getCampfireVertex());
-		int randIndex = Random.Range(0, buildings.Count);
-		GetComponent<FollowPath>().targetGoal = buildings[randIndex];
+		if (buildings.Count == 0) {
+			GetComponent<FollowPath>().targetGoal = comm.getCampfireVertex();
+		} else {
+			int randIndex = Random.Range(0, buildings.Count);
+			GetComponent<FollowPath>().targetGoal = buildings[randIndex];
+		}
 	}
 
 

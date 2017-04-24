@@ -209,11 +209,13 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	public void setHeightAtIndex(int index, float height) {
+		(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 		vertices [index].setHeight (height);
 		updateMesh ();
 	}
 
 	public void incHeightAtIndex(int index, float height) {
+		(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 		setHeightAtIndex (index, vertices [index].getHeight () + height);
 	}
 

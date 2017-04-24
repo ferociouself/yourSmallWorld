@@ -148,12 +148,16 @@ public class TierController : MonoBehaviour {
 		switch (curTier) {
 		case(0):
 			//10 bois
+			myCommunity.AddBois(5);
 			//2 huts
 			for (int i = 0; i < 3; i++) {
 				Vertex v = myCommunity.ChooseNextBuildingLocation ();
 				if (v != null) {
 					terrain.buildAtIndex (v.getIndex (), "wood_house");
 					myCommunity.addHut (v);
+				} else {
+					if (myCommunity.getCampfireVertex() == null)
+						Debug.LogError("SUCC");
 				}
 			}
 			//lithic workshop
@@ -178,6 +182,7 @@ public class TierController : MonoBehaviour {
 					myCommunity.addHut (v);
 				}
 			}
+			myCommunity.AddBois(10);
 			//granary
 			Vertex granary = myCommunity.ChooseNextBuildingLocation ();
 			if (granary != null) {
@@ -207,6 +212,7 @@ public class TierController : MonoBehaviour {
 					myCommunity.addHut (v);
 				}
 			}
+			myCommunity.AddBois(20);
 			//blast furnace
 			Vertex blast = myCommunity.ChooseNextBuildingLocation ();
 			if (blast != null) {
@@ -230,6 +236,7 @@ public class TierController : MonoBehaviour {
 					myCommunity.addHut (v);
 				}
 			}
+			myCommunity.AddBois(40);
 			//observatory
 			Vertex observatory = myCommunity.ChooseNextBuildingLocation ();
 			if (observatory != null) {
@@ -245,6 +252,7 @@ public class TierController : MonoBehaviour {
 			break;
 		case(4):
 			//160 bois
+			myCommunity.AddBois(80);
 			//factory
 			Vertex factory = myCommunity.ChooseNextBuildingLocation ();
 			if (factory != null) {
@@ -268,6 +276,7 @@ public class TierController : MonoBehaviour {
 			break;
 		case(5):
 			//320 bois
+			myCommunity.AddBois(160);
 			//gas refinery
 			//labs
 			break;
@@ -277,6 +286,7 @@ public class TierController : MonoBehaviour {
 			break;
 		default:
 			//5 bois
+			myCommunity.AddBois(5);
 			//fire
 			break;
 		}
