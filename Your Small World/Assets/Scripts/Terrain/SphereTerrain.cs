@@ -243,7 +243,6 @@ public class SphereTerrain : MonoBehaviour {
 	public void spreadWaterBiome(Vertex v) {
 		if (v.getBiome() == LOW_BIOME || v.getBiome() == OIL_BIOME || v.getBiome() == STONE_BIOME) {
 			v.setBiome (WATER_BIOME);
-			EventManager.TriggerEvent("Resource");
 			Vertex[] neighbors = v.getNeighbors ();
 			for (int i = 0; i < neighbors.Length; i++) {
 				if (neighbors[i].getHeight() < 0 && neighbors[i].getBiome() != WATER_BIOME) {
