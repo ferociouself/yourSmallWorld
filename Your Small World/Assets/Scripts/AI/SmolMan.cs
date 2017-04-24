@@ -15,8 +15,10 @@ public class SmolMan : MonoBehaviour {
 	void Awake () {
 		st = GameObject.FindObjectOfType(typeof(SphereTerrain)) as SphereTerrain;
 		comm = GameObject.FindObjectOfType(typeof(Community)) as Community;
-		GetComponent<FollowPath>().start = st.getVertex(st.findIndexOfNearest(comm.gameObject.transform.position));
-		GetComponent<FollowPath>().targetGoal = st.getVertex(st.findIndexOfNearest(comm.gameObject.transform.position));
+		if (st != null && comm != null) {
+			GetComponent<FollowPath> ().start = st.getVertex (st.findIndexOfNearest (comm.gameObject.transform.position));
+			GetComponent<FollowPath> ().targetGoal = st.getVertex (st.findIndexOfNearest (comm.gameObject.transform.position));
+		}
 		if (comm == null) {
 			Debug.LogError("Community does not exist!");
 		}

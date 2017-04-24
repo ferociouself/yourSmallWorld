@@ -118,7 +118,9 @@ public class FollowPath : MonoBehaviour {
 		}
 		Gizmos.color = Color.black;
 		if (disabled) {
-			Gizmos.DrawSphere(targetGoal.getTransformedPoint(), 0.5f);
+			if (targetGoal != null) {
+				Gizmos.DrawSphere (targetGoal.getTransformedPoint (), 0.5f);
+			}
 		}
 	}
 }
