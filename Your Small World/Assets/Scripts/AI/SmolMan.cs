@@ -34,7 +34,6 @@ public class SmolMan : MonoBehaviour {
 	}
 
 	public void findNewBuilding() {
-		Debug.Log("Finding new Building!");
 		if (comm == null) {
 			Debug.LogError("Comm is null");
 			comm = GameObject.FindObjectOfType(typeof(Community)) as Community;
