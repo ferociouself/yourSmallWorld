@@ -19,15 +19,19 @@ public class CameraController : MonoBehaviour {
 	public Text LatinText;
 	public Text EnglishText;
 	public Text TitleText;
+	public Image tierindicator;
 	public int stage;
 
 	float fadeTimer;
 
 	public float finalTimer;
 
+	bool done;
+
 	// Use this for initialization
 	void Start () {
 		timer = 0.0f;
+		done = false;
 		fadeTimer = 0.0f;
 		finalTimer = 0.0f;
 		Vector3 awayFromSphere = Camera.main.transform.position - gameObject.transform.position;
@@ -35,12 +39,15 @@ public class CameraController : MonoBehaviour {
 		stage = 0;
 		if (LatinText != null) {
 			LatinText.text = "Principio magni speciem glomeravit in orbis.\nTum freta diffundi rapidisque tumescere ventis.";
-			LatinText.color = new Color(255,255,255,1); //black
+			LatinText.color = new Color(255,255,255,1); 
 		}
 		if (EnglishText != null) {
 			EnglishText.text = "First he gathered up the land into the shape of a great orb.\nThen he ordered the seas to spread and rise in the rushing winds.";
-			EnglishText.color = new Color(0,0,0,0); //black alpha'ed
+			EnglishText.color = new Color(0,0,0,0); 
 		}
+		tierindicator.color = new Color (1.0f, 1.0f, 1.0f, 0.0f);
+		(tierindicator.transform.GetChild (0).gameObject.GetComponent<Text>() as Text).color = tierindicator.color;
+		(tierindicator.transform.GetChild (1).gameObject.GetComponent<Text>() as Text).color = tierindicator.color;
 	}
 
 	// Update is called once per frame
@@ -63,8 +70,12 @@ public class CameraController : MonoBehaviour {
 			}
 			finalTimer += Time.deltaTime;
 			if (finalTimer >= 3.0f) {
+				tierindicator.color = new Color (1.0f, 1.0f, 1.0f, (float)Mathf.Lerp(0,1, finalTimer/7.0f));
+				(tierindicator.transform.GetChild (0).gameObject.GetComponent<Text>() as Text).color = tierindicator.color;
+				(tierindicator.transform.GetChild (1).gameObject.GetComponent<Text>() as Text).color = tierindicator.color;
 				TitleText.color = new Color(TitleText.color.r, TitleText.color.g, TitleText.color.b, (float)Mathf.Lerp(1,0,finalTimer/7.0f));
 			}
+
 		} else {
 			float dT = Time.deltaTime;
 			timer += dT;
