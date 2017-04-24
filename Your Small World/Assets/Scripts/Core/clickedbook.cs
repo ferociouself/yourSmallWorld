@@ -11,11 +11,24 @@ public class clickedbook : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetMouseButton (0)) {
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			RaycastHit hitInfo;
+			int layerMask = 1 << 10;
+			if (Physics.Raycast (ray, out hitInfo, layerMask)) {
+				Debug.Log (hitInfo.collider.gameObject.name);
+				if (hitInfo.collider.gameObject.name == "book") {
+					ClickedBook ();
+				}
+			}
+		}
 	}
 
 	public void ClickedBook(){
 		Debug.Log ("you clicked the book!");
 		this.gameObject.GetComponent<AudioSource> ().Play ();
+		(GameObject.FindObjectOfType (typeof(TierController)) as TierController).IncreaseTier ();
 	}
+
+
 }

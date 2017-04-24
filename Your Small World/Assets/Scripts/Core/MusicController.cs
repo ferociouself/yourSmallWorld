@@ -268,7 +268,7 @@ public class MusicController : MonoBehaviour {
 	}
 
 	public void StartPlacing(){
-		Debug.Log ("play plz");
+		//Debug.Log ("play plz");
 		if (!placing) {
 			placing = true;
 			fading = false;

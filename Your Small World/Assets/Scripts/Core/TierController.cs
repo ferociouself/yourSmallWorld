@@ -86,7 +86,7 @@ public class TierController : MonoBehaviour {
 	}
 
 	public void IncreaseTier() {
-		if (CheckTier()) {
+		//if (CheckTier()) {
 			ConstructEra ();
 			curTier++;
 			GameObject g = GameObject.Find ("TierNum");
@@ -102,7 +102,7 @@ public class TierController : MonoBehaviour {
 			}
 			//TODO: check if we want all resources present in the spheremap
 			tierIncreaseEvent.Invoke();
-		}
+		//}
 	}
 
 	/// <summary>
