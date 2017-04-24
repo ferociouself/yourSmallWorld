@@ -146,7 +146,7 @@ public class Vertex {
 	}
 
 	public bool getTransversable() {
-		return (biome == SphereTerrain.DESERT_BIOME || biome == SphereTerrain.MED_BIOME);
+		return (biome == SphereTerrain.DESERT_BIOME || biome == SphereTerrain.MED_BIOME || biome == SphereTerrain.CITY_BIOME);
 	}
 
 	public Vertex[] getNeighbors() {

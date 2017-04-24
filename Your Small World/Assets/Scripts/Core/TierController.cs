@@ -155,9 +155,6 @@ public class TierController : MonoBehaviour {
 				if (v != null) {
 					terrain.buildAtIndex (v.getIndex (), "wood_house");
 					myCommunity.addHut (v);
-				} else {
-					if (myCommunity.getCampfireVertex() == null)
-						Debug.LogError("SUCC");
 				}
 			}
 			//lithic workshop
@@ -312,7 +309,6 @@ public class TierController : MonoBehaviour {
 			break;
 		default:
 			//5 bois
-			myCommunity.AddBois(5);
 			//fire
 			break;
 		}

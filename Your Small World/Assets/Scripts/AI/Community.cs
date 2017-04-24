@@ -26,6 +26,7 @@ public class Community : MonoBehaviour {
 		goods = new Dictionary<BaseResource, int> ();
 		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
 		setCampfireVertex (terrain.getVertex (terrain.findIndexOfNearest (gameObject.transform.position)));
+		AddBois(5);
 		//TODO: make the bois
 	}
 	
