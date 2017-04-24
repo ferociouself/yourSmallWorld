@@ -12,6 +12,8 @@ public class TierController : MonoBehaviour {
 
 	public Community myCommunity;
 
+	public GameObject book;
+
 	/// <summary>
 	/// The requisites to move on from each tier.
 	/// </summary>
@@ -176,7 +178,7 @@ public class TierController : MonoBehaviour {
 					return false;
 				}
 			}
-			(GameObject.FindObjectOfType (typeof(clickedbook)) as clickedbook).ShowBook ();
+			book.GetComponent<clickedbook>().ShowBook ();
 			return true;
 		}
 		return false;
@@ -232,8 +234,8 @@ public class TierController : MonoBehaviour {
 				myCommunity.addBuilding (well);
 			}
 			//unlock wheat and iron
-			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockWheat ();
-			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockIron ();
+			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockWheat();
+			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockIron();
 			break;
 		case(1):
 			//20 bois
@@ -264,7 +266,7 @@ public class TierController : MonoBehaviour {
 				myCommunity.addBuilding (smelter);
 			}
 			//unlock coal
-			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockCoal ();
+			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockCoal ();
 			break;
 		case(2):
 			//40 bois
@@ -290,7 +292,7 @@ public class TierController : MonoBehaviour {
 				myCommunity.addBuilding (castle);
 			}
 			//unlock sand
-			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockSand ();
+			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockSand ();
 			break;
 		case(3):
 			//80 bois
@@ -316,7 +318,7 @@ public class TierController : MonoBehaviour {
 				myCommunity.addBuilding (university);
 			}
 			//unlock copper
-			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockCopper ();
+			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockCopper ();
 			break;
 		case(4):
 			//160 bois
@@ -342,7 +344,7 @@ public class TierController : MonoBehaviour {
 				}
 			}
 			//unlock oil
-			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockOil ();
+			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockOil ();
 			break;
 		case(5):
 			//320 bois
@@ -367,7 +369,7 @@ public class TierController : MonoBehaviour {
 				myCommunity.addBuilding (lab);
 			}
 			//unlock deiton
-			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockDieton ();
+			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockDieton ();
 			break;
 		case(6):
 			//same number of bois
