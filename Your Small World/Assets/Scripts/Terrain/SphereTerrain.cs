@@ -28,6 +28,7 @@ public class SphereTerrain : MonoBehaviour {
 	public const string WATER_BIOME = "Water";
 	public const string OIL_BIOME = "Oil";
 	public const string STONE_BIOME = "Stone";
+	public const string CITY_BIOME = "City";
 
 
 
@@ -226,6 +227,7 @@ public class SphereTerrain : MonoBehaviour {
 			buildingIndices.Add (vertices[index]);
 			vertices [index].setResource (building);
 			vertices [index].setIsEditable (false);
+			vertices [index].setBiome (CITY_BIOME);
 		}
 	}
 

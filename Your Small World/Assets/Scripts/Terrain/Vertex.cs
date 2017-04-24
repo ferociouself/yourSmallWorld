@@ -72,7 +72,7 @@ public class Vertex {
 	}
 
 	public void setTerrain(string b) {
-		if (this.biome == b) {
+		if (this.biome == b || this.biome == SphereTerrain.CITY_BIOME) {
 			return;
 		}
 		biome = b;
@@ -97,9 +97,6 @@ public class Vertex {
 			break;
 		case SphereTerrain.OIL_BIOME:
 			color = SphereTerrain.oils [Random.Range (0, SphereTerrain.oils.Count)];
-			break;
-		default:
-			color = SphereTerrain.yellows[Random.Range(0, SphereTerrain.yellows.Count)];
 			break;
 		}
 		parent.updateColors ();
