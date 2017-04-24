@@ -22,6 +22,8 @@ public class Vertex {
 
 	SphereTerrain parent;
 
+	SmolMan attachedMan;
+
 	public Vertex(int index, Vector3 loc, SphereTerrain parent) {
 		this.parent = parent;
 		this.index = index;
@@ -75,7 +77,14 @@ public class Vertex {
 		if (this.biome == b || this.biome == SphereTerrain.CITY_BIOME) {
 			return;
 		}
-		biome = b;
+		Debug.Log("Setting terrain from " + biome + " to " + b);
+		if (biome != b){
+			if (b == SphereTerrain.WATER_BIOME || b == SphereTerrain.OIL_BIOME || b == SphereTerrain.STONE_BIOME || b == SphereTerrain.DEITON_BIOME || b == SphereTerrain.DESERT_BIOME){
+				Debug.Log("Detaching Man");
+				detachMan();
+			}
+			biome = b;
+		}
 		switch (b) {
 		case SphereTerrain.WATER_BIOME:
 			color = SphereTerrain.blues[Random.Range(0, SphereTerrain.blues.Count)];
@@ -105,6 +114,20 @@ public class Vertex {
 		parent.updateColors ();
 	}
 
+	public void attachMan(SmolMan man) {
+		attachedMan = man;
+	}
+
+	private void detachMan() {
+		if (attachedMan != null) {
+			Community comm = GameObject.FindObjectOfType<Community>();
+			if (comm != null) {
+				comm.FreeOneBoi(attachedMan);
+				attachedMan = null;
+			}
+		}
+	}
+
 	public bool getIsEditable() {
 		return isEditable;
 	}
@@ -130,6 +153,8 @@ public class Vertex {
 	}
 
 	public void removeResource() {
+		Debug.Log("Removing Resource");
+		if (resource != null) detachMan();
 		GameObject temp = this.resource;
 		this.resource = null;
 		GameObject.Destroy (temp);

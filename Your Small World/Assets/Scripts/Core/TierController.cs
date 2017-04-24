@@ -20,7 +20,7 @@ public class TierController : MonoBehaviour {
 	List<Dictionary<string,int>> tierreqs;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		if (tierIncreaseEvent == null)
 			tierIncreaseEvent = new UnityEvent();
 
@@ -139,14 +139,6 @@ public class TierController : MonoBehaviour {
 
 		//tierIncreaseEvent.AddListener();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		/*if (Input.GetKeyDown (KeyCode.Space)) {
-			ConstructEra ();
-			curTier++;
-		}*/
-	}
 
 	public void IncreaseTier() {
 		if (CheckTier()) {
@@ -162,6 +154,41 @@ public class TierController : MonoBehaviour {
 			g = GameObject.Find ("TierName");
 			if (g != null) {
 				g.GetComponent<ToggleEraText> ().ChangeEraText (curTier);
+			}
+			ResourceController cont = GetComponent<ResourceController>();
+			SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
+			for (int i = 0; i < terrain.vertices.Length; i++) {
+				Vertex v = terrain.vertices[i];
+
+				if (v.getBiome() == SphereTerrain.WATER_BIOME) {
+					cont.WaterMade(v);
+				}
+				if (v.getBiome() == SphereTerrain.STONE_BIOME) {
+					cont.StoneMade(v);
+				}
+				if (v.getBiome() == SphereTerrain.OIL_BIOME) {
+					cont.OilMade(v);
+				}
+				if (v.getResource() != null) {
+					if (v.getResource().name.Contains("Forest")) {
+						cont.TreeMade(v);
+					}
+					if (v.getResource().name.Contains("Sand")) {
+						cont.SandMade(v);
+					}
+					if (v.getResource().name.Contains("Wheat")) {
+						cont.WheatMade(v);
+					}
+					if (v.getResource().name.Contains("Iron")) {
+						cont.IronMade(v);
+					}
+					if (v.getResource().name.Contains("Copper")) {
+						cont.CopperMade(v);
+					}
+					if (v.getResource().name.Contains("Coal")) {
+						cont.CoalMade(v);
+					}
+				}
 			}
 			//TODO: check if we want all resources present in the spheremap
 			tierIncreaseEvent.Invoke();
@@ -191,7 +218,6 @@ public class TierController : MonoBehaviour {
 	/// <returns><c>true</c>, if if want was checked, <c>false</c> otherwise.</returns>
 	/// <param name="b">The blue component.</param>
 	public bool CheckIfWant(string b){
-		Debug.Log("Checking if want " + b);
 		if (tierreqs [curTier].ContainsKey (b)) {
 			if (!myCommunity.ContainsKey (b)) {
 				return true;
@@ -216,6 +242,41 @@ public class TierController : MonoBehaviour {
 		if (g != null) {
 			g.GetComponent<ToggleEraText> ().ChangeEraText (curTier);
 		}
+		ResourceController cont = GetComponent<ResourceController>();
+		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
+		for (int i = 0; i < terrain.vertices.Length; i++) {
+			Vertex v = terrain.vertices[i];
+
+			if (v.getBiome() == SphereTerrain.WATER_BIOME) {
+				cont.WaterMade(v);
+			}
+			if (v.getBiome() == SphereTerrain.STONE_BIOME) {
+				cont.StoneMade(v);
+			}
+			if (v.getBiome() == SphereTerrain.OIL_BIOME) {
+				cont.OilMade(v);
+			}
+			if (v.getResource() != null) {
+				if (v.getResource().name.Contains("Forest")) {
+					cont.TreeMade(v);
+				}
+				if (v.getResource().name.Contains("Sand")) {
+					cont.SandMade(v);
+				}
+				if (v.getResource().name.Contains("Wheat")) {
+					cont.WheatMade(v);
+				}
+				if (v.getResource().name.Contains("Iron")) {
+					cont.IronMade(v);
+				}
+				if (v.getResource().name.Contains("Copper")) {
+					cont.CopperMade(v);
+				}
+				if (v.getResource().name.Contains("Coal")) {
+					cont.CoalMade(v);
+				}
+			}
+		}
 	}
 
 	/// <summary>
@@ -227,6 +288,7 @@ public class TierController : MonoBehaviour {
 		switch (curTier) {
 		case(1):
 			//10 bois
+			myCommunity.FreeBois();
 			myCommunity.AddBois (5);
 			//2 huts
 			for (int i = 0; i < 3; i++) {
@@ -261,6 +323,7 @@ public class TierController : MonoBehaviour {
 					myCommunity.addHut (v);
 				}
 			}
+			myCommunity.FreeBois();
 			myCommunity.AddBois(10);
 			//granary
 			Vertex granary = myCommunity.ChooseNextBuildingLocation ();
@@ -293,6 +356,7 @@ public class TierController : MonoBehaviour {
 					myCommunity.addHut (v);
 				}
 			}
+			myCommunity.FreeBois();
 			myCommunity.AddBois(20);
 			//blast furnace
 			Vertex blast = myCommunity.ChooseNextBuildingLocation ();
@@ -319,6 +383,7 @@ public class TierController : MonoBehaviour {
 					myCommunity.addHut (v);
 				}
 			}
+			myCommunity.FreeBois();
 			myCommunity.AddBois(40);
 			//observatory
 			Vertex observatory = myCommunity.ChooseNextBuildingLocation ();
@@ -337,6 +402,7 @@ public class TierController : MonoBehaviour {
 			break;
 		case(5):
 			//160 bois
+			myCommunity.FreeBois();
 			myCommunity.AddBois(80);
 			//factory
 			Vertex factory = myCommunity.ChooseNextBuildingLocation ();
@@ -370,6 +436,7 @@ public class TierController : MonoBehaviour {
 					myCommunity.addBuilding (v);
 				}
 			}
+			myCommunity.FreeBois();
 			myCommunity.AddBois(160);
 			//gas refinery
 			Vertex gas = myCommunity.ChooseNextBuildingLocation ();

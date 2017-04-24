@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(FollowPath))]
 public class SmolMan : MonoBehaviour {
 
-	bool resourceActive = false;
+	public bool resourceActive = false;
+	Vertex targetResource;
 
 	Community comm;
 
@@ -30,6 +31,7 @@ public class SmolMan : MonoBehaviour {
 	}
 
 	public void setResource(Vertex res) {
+		targetResource = res;
 		GetComponent<FollowPath>().backAndForth = true;
 		GetComponent<FollowPath>().targetGoal = res;
 		resourceActive = true;
@@ -46,8 +48,17 @@ public class SmolMan : MonoBehaviour {
 			GetComponent<FollowPath>().targetGoal = comm.getCampfireVertex();
 		} else {
 			int randIndex = Random.Range(0, buildings.Count);
-			Debug.Log(buildings[randIndex].getTransformedPoint());
 			GetComponent<FollowPath>().targetGoal = buildings[randIndex];
+		}
+		resourceActive = false;
+		targetResource = null;
+	}
+
+	public Vertex getResource() {
+		if (this.resourceActive) {
+			return targetResource;
+		} else {
+			return null;
 		}
 	}
 

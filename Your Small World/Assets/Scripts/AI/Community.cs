@@ -33,7 +33,10 @@ public class Community : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Y)) {
-			AddBois(5);
+			foreach (string key in goods.Keys) {
+				Debug.Log("Community has " + goods[key] + " of " + key);
+			}
+			Debug.Log("Check Tier Result: " + GetComponent<TierController>().CheckTier());
 		}
 	}
 
@@ -98,21 +101,110 @@ public class Community : MonoBehaviour {
 	}
 
 	public void FreeBois(){
+		Debug.Log("Freeing all bois.");
 		foreach (SmolMan m in busyBois) {
+			if (m.resourceActive) {
+				Vertex v = m.getResource();
+				if (v.getBiome() == SphereTerrain.WATER_BIOME) {
+					RemoveGoods("Water", 1);
+				}
+				if (v.getBiome() == SphereTerrain.STONE_BIOME) {
+					RemoveGoods("Stone", 1);
+				}
+				if (v.getBiome() == SphereTerrain.OIL_BIOME) {
+					RemoveGoods("Oil", 1);
+				}
+				if (v.getResource() != null) {
+					if (v.getResource().name.Contains("Forest")) {
+						RemoveGoods("Tree", 1);
+					}
+					if (v.getResource().name.Contains("Sand")) {
+						RemoveGoods("Sand", 1);
+					}
+					if (v.getResource().name.Contains("Wheat")) {
+						RemoveGoods("Wheat", 1);
+					}
+					if (v.getResource().name.Contains("Iron")) {
+						RemoveGoods("Iron", 1);
+					}
+					if (v.getResource().name.Contains("Copper")) {
+						RemoveGoods("Copper", 1);
+					}
+					if (v.getResource().name.Contains("Coal")) {
+						RemoveGoods("Coal", 1);
+					}
+				}
+			}
 			m.findNewBuilding();
 			freeBois.Add(m);
 		}
 		busyBois.Clear();
 	}
 
+	public SmolMan BoiOnVertex(Vertex v) {
+		if (busyBois != null) {
+			for (int b = 0; b < busyBois.Count; b++) {
+				if (busyBois[b].getResource() == v) {
+					return busyBois[b];
+				}
+			}
+		}
+		return null;
+	}
+
+	public void FreeOneBoi(SmolMan m) {
+		Debug.Log("Freeing one boi");
+		if (m.resourceActive) {
+			Debug.Log("Resource Active");
+			Vertex v = m.getResource();
+			if (v.getBiome() == SphereTerrain.WATER_BIOME) {
+				RemoveGoods("Water", 1);
+			}
+			if (v.getBiome() == SphereTerrain.STONE_BIOME) {
+				Debug.Log("Removing Stone");
+				RemoveGoods("Stone", 1);
+			}
+			if (v.getBiome() == SphereTerrain.OIL_BIOME) {
+				RemoveGoods("Oil", 1);
+			}
+			if (v.getResource() != null) {
+				if (v.getResource().name.Contains("Forest")) {
+					RemoveGoods("Tree", 1);
+				}
+				if (v.getResource().name.Contains("Sand")) {
+					RemoveGoods("Sand", 1);
+				}
+				if (v.getResource().name.Contains("Wheat")) {
+					RemoveGoods("Wheat", 1);
+				}
+				if (v.getResource().name.Contains("Iron")) {
+					RemoveGoods("Iron", 1);
+				}
+				if (v.getResource().name.Contains("Copper")) {
+					RemoveGoods("Copper", 1);
+				}
+				if (v.getResource().name.Contains("Coal")) {
+					RemoveGoods("Coal", 1);
+				}
+			}
+		}
+		busyBois.Remove(m);
+		freeBois.Add(m);
+		m.findNewBuilding();
+	}
+
 	public void SendBoiToGood(string g, Vertex res) {
 		if (IsThereAFreeBoi()) {
+			Debug.Log("There is a free boi.");
 			Vertex[] resNeighbors = res.getNeighbors();
 			for (int i = 0; i < resNeighbors.Length; i++) {
 				if (resNeighbors[i].getTransversable()) {
 					freeBois[0].setResource(resNeighbors[i]);
+					res.attachMan(freeBois[0]);
 					MakeBusyBoi();
+					//Debug.Log("Community has " + goods[g] + " of " + g);
 					AddGoods(g, 1);
+					Debug.Log("Community has " + goods[g] + " of " + g);
 					GetComponent<TierController>().CheckTier();
 					break;
 				}
@@ -143,7 +235,7 @@ public class Community : MonoBehaviour {
 	/// <param name="amountToRemove">Amount to remove.</param>
 	public bool RemoveGoods(string good, int amountToRemove){
 		if (HasGoodsCheck(good, amountToRemove)) {
-			goods.Add (good, goods[good] - amountToRemove);
+			goods[good] = goods[good] - amountToRemove;
 			return true;
 		}
 		return false;
