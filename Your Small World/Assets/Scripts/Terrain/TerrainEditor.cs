@@ -42,7 +42,33 @@ public class TerrainEditor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		if (Input.GetMouseButton(0))
+		{
+			if (downInPreviousFrame)
+			{
+				if (isDragActive)
+				{
+					//(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).PlaceSingle();
+				}
+				else
+				{
+					isDragActive = true;
+					(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
+				}
+			}
+			downInPreviousFrame = true;
+		}
+		else
+		{
+			if (isDragActive)
+			{
+				isDragActive = false;
+				(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).SetFading();
+			}
+			downInPreviousFrame = false;
+		}
+
 		if (Input.GetMouseButton(0) && buffer > maxBuffer) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hitInfo;

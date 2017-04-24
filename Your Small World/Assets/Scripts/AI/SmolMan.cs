@@ -4,33 +4,41 @@ using UnityEngine;
 
 public class SmolMan : MonoBehaviour {
 
-	public float speed = 1.0f;
-	public float rotateSpeed = 1.0f;
+	bool resourceActive = false;
 
-	Rigidbody rb;
+	Community comm;
+
+	SphereTerrain st;
 
 	// Use this for initialization
 	void Start () {
-		rb = GetComponent<Rigidbody>();
+		st = GameObject.FindObjectOfType(typeof(SphereTerrain)) as SphereTerrain;
+		comm = GameObject.FindObjectOfType(typeof(Community)) as Community;
+		GetComponent<FollowPath>().start = st.getVertex(st.findIndexOfNearest(GameObject.Find("Campfire").transform.position));
+		GetComponent<FollowPath>().targetGoal = st.getVertex(st.findIndexOfNearest(GameObject.Find("Building").transform.position));
+		if (comm == null) {
+			Debug.LogError("Community does not exist!");
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey(KeyCode.UpArrow)) {
-			rb.AddRelativeForce(Vector3.forward * speed);
+		if (Input.GetKeyDown(KeyCode.G)) {
+			setResource(st.getVertex(st.findIndexOfNearest(GameObject.Find("Path End").transform.position)));
 		}
-		if (Input.GetKey(KeyCode.RightArrow)) {
-			transform.Rotate(0.0f, rotateSpeed, 0.0f);
-			//rb.AddRelativeForce(Vector3.right * speed);
-		}
-		if (Input.GetKey(KeyCode.LeftArrow)) {
-			transform.Rotate(0.0f, -rotateSpeed, 0.0f);
-			//rb.AddRelativeForce(Vector3.left * speed);
-		}
-		if (Input.GetKey(KeyCode.DownArrow)) {
-			rb.AddRelativeForce(Vector3.back * speed);
-		}
-
-
 	}
+
+	public void setResource(Vertex res) {
+		GetComponent<FollowPath>().backAndForth = true;
+		GetComponent<FollowPath>().targetGoal = res;
+		resourceActive = true;
+	}
+
+	public void findNewBuilding() {
+		Debug.Log("Finding new Building!");
+
+		//GetComponent<FollowPath>().targetGoal = new building
+	}
+
+
 }

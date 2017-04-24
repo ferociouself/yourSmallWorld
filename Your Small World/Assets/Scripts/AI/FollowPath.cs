@@ -12,6 +12,8 @@ public class FollowPath : MonoBehaviour {
 
 	bool disabled = false;
 
+	public bool backAndForth = false;
+
 	float disabledBuffer = 0.0f;
 	float maxDisabledBuffer = 0.5f;
 
@@ -26,8 +28,8 @@ public class FollowPath : MonoBehaviour {
 
 	public float speed;
 
-	public GameObject start;
-	public GameObject targetGoal;
+	public Vertex start;
+	public Vertex targetGoal;
 
 	// Use this for initialization
 	void Start () {
@@ -43,15 +45,21 @@ public class FollowPath : MonoBehaviour {
 				if (path.Count > 0) {
 					if ((transform.position - curTarget.getTransformedPoint()).magnitude < proxToTarget) {
 						curIndex++;
-						if (curIndex >= path.Count) {
-							GameObject temp = targetGoal;
+						if (curIndex >= path.Count && backAndForth) {
+							Vertex temp = targetGoal;
 							targetGoal = start;
 							start = temp;
+							setPath();
+						} else if (curIndex >= path.Count) {
+							GetComponent<SmolMan>().findNewBuilding();
 							setPath();
 						}
 						if (path == null) {
 							disabled = true;
 						} else {
+							if (path.Count == 1) {
+								curIndex = 0;
+							}
 							curTarget = path[curIndex];
 							if (enabledBuffer > maxEnabledBuffer) {
 								setPath();
@@ -62,7 +70,7 @@ public class FollowPath : MonoBehaviour {
 						}
 					} else {
 						Vector3 direction = curTarget.getTransformedPoint() - transform.position;
-						if (rb.velocity.magnitude < speed / 10) {
+						if (rb.velocity.magnitude < speed / 50) {
 							transform.position = curTarget.getTransformedPoint();
 						}
 						rb.velocity = direction.normalized * speed;
@@ -85,7 +93,7 @@ public class FollowPath : MonoBehaviour {
 	}
 
 	public void setPath() {
-		path = AStar.FindPath(sphere.getVertex(sphere.findIndexOfNearest(transform.position)), sphere.getVertex(sphere.findIndexOfNearest(targetGoal.transform.position)), this.gameObject);
+		path = AStar.FindPath(sphere.getVertex(sphere.findIndexOfNearest(transform.position)), targetGoal, this.gameObject);
 		if (path != null && path.Count > 1) {
 			curIndex = 0;
 			curTarget = path[1];

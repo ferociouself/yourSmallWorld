@@ -323,5 +323,10 @@ public class MusicController : MonoBehaviour {
 		paint1.Play ();
 		fading = true;
 	}
+
+	public void SetFading() {
+		fadeTimer = 0.0f;
+		fading = true;
+	}
 		
 }
