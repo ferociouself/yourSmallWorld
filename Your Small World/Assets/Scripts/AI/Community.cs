@@ -27,7 +27,7 @@ public class Community : MonoBehaviour {
 		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
 		setCampfireVertex (terrain.getVertex (terrain.findIndexOfNearest (gameObject.transform.position)));
 		AddBois(5);
-		//TODO: make the bois
+		GetComponent<TierController>().FireBuilt();
 	}
 	
 	// Update is called once per frame

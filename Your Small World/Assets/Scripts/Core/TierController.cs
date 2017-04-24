@@ -128,6 +128,7 @@ public class TierController : MonoBehaviour {
 		tier6 ["Sand"] = 40;
 		tier6 ["Iron"] = 40;
 
+		tierreqs.Add (null);
 		tierreqs.Add (tier0);
 		tierreqs.Add (tier1);
 		tierreqs.Add (tier2);
@@ -197,10 +198,24 @@ public class TierController : MonoBehaviour {
 			}
 			if (myCommunity.IsThereAFreeBoi ()) {
 				return !myCommunity.HasGoodsCheck (b, tierreqs [curTier] [b]);
-				//TODO: if true go get resource and mark a boi as busy
 			}
 		}
 		return false;
+	}
+
+	public void FireBuilt() {
+		curTier++;
+		GameObject g = GameObject.Find ("TierNum");
+		if (g != null) {
+			Text t = g.GetComponent<Text> ();
+			if (t != null) {
+				t.text = curTier.ToString();
+			}
+		}
+		g = GameObject.Find ("TierName");
+		if (g != null) {
+			g.GetComponent<ToggleEraText> ().ChangeEraText (curTier);
+		}
 	}
 
 	/// <summary>
@@ -210,7 +225,7 @@ public class TierController : MonoBehaviour {
 		myCommunity.FreeBois ();
 		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
 		switch (curTier) {
-		case(0):
+		case(1):
 			//10 bois
 			myCommunity.AddBois (5);
 			//2 huts
@@ -237,7 +252,7 @@ public class TierController : MonoBehaviour {
 			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockWheat();
 			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockIron();
 			break;
-		case(1):
+		case(2):
 			//20 bois
 			for (int i = 0; i < 2; i++) {
 				Vertex v = myCommunity.ChooseNextBuildingLocation ();
@@ -268,7 +283,7 @@ public class TierController : MonoBehaviour {
 			//unlock coal
 			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockCoal ();
 			break;
-		case(2):
+		case(3):
 			//40 bois
 			//2 hut
 			for (int i = 0; i < 2; i++) {
@@ -294,7 +309,7 @@ public class TierController : MonoBehaviour {
 			//unlock sand
 			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockSand ();
 			break;
-		case(3):
+		case(4):
 			//80 bois
 			//3 huts
 			for (int i = 0; i < 3; i++) {
@@ -320,7 +335,7 @@ public class TierController : MonoBehaviour {
 			//unlock copper
 			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockCopper ();
 			break;
-		case(4):
+		case(5):
 			//160 bois
 			myCommunity.AddBois(80);
 			//factory
@@ -346,7 +361,7 @@ public class TierController : MonoBehaviour {
 			//unlock oil
 			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockOil ();
 			break;
-		case(5):
+		case(6):
 			//320 bois
 			for (int i = 0; i < 8; i++) {
 				Vertex v = myCommunity.ChooseNextBuildingLocation ();
@@ -371,7 +386,7 @@ public class TierController : MonoBehaviour {
 			//unlock deiton
 			(GameObject.Find("HUD").GetComponent(typeof(ResourceFooBar)) as ResourceFooBar).UnlockDieton ();
 			break;
-		case(6):
+		case(7):
 			//same number of bois
 			Vertex launchSite = myCommunity.ChooseNextBuildingLocation ();
 			if (launchSite != null) {
