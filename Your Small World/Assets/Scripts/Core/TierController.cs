@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class TierController : MonoBehaviour {
@@ -23,48 +24,48 @@ public class TierController : MonoBehaviour {
 
 		tierreqs = new List<Dictionary<BaseResource,int>> ();
 
-		/*Dictionary<BaseResource,int> tier0 = new Dictionary<BaseResource,int>();
-		tier0.Add (Tree.instance, 1);
-		tier0.Add (Stone.instance, 3);
-		tier0.Add (Water.instance, 1);
+		Dictionary<BaseResource,int> tier0 = new Dictionary<BaseResource,int>();
+		tier0[Tree.instance] = 1;
+		tier0[Stone.instance] = 3;
+		tier0[Water.instance] = 1;
 
 		Dictionary<BaseResource,int> tier1 = new Dictionary<BaseResource,int>();
-		tier1.Add (Wheat.instance, 3);
-		tier1.Add (Water.instance, 3);
-		tier1.Add (Iron.instance, 1);
-		tier1.Add (Tree.instance, 3);
+		tier1 [Wheat.instance] = 3;
+		tier1 [Water.instance] = 3;
+		tier1 [Iron.instance] = 1;
+		tier1 [Tree.instance] = 3;
 
-		Dictionary<BaseResource,int> tier2 = new Dictionary<BaseResource,int>();
-		tier2.Add (Coal.instance, 3);
-		tier2.Add (Iron.instance, 6);
-		tier2.Add (Stone.instance, 9);
-		tier2.Add (Tree.instance, 2);
+		Dictionary<BaseResource, int> tier2 = new Dictionary<BaseResource ,int>();
+		tier2 [Coal.instance] = 3;
+		tier2 [Iron.instance] = 6;
+		tier2 [Stone.instance] = 9;
+		tier2 [Tree.instance] = 2;
 
-		Dictionary<BaseResource,int> tier3 = new Dictionary<BaseResource,int>();
-		tier3.Add (Coal.instance, 21);
-		tier3.Add (Water.instance, 14);
-		tier3.Add (Iron.instance, 15);
-		tier3.Add (Copper.instance, 14);
-		tier3.Add (Stone.instance, 8);
-		tier3.Add (Sand.instance, 8);
+		Dictionary<BaseResource,int> tier3 = new Dictionary<BaseResource ,int>();
+		tier3 [Coal.instance] = 21;
+		tier3 [Water.instance] = 14;
+		tier3 [Iron.instance] = 15;
+		tier3 [Copper.instance] = 14;
+		tier3 [Stone.instance] = 8;
+		tier3 [Sand.instance] = 8;
 
-		Dictionary<BaseResource,int> tier4 = new Dictionary<BaseResource,int>();
-		tier4.Add (Oil.instance, 43);
-		tier4.Add (Stone.instance, 9);
-		tier4.Add (Water.instance, 26);
-		tier4.Add (Sand.instance, 28);
-		tier4.Add (Copper.instance, 14);
-		tier4.Add (Tree.instance, 12);
-		tier4.Add (Iron.instance, 6);
+		Dictionary<BaseResource ,int> tier4 = new Dictionary<BaseResource,int>();
+		tier4 [Oil.instance] = 43;
+		tier4 [Stone.instance] = 9;
+		tier4 [Water.instance] = 26;
+		tier4 [Sand.instance] = 28;
+		tier4 [Copper.instance] = 14;
+		tier4 [Tree.instance] = 12;
+		tier4 [Iron.instance] = 6;
 
 		Dictionary<BaseResource,int> tier5 = new Dictionary<BaseResource,int>();
-		tier5.Add (Deiton.instance, 40);
-		tier5.Add (Oil.instance, 40);
-		tier5.Add (Copper.instance, 40);
-		tier5.Add (Water.instance, 40);
-		tier5.Add (Wheat.instance, 40);
-		tier5.Add (Sand.instance, 40);
-		tier5.Add (Iron.instance, 40);
+		tier5 [Deiton.instance] = 40;
+		tier5 [Oil.instance] = 40;
+		tier5 [Copper.instance] = 40;
+		tier5 [Water.instance] = 40;
+		tier5 [Wheat.instance] = 40;
+		tier5 [Sand.instance] = 40;
+		tier5 [Iron.instance] = 40;
 
 		tierreqs.Add (tier0);
 		tierreqs.Add (tier1);
@@ -73,7 +74,7 @@ public class TierController : MonoBehaviour {
 		tierreqs.Add (tier4);
 		tierreqs.Add (tier5);
 
-		//tierIncreaseEvent.AddListener();*/
+		//tierIncreaseEvent.AddListener();
 	}
 	
 	// Update is called once per frame
@@ -87,6 +88,14 @@ public class TierController : MonoBehaviour {
 		if (CheckTier()) {
 			ConstructEra ();
 			curTier++;
+			GameObject g = GameObject.Find ("TierNum");
+			if (g != null) {
+				Text t = g.GetComponent<Text> ();
+				if (t != null) {
+					t.text = curTier.ToString();
+				}
+			}
+			//TODO: change the TierText as well!!!
 			//TODO: check if we want all resources present in the spheremap
 			tierIncreaseEvent.Invoke();
 		}

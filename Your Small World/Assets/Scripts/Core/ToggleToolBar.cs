@@ -19,8 +19,10 @@ public class ToggleToolBar : MonoBehaviour {
 	}
 
 	public void ActivateTools(){
-		tools.gameObject.SetActive(true);
-		toolDisable.gameObject.SetActive (false);
+		if (!MusicController.introduction) {
+			tools.gameObject.SetActive (true);
+			toolDisable.gameObject.SetActive (false);
+		}
 	}
 
 	public void DisableTools(){
