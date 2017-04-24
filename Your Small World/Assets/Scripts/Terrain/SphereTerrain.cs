@@ -292,8 +292,8 @@ public class SphereTerrain : MonoBehaviour {
 			(GameObject.FindObjectOfType(typeof(MusicController)) as MusicController).StartPlacing();
 			GameObject tree = Resources.Load("Prefabs/Forest" + Random.Range(0,5), typeof(GameObject)) as GameObject;
 			float randRot = Random.Range(0.0f, 180.0f);
-			tree.transform.GetChild (0).transform.rotation = Quaternion.Euler (0.0f, randRot, 0.0f);
 			tree = Instantiate(tree, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity) as GameObject;
+			tree.transform.GetChild (0).transform.rotation = Quaternion.Euler (0.0f, randRot, 0.0f);
 			vertices [index].removeResource ();
 			vertices [index].setResource (tree);
 		}
