@@ -240,10 +240,10 @@ public class MusicController : MonoBehaviour {
 		}
 		pedals.Play ();
 		drums.time = 0.0f;
-		if (Random.Range (0, 20) == 0) {
-			drums.Play ();
-		} else {
+		if (CameraController.finalTimer >= 3.0f && Random.Range (0, 20) == 0) {
 			drums.Stop ();
+		} else {
+			drums.Play ();
 		}
 	}
 
@@ -268,20 +268,23 @@ public class MusicController : MonoBehaviour {
 	}
 
 	public void StartPlacing(){
-		placing = true;
-		fading = false;
-		AM.SetFloat ("FXVolume", maxFXVOL);
-		placingTimer = 0.0;
-		placingTonePos = Random.Range (0, 4);
-		paint1.clip = tones [placingTonePos];
-		paint2.clip = tones [placingTonePos+1];
-		paint3.clip = tones [placingTonePos+2];
-		paint4.clip = tones [placingTonePos+3];
-		paint1.loop = true;
-		paint2.loop = true;
-		paint3.loop = true;
-		paint4.loop = true;
-		paint1.Play ();
+		Debug.Log ("play plz");
+		if (!placing) {
+			placing = true;
+			fading = false;
+			AM.SetFloat ("FXVolume", maxFXVOL);
+			placingTimer = 0.0;
+			placingTonePos = Random.Range (0, 4);
+			paint1.clip = tones [placingTonePos];
+			paint2.clip = tones [placingTonePos + 1];
+			paint3.clip = tones [placingTonePos + 2];
+			paint4.clip = tones [placingTonePos + 3];
+			paint1.loop = true;
+			paint2.loop = true;
+			paint3.loop = true;
+			paint4.loop = true;
+			paint1.Play ();
+		}
 	}
 
 	void Placeing(){

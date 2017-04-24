@@ -96,7 +96,10 @@ public class TierController : MonoBehaviour {
 					t.text = curTier.ToString();
 				}
 			}
-			//TODO: change the TierText as well!!!
+			g = GameObject.Find ("TierName");
+			if (g != null) {
+				g.GetComponent<ToggleEraText> ().ChangeEraText (curTier);
+			}
 			//TODO: check if we want all resources present in the spheremap
 			tierIncreaseEvent.Invoke();
 		}
