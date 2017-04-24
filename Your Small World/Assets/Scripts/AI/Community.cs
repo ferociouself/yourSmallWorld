@@ -68,6 +68,7 @@ public class Community : MonoBehaviour {
 		for (int i = 0; i < toAdd; i++) {
 			GameObject boi = Resources.Load("Prefabs/Person" + Random.Range(0, 8), typeof(GameObject)) as GameObject;
 			boi = Instantiate(boi, transform.position, Quaternion.identity);
+			boi.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 			boi.GetComponent<SmolMan>().findNewBuilding();
 			freeBois.Add(boi.GetComponent<SmolMan>());
 		}
