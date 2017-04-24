@@ -265,12 +265,38 @@ public class TierController : MonoBehaviour {
 			break;
 		case(5):
 			//320 bois
+			for (int i = 0; i < 8; i++) {
+				Vertex v = myCommunity.ChooseNextBuildingLocation ();
+				if (v != null) {
+					terrain.buildAtIndex (v.getIndex (), "apartment");
+					myCommunity.addBuilding (v);
+				}
+			}
 			//gas refinery
+			Vertex gas = myCommunity.ChooseNextBuildingLocation ();
+			if (gas != null) {
+				terrain.buildAtIndex (gas.getIndex (), "refinery");
+				myCommunity.addBuilding (gas);
+			}
 			//labs
+			Vertex lab = myCommunity.ChooseNextBuildingLocation ();
+			if (lab != null) {
+				terrain.buildAtIndex (lab.getIndex (), "lab");
+				myCommunity.addBuilding (lab);
+			}
 			break;
 		case(6):
 			//same number of bois
-			//space station
+			Vertex launchSite = myCommunity.ChooseNextBuildingLocation ();
+			if (launchSite != null) {
+				GameObject bigOlBoy = Resources.Load ("prefabs/bigspacefucker") as GameObject;
+				GameObject realBigBoy = Instantiate (bigOlBoy, transform.TransformPoint (launchSite.getSphereVector () * 1.3f), Quaternion.identity);
+				realBigBoy.GetComponent<Rigidbody> ().velocity = transform.TransformPoint(launchSite.getSphereVector ()).normalized * 0.5f;
+			} else {
+				GameObject bigOlBoy = Resources.Load ("prefabs/bigspacefucker") as GameObject;
+				GameObject realBigBoy = Instantiate (bigOlBoy, transform.TransformPoint (myCommunity.getCampfireVertex ().getSphereVector () * 1.3f), Quaternion.identity);
+				realBigBoy.GetComponent<Rigidbody> ().velocity = transform.TransformPoint(myCommunity.getCampfireVertex ().getSphereVector ()).normalized * 0.5f;
+			}
 			break;
 		default:
 			//5 bois
