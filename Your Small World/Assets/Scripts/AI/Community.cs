@@ -8,17 +8,42 @@ public class Community : MonoBehaviour {
 	int bois;
 	int busybois;
 
+	private List<Vertex> buildingLocations;
+	private Vertex campfireVertex;
+
 	// Use this for initialization
 	void Start () {
+		if (buildingLocations == null) {
+			buildingLocations = new List<Vertex> ();
+		}
 		goods = new Dictionary<BaseResource, int> ();
 		bois = 5;
 		busybois = 0;
+		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
+		setCampfireVertex (terrain.getVertex (terrain.findIndexOfNearest (gameObject.transform.position)));
 		//TODO: make the bois
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void setCampfireVertex(Vertex v) {
+		campfireVertex = v;
+		addBuilding (v);
+	}
+
+	public Vertex getCampfireVertex() {
+		return campfireVertex;
+	}
+
+	public List<Vertex> getBuildingLocations() {
+		return buildingLocations;
+	}
+
+	public void addBuilding(Vertex v) {
+		buildingLocations.Add (v);
 	}
 
 	public void AddBois(int toAdd){
@@ -97,25 +122,24 @@ public class Community : MonoBehaviour {
 	}
 
 	public Vertex ChooseNextBuildingLocation() {
-		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
-		Vertex[] buildingIndices = terrain.currentBuildings ();
-		int randomBuildingIndex = Random.Range (0, buildingIndices.Length);
-		int numBuildingsChecked = 0;
-		while (numBuildingsChecked < buildingIndices.Length) {
-			Vertex randomBuilding = buildingIndices [randomBuildingIndex];
-			Vertex[] neighbors = randomBuilding.getNeighbors ();
-			int randomNeighborIndex = Random.Range (0, neighbors.Length);
-			int numNeighborsChecked = 0;
-			while (numNeighborsChecked < neighbors.Length) {
-				if (neighbors [randomNeighborIndex].getHeight() == 0 && neighbors[randomNeighborIndex].getResource() == null) {
-					return neighbors [randomNeighborIndex];
+		int randomBuildingIndex = Random.Range (0, buildingLocations.Count);
+		for (int i = 0; i < buildingLocations.Count; i++) {
+			int numNeighbors = buildingLocations [(i + randomBuildingIndex) % buildingLocations.Count].getNeighbors ().Length;
+			int randomNeighborIndex = Random.Range (0, numNeighbors);
+			for (int j = 0; j < numNeighbors; j++) {
+				Vertex potential = buildingLocations [(i + randomBuildingIndex) % buildingLocations.Count].getNeighbors () [(j + randomNeighborIndex) % numNeighbors];
+				if (potential.getHeight () == 0 && potential.getIsEditable()) {
+					return potential;
 				}
-				randomNeighborIndex = (randomNeighborIndex + 1) % neighbors.Length;
-				numNeighborsChecked++;
 			}
-			randomBuildingIndex = (randomBuildingIndex + 1) % buildingIndices.Length;
-			numBuildingsChecked++;
 		}
 		return null;
+	}
+
+	void OnDrawGizmos() {
+		if (campfireVertex != null) {
+			Gizmos.color = Color.black;
+			Gizmos.DrawSphere (campfireVertex.getSphereVector(), 0.2f);
+		}
 	}
 }

@@ -9,7 +9,7 @@ public class TierController : MonoBehaviour {
 
 	UnityEvent tierIncreaseEvent;
 
-	Community myCommunity;
+	public Community myCommunity;
 
 	/// <summary>
 	/// The requisites to move on from each tier.
@@ -23,7 +23,7 @@ public class TierController : MonoBehaviour {
 
 		tierreqs = new List<Dictionary<BaseResource,int>> ();
 
-		Dictionary<BaseResource,int> tier0 = new Dictionary<BaseResource,int>();
+		/*Dictionary<BaseResource,int> tier0 = new Dictionary<BaseResource,int>();
 		tier0.Add (Tree.instance, 1);
 		tier0.Add (Stone.instance, 3);
 		tier0.Add (Water.instance, 1);
@@ -73,17 +73,19 @@ public class TierController : MonoBehaviour {
 		tierreqs.Add (tier4);
 		tierreqs.Add (tier5);
 
-		//tierIncreaseEvent.AddListener();
+		//tierIncreaseEvent.AddListener();*/
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			ConstructEra ();
+		}
 	}
 
 	public void IncreaseTier() {
 		if (CheckTier()) {
-			ConstuctEra ();
+			ConstructEra ();
 			curTier++;
 			//TODO: check if we want all resources present in the spheremap
 			tierIncreaseEvent.Invoke();
@@ -127,14 +129,32 @@ public class TierController : MonoBehaviour {
 	/// <summary>
 	/// Constucts the era at the end of each tier and clears all bois of their responsabilities.
 	/// </summary>
-	public void ConstuctEra(){
+	public void ConstructEra(){
 		myCommunity.FreeBois ();
+		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
 		switch (curTier) {
 		case(0):
 			//10 bois
-			//huts
+			//2 huts
+			for (int i = 0; i < 2; i++) {
+				Vertex v = myCommunity.ChooseNextBuildingLocation ();
+				if (v != null) {
+					terrain.buildAtIndex (v.getIndex (), "wood_house");
+					myCommunity.addBuilding (v);
+				}
+			}
 			//lithic workshop
+			Vertex litho = myCommunity.ChooseNextBuildingLocation ();
+			if (litho != null) {
+				terrain.buildAtIndex (litho.getIndex (), "stonecraft_house");
+				myCommunity.addBuilding (litho);
+			}
 			//well
+			Vertex well = myCommunity.ChooseNextBuildingLocation ();
+			if (well != null) {
+				terrain.buildAtIndex (well.getIndex (), "well");
+				myCommunity.addBuilding (well);
+			}
 			break;
 		case(1):
 			//20 bois

@@ -220,7 +220,7 @@ public class SphereTerrain : MonoBehaviour {
 		if (vertices[index].getIsEditable()) {
 			vertices [index].removeResource ();
 			GameObject building = Resources.Load("Prefabs/" + prefabName, typeof(GameObject)) as GameObject;
-			building = Instantiate(building, transform.TransformPoint(vertices[index].getSphereVector(this.radius, this.gameObject.transform.position)), Quaternion.identity);
+			building = Instantiate(building, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity);
 			building.transform.parent = transform.FindChild("Planet Objects");
 			building.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
 			buildingIndices.Add (vertices[index]);
@@ -268,7 +268,7 @@ public class SphereTerrain : MonoBehaviour {
 
 	public void SandAtIndex(int index) {
 		if (vertices[index].getBiome() == DESERT_BIOME || vertices[index].getBiome() == MED_BIOME) {
-			if(vertices[index].getResource() != null && vertices[index].getResource().name.Contains("SandHills")) {
+			if(vertices[index].getResource() != null && vertices[index].getResource().name.Contains("SandHill")) {
 				return;
 			}
 			GameObject sand = Resources.Load("Prefabs/SandHill" + Random.Range(0,1), typeof(GameObject)) as GameObject;
