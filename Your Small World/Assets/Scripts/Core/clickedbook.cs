@@ -28,6 +28,11 @@ public class clickedbook : MonoBehaviour {
 		Debug.Log ("you clicked the book!");
 		this.gameObject.GetComponent<AudioSource> ().Play ();
 		(GameObject.FindObjectOfType (typeof(TierController)) as TierController).IncreaseTier ();
+		this.gameObject.SetActive (false);
+	}
+
+	public void ShowBook(){
+		this.gameObject.SetActive (true);
 	}
 
 

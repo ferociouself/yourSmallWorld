@@ -86,7 +86,7 @@ public class TierController : MonoBehaviour {
 	}
 
 	public void IncreaseTier() {
-		//if (CheckTier()) {
+		if (CheckTier()) {
 			ConstructEra ();
 			curTier++;
 			GameObject g = GameObject.Find ("TierNum");
@@ -102,20 +102,21 @@ public class TierController : MonoBehaviour {
 			}
 			//TODO: check if we want all resources present in the spheremap
 			tierIncreaseEvent.Invoke();
-		//}
+		}
 	}
 
 	/// <summary>
 	/// Checks whether or not the requirements to move to the next tier are satisfied; for example: case(2) checks if all of the resources are present to move from 2 to 3
 	/// </summary>
 	/// <returns><c>true</c>, if tier was checked, <c>false</c> otherwise.</returns>
-	private bool CheckTier(){
+	public bool CheckTier(){
 		if (myCommunity != null) {
 			foreach (BaseResource b in tierreqs[curTier].Keys) {
 				if(!myCommunity.HasGoodsCheck(b, tierreqs[curTier][b])){
 					return false;
 				}
 			}
+			(GameObject.FindObjectOfType (typeof(clickedbook)) as clickedbook).ShowBook ();
 			return true;
 		}
 		return false;
@@ -148,7 +149,7 @@ public class TierController : MonoBehaviour {
 		switch (curTier) {
 		case(0):
 			//10 bois
-			myCommunity.AddBois(5);
+			myCommunity.AddBois (5);
 			//2 huts
 			for (int i = 0; i < 3; i++) {
 				Vertex v = myCommunity.ChooseNextBuildingLocation ();
@@ -169,6 +170,9 @@ public class TierController : MonoBehaviour {
 				terrain.buildAtIndex (well.getIndex (), "well");
 				myCommunity.addBuilding (well);
 			}
+			//unlock wheat and iron
+			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockWheat ();
+			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockIron ();
 			break;
 		case(1):
 			//20 bois
@@ -198,6 +202,8 @@ public class TierController : MonoBehaviour {
 				terrain.buildAtIndex (smelter.getIndex (), "smelter");
 				myCommunity.addBuilding (smelter);
 			}
+			//unlock coal
+			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockCoal ();
 			break;
 		case(2):
 			//40 bois
@@ -222,6 +228,8 @@ public class TierController : MonoBehaviour {
 				terrain.buildAtIndex (castle.getIndex (), "tower");
 				myCommunity.addBuilding (castle);
 			}
+			//unlock sand
+			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockSand ();
 			break;
 		case(3):
 			//80 bois
@@ -246,6 +254,8 @@ public class TierController : MonoBehaviour {
 				terrain.buildAtIndex (university.getIndex (), "temple");
 				myCommunity.addBuilding (university);
 			}
+			//unlock copper
+			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockCopper ();
 			break;
 		case(4):
 			//160 bois
@@ -270,6 +280,8 @@ public class TierController : MonoBehaviour {
 					myCommunity.addBuilding (v);
 				}
 			}
+			//unlock oil
+			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockOil ();
 			break;
 		case(5):
 			//320 bois
@@ -293,6 +305,8 @@ public class TierController : MonoBehaviour {
 				terrain.buildAtIndex (lab.getIndex (), "lab");
 				myCommunity.addBuilding (lab);
 			}
+			//unlock deiton
+			(GameObject.FindObjectOfType (typeof(ResourceFooBar)) as ResourceFooBar).UnlockDieton ();
 			break;
 		case(6):
 			//same number of bois
