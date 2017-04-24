@@ -81,6 +81,7 @@ public class TierController : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			ConstructEra ();
+			curTier++;
 		}
 	}
 
@@ -145,11 +146,11 @@ public class TierController : MonoBehaviour {
 		case(0):
 			//10 bois
 			//2 huts
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 3; i++) {
 				Vertex v = myCommunity.ChooseNextBuildingLocation ();
 				if (v != null) {
 					terrain.buildAtIndex (v.getIndex (), "wood_house");
-					myCommunity.addBuilding (v);
+					myCommunity.addHut (v);
 				}
 			}
 			//lithic workshop
@@ -167,24 +168,100 @@ public class TierController : MonoBehaviour {
 			break;
 		case(1):
 			//20 bois
+			for (int i = 0; i < 2; i++) {
+				Vertex v = myCommunity.ChooseNextBuildingLocation ();
+				if (v != null) {
+					terrain.buildAtIndex (v.getIndex (), "wood_house");
+					myCommunity.addHut (v);
+				}
+			}
 			//granary
+			Vertex granary = myCommunity.ChooseNextBuildingLocation ();
+			if (granary != null) {
+				terrain.buildAtIndex (granary.getIndex (), "granary");
+				myCommunity.addBuilding (granary);
+			}
 			//mill
+			Vertex mill = myCommunity.ChooseNextBuildingLocation ();
+			if (mill != null) {
+				terrain.buildAtIndex (mill.getIndex (), "windmill");
+				myCommunity.addBuilding (mill);
+			}
 			//smelter
+			Vertex smelter = myCommunity.ChooseNextBuildingLocation ();
+			if (smelter != null) {
+				terrain.buildAtIndex (smelter.getIndex (), "smelter");
+				myCommunity.addBuilding (smelter);
+			}
 			break;
 		case(2):
 			//40 bois
+			//2 hut
+			for (int i = 0; i < 2; i++) {
+				Vertex v = myCommunity.ChooseNextBuildingLocation ();
+				if (v != null) {
+					terrain.buildAtIndex (v.getIndex (), "wood_house");
+					myCommunity.addHut (v);
+				}
+			}
 			//blast furnace
+			Vertex blast = myCommunity.ChooseNextBuildingLocation ();
+			if (blast != null) {
+				terrain.buildAtIndex (blast.getIndex (), "blast_furnace");
+				myCommunity.addBuilding (blast);
+			}
 			//castle
+			Vertex castle = myCommunity.ChooseNextBuildingLocation ();
+			if (castle != null) {
+				terrain.buildAtIndex (castle.getIndex (), "tower");
+				myCommunity.addBuilding (castle);
+			}
 			break;
 		case(3):
 			//80 bois
+			//3 huts
+			for (int i = 0; i < 3; i++) {
+				Vertex v = myCommunity.ChooseNextBuildingLocation ();
+				if (v != null) {
+					terrain.buildAtIndex (v.getIndex (), "wood_house");
+					myCommunity.addHut (v);
+				}
+			}
 			//observatory
+			Vertex observatory = myCommunity.ChooseNextBuildingLocation ();
+			if (observatory != null) {
+				terrain.buildAtIndex (observatory.getIndex (), "observatory");
+				myCommunity.addBuilding (observatory);
+			}
 			//university
+			Vertex university = myCommunity.ChooseNextBuildingLocation ();
+			if (university != null) {
+				terrain.buildAtIndex (university.getIndex (), "temple");
+				myCommunity.addBuilding (university);
+			}
 			break;
 		case(4):
 			//160 bois
 			//factory
-			//gettos (the projects)
+			Vertex factory = myCommunity.ChooseNextBuildingLocation ();
+			if (factory != null) {
+				terrain.buildAtIndex (factory.getIndex (), "factory");
+				myCommunity.addBuilding (factory);
+			}
+			//remove huts, replace
+			for (int i = 0; i < myCommunity.getHuts ().Count; i++) {
+				myCommunity.getHuts () [i].removeResource ();
+				myCommunity.getHuts () [i].setIsEditable (true);
+				terrain.buildAtIndex (myCommunity.getHuts () [i].getIndex (), "apartment");
+			}
+			//+ 4 more apartments
+			for (int i = 0; i < 4; i++) {
+				Vertex v = myCommunity.ChooseNextBuildingLocation ();
+				if (v != null) {
+					terrain.buildAtIndex (v.getIndex (), "apartment");
+					myCommunity.addBuilding (v);
+				}
+			}
 			break;
 		case(5):
 			//320 bois

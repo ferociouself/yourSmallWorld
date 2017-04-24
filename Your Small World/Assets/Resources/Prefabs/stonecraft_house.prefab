@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4686762451905698}
   - component: {fileID: 95120334253012274}
   - component: {fileID: 114713760714267248}
+  - component: {fileID: 114346720582211140}
   m_Layer: 0
   m_Name: stonecraft_house
   m_TagString: Untagged
@@ -524,7 +525,7 @@ Transform:
   m_GameObject: {fileID: 1404703414642006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.5004945, y: -0.34766543, z: 0.8368264}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4581191814638604}
   - {fileID: 4698861020117854}
@@ -1318,6 +1319,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114346720582211140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1404703414642006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b19515b573f146d4bc0971d1cb3b192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTimer: 0.5
+  finalScale: {x: 0.02, y: 0.02, z: 0.02}
 --- !u!114 &114713760714267248
 MonoBehaviour:
   m_ObjectHideFlags: 1

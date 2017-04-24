@@ -7,6 +7,7 @@ public class Community : MonoBehaviour {
 	private Dictionary<BaseResource,int> goods;
 
 	private List<Vertex> buildingLocations;
+	private List<Vertex> huts;
 	private Vertex campfireVertex;
 
 	private List<SmolMan> freeBois;
@@ -19,6 +20,9 @@ public class Community : MonoBehaviour {
 		}
 		freeBois = new List<SmolMan>();
 		busyBois = new List<SmolMan>();
+		if (huts == null) {
+			huts = new List<Vertex> ();
+		}
 		goods = new Dictionary<BaseResource, int> ();
 		SphereTerrain terrain = FindObjectOfType<SphereTerrain> ();
 		setCampfireVertex (terrain.getVertex (terrain.findIndexOfNearest (gameObject.transform.position)));
@@ -39,6 +43,15 @@ public class Community : MonoBehaviour {
 
 	public Vertex getCampfireVertex() {
 		return campfireVertex;
+	}
+
+	public void addHut(Vertex v) {
+		huts.Add (v);
+		buildingLocations.Add (v);
+	}
+
+	public List<Vertex> getHuts() {
+		return huts;
 	}
 
 	public List<Vertex> getBuildingLocations() {

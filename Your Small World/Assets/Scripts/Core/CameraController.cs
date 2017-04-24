@@ -69,12 +69,12 @@ public class CameraController : MonoBehaviour {
 				TitleText.color = Color.black;
 			}
 			finalTimer += Time.deltaTime;
-			if (finalTimer >= 3.0f) {
+			/*if (finalTimer >= 3.0f) {
 				tierindicator.color = new Color (1.0f, 1.0f, 1.0f, (float)Mathf.Lerp(0,1, finalTimer/7.0f));
 				(tierindicator.transform.GetChild (0).gameObject.GetComponent<Text>() as Text).color = tierindicator.color;
 				(tierindicator.transform.GetChild (1).gameObject.GetComponent<Text>() as Text).color = tierindicator.color;
 				TitleText.color = new Color(TitleText.color.r, TitleText.color.g, TitleText.color.b, (float)Mathf.Lerp(1,0,finalTimer/7.0f));
-			}
+			}*/
 
 		} else {
 			float dT = Time.deltaTime;

@@ -224,6 +224,7 @@ public class SphereTerrain : MonoBehaviour {
 			building.transform.parent = transform.FindChild("Planet Objects");
 			building.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
 			buildingIndices.Add (vertices[index]);
+			vertices [index].setResource (building);
 			vertices [index].setIsEditable (false);
 		}
 	}
