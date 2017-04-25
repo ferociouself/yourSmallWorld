@@ -137,15 +137,35 @@ public class BarkController : MonoBehaviour {
 
 	void FillLists(){
 		waterBarks.Add ("aquam requiramos");
+		waterBarks.Add ("voleo aquam");
+		waterBarks.Add ("aqua?");
 		stoneBarks.Add("calcem requiramos");
+		stoneBarks.Add ("voleo calcem");
+		stoneBarks.Add ("calcem?");
 		sandBarks.Add("pulverem speculum requiramos");
+		sandBarks.Add ("voleo pulverum speculum");
+		sandBarks.Add ("pulvis speculum?");
 		treeBarks.Add("silvam requiramos");
+		treeBarks.Add ("voleo silvam");
+		treeBarks.Add ("silva?");
 		wheatBarks.Add("granum requiramos");
+		wheatBarks.Add ("voleo granum");
+		wheatBarks.Add ("granum?");
 		oilBarks.Add("oleum requiramos");
+		oilBarks.Add ("voleo oleum");
+		oilBarks.Add ("oleum?");
 		ironBarks.Add("ferrum requiramos");
+		ironBarks.Add ("voleo ferrum");
+		ironBarks.Add ("ferrum?");
 		copperBarks.Add("aenum requiramos");
+		copperBarks.Add ("voleo aenum");
+		copperBarks.Add ("aes?");
 		coalBarks.Add("carbonem requiramos");
+		coalBarks.Add ("voleo carbonem");
+		coalBarks.Add ("carbo?");
 		deitonBarks.Add("deiton requiramos");
+		deitonBarks.Add ("voleo deiton");
+		deitonBarks.Add ("deiton?");
 		altBarks.Add("deus vult");
 		altBarks.Add("tibi ludum daremus");
 		altBarks.Add("mundus mirabilis!");

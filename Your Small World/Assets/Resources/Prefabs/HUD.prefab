@@ -1092,6 +1092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 114868321122647642}
   ret: {fileID: 114432792266123480}
+  firstTimeInTier: 0
 --- !u!114 &114117282074872010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2159,7 +2160,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Prologue - An Awakening
+  m_Text: Prologue - The Awakening
 --- !u!114 &114384428815487638
 MonoBehaviour:
   m_ObjectHideFlags: 1

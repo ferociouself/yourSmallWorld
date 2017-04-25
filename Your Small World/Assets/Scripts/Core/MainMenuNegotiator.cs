@@ -31,8 +31,8 @@ public class MainMenuNegotiator : MonoBehaviour {
 	void Update () {
 		if (ending) {
 			timer += Time.deltaTime;
-			AM.SetFloat ("MainMenuVolume", (float)Mathf.Lerp (0.00f, -30.00f, timer / 5.00f));
-			if (timer >= 5.00f) {
+			AM.SetFloat ("MainMenuVolume", (float)Mathf.Lerp (0.00f, -40.00f, timer / 2.00f));
+			if (timer >= 2.00f) {
 				UnityEngine.SceneManagement.SceneManager.LoadSceneAsync (1);
 			}
 		}
