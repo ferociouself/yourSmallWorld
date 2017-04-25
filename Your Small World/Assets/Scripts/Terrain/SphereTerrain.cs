@@ -509,7 +509,7 @@ public class SphereTerrain : MonoBehaviour {
 	}
 
 	void OnDrawGizmos() {
-		Gizmos.color = Color.red;
+		Gizmos.color = Color.green;
 		if (vertices != null) {
 			for (int i = 0; i < vertices.Length; i++) {
 				if (vertices[i].getTransversable()) {

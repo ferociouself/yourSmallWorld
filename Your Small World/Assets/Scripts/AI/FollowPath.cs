@@ -75,6 +75,8 @@ public class FollowPath : MonoBehaviour {
 					} else {
 						Vector3 direction = curTarget.getTransformedPoint() - transform.position;
 						if (rb.velocity.magnitude < speed / 50) {
+							rb.velocity = direction.normalized * 2 * speed;
+						} if (rb.velocity.magnitude < 0.001f) {
 							transform.position = curTarget.getTransformedPoint();
 						}
 						rb.velocity = direction.normalized * speed;
