@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ToggleEraText : MonoBehaviour {
 
-	Button mold;
-	Button place;
+	public Button mold;
+	public Button place;
 	public Image info;
 
 	public Button ret;
@@ -16,14 +16,19 @@ public class ToggleEraText : MonoBehaviour {
 	public bool firstTimeInTier;
 	private float flashTimer;
 
+	bool firstEver;
+	private float firstEverTimer;
+
 	// Use this for initialization
 	void Start () {
-		mold = GameObject.Find ("Mold").GetComponent<Button>() as Button;
-		place = GameObject.Find ("Place").GetComponent<Button>() as Button;
+		if(mold == null) mold = GameObject.Find ("Mold").GetComponent<Button>() as Button;
+		if(place == null) place = GameObject.Find ("Place").GetComponent<Button>() as Button;
 		info.gameObject.SetActive (false);
 		active = false;
 		firstTimeInTier = true;
 		flashTimer = 0.0f;
+		firstEverTimer = 0.0f;
+		firstEver = true;
 	}
 
 	
@@ -34,6 +39,12 @@ public class ToggleEraText : MonoBehaviour {
 			if (flashTimer >= 1.0f) {
 				flashTimer = 0.0f;
 				this.gameObject.GetComponent<Text> ().color = (this.gameObject.GetComponent<Text> ().color == Color.red) ? Color.white : Color.red;
+			}
+			if (firstEver) {
+				firstEverTimer += Time.deltaTime;
+				if (firstEverTimer > 7) {
+					Press ();
+				}
 			}
 		}
 	}
@@ -60,11 +71,11 @@ public class ToggleEraText : MonoBehaviour {
 		switch (curTier) {
 		case(0):
 			this.gameObject.GetComponent<Text>().text = "Prologue";
-			info.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Hear your name and awaken great one! The world is desolate and harsh, and your people need your help to survive. The first thing they need is a source of water and a place to hunt.";
+			info.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Hear your name and awaken great one! The world is desolate and harsh, not yet ready for life. Carve out a valley and fill it with water, then plant forests along the banks.";
 			break;
 		case(1):
 			this.gameObject.GetComponent<Text>().text = "The Age of Stone";
-			info.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Congratulations, your people have taken the first step on the road of civilization. But there is much work to do yet, and many obstacles to overcome. In order to expand, your people need simple huts to live in, a workshop to make primitive stone tools, and a well for a more stable source of water.";
+			info.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Congratulations, your newly arisen people have built themselves a home, taking the first step on the road of civilization. But there is much work to do yet, and many obstacles to overcome. In order to expand, your people need simple huts to live in, a workshop to make primitive stone tools, and a well for a more stable source of water.";
 			break;
 		case(2):
 			this.gameObject.GetComponent<Text> ().text = "The Age of Iron";

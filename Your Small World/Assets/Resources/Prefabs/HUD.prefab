@@ -1090,6 +1090,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555ed4fc707b54c99aed05d7ded90bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mold: {fileID: 114669055575006392}
+  place: {fileID: 114297582679948304}
   info: {fileID: 114868321122647642}
   ret: {fileID: 114432792266123480}
   firstTimeInTier: 0
@@ -1112,10 +1114,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.39607844, g: 0, b: 0, a: 1}
+    m_NormalColor: {r: 0.4705882, g: 0.43813384, b: 0, a: 1}
     m_HighlightedColor: {r: 0.3372549, g: 0.6431373, b: 1, a: 1}
     m_PressedColor: {r: 0, g: 0.4627451, b: 1, a: 1}
-    m_DisabledColor: {r: 0.39607844, g: 0, b: 0, a: 0.416}
+    m_DisabledColor: {r: 0.47058824, g: 0.4392157, b: 0, a: 0.416}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1763,10 +1765,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0.42745098, b: 0.1254902, a: 1}
+    m_NormalColor: {r: 0.47794116, g: 0, b: 0, a: 1}
     m_HighlightedColor: {r: 0.3372549, g: 0.6431373, b: 1, a: 1}
     m_PressedColor: {r: 0, g: 0.4627451, b: 1, a: 1}
-    m_DisabledColor: {r: 0, g: 0.42745098, b: 0.1254902, a: 0.422}
+    m_DisabledColor: {r: 0.47843137, g: 0, b: 0, a: 0.406}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1815,10 +1817,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.39607844, g: 0, b: 0, a: 1}
+    m_NormalColor: {r: 0.47794116, g: 0, b: 0, a: 1}
     m_HighlightedColor: {r: 0.3372549, g: 0.6431373, b: 1, a: 1}
     m_PressedColor: {r: 0, g: 0.4627451, b: 1, a: 1}
-    m_DisabledColor: {r: 0.39607844, g: 0, b: 0, a: 0.416}
+    m_DisabledColor: {r: 0.47843137, g: 0, b: 0, a: 0.406}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3094,10 +3096,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.39607844, g: 0, b: 0, a: 1}
+    m_NormalColor: {r: 0.47794116, g: 0, b: 0, a: 1}
     m_HighlightedColor: {r: 0.3372549, g: 0.6431373, b: 1, a: 1}
     m_PressedColor: {r: 0, g: 0.4627451, b: 1, a: 1}
-    m_DisabledColor: {r: 0.39607844, g: 0, b: 0, a: 0.416}
+    m_DisabledColor: {r: 0.47843137, g: 0, b: 0, a: 0.406}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3200,9 +3202,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hear your name and awaken great one! The world is desolate and harsh, and
-    your people need your help to survive. The first thing they need is a source of
-    water and a place to hunt.
+  m_Text: Hear your name and awaken great one! The world is desolate and harsh, not
+    yet ready for life. Carve out a valley and fill it with water, then plant forests
+    along the banks.
 --- !u!114 &114794673061561152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4059,7 +4061,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 195}
+  m_AnchoredPosition: {x: 0, y: -195}
   m_SizeDelta: {x: 50, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224154240696344742
@@ -4152,7 +4154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -85}
+  m_AnchoredPosition: {x: 0, y: 140}
   m_SizeDelta: {x: 50, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224264912212228850
@@ -4264,7 +4266,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -140}
+  m_AnchoredPosition: {x: 0, y: 195}
   m_SizeDelta: {x: 50, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224503801828139720
@@ -4522,7 +4524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -30}
+  m_AnchoredPosition: {x: 0, y: -140}
   m_SizeDelta: {x: 50, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224687258648243052
@@ -4541,7 +4543,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 85}
+  m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: 50, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224696663397654146
@@ -4560,7 +4562,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 250}
+  m_AnchoredPosition: {x: 0, y: -85}
   m_SizeDelta: {x: 50, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224745630465215890
@@ -4617,7 +4619,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -195}
+  m_AnchoredPosition: {x: 0, y: 250}
   m_SizeDelta: {x: 50, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224796445418118602
@@ -4754,6 +4756,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 140}
+  m_AnchoredPosition: {x: 0, y: 85}
   m_SizeDelta: {x: 50, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}

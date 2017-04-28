@@ -191,6 +191,10 @@ public class MusicController : MonoBehaviour {
 		loopTimer -= dT;
 		pedalTimer -= dT;
 
+		if (fading) {
+			placing = false;
+		}
+
 		if (introduction && introTimer <= 0.0) {
 			introduction = false;
 			drums.Play ();
@@ -207,7 +211,7 @@ public class MusicController : MonoBehaviour {
 		AM.SetFloat("IntroLowPassCutoff", (float)Mathf.Lerp (introlowpasscufoffmin, introlowpasscufoffmax, (float)(introClip.length - introTimer) / introClip.length));
 
 		if (placing) Placeing ();
-		if (fading){
+		else if (fading){
 			fadeTimer += Time.deltaTime;
 			AM.SetFloat ("FXVolume", Mathf.Lerp (maxFXVOL, -70.0f, (float)(fadeTimer / 8.0)));
 			float value = 1.0f;
