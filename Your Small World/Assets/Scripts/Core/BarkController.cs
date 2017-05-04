@@ -115,7 +115,7 @@ public class BarkController : MonoBehaviour {
 				int decisionMeaningless = Random.Range (0, altBarks.Count);
 				woof = altBarks [decisionMeaningless];
 			}
-			this.gameObject.GetComponent<TextMesh> ().text = woof;
+			this.gameObject.GetComponent<TextMesh> ().text = woof.ToUpper();
 		}
 	}
 

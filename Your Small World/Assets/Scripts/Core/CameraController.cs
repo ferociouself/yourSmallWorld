@@ -47,11 +47,11 @@ public class CameraController : MonoBehaviour {
 		Camera.main.transform.position = awayFromSphere.normalized * originZoomAmt*3 + gameObject.transform.position;
 		stage = 0;
 		if (LatinText != null) {
-			LatinText.text = "Principio magni speciem glomeravit in orbis.\nTum freta diffundi rapidisque tumescere ventis.";
+			LatinText.text = "Principio magni speciem glomeravit in orbis.\nTum freta diffundi rapidisque tumescere ventis.".ToUpper();
 			LatinText.color = new Color(255,255,255,1); 
 		}
 		if (EnglishText != null) {
-			EnglishText.text = "First he gathered up the land into the shape of a great orb.\nThen he ordered the seas to spread and rise in the rushing winds.";
+			EnglishText.text = "First he gathered up the land into the shape of a great orb.\nThen he ordered the seas to spread and rise in the rushing winds.".ToUpper();
 			EnglishText.color = new Color(0,0,0,0); 
 		}
 		Color c = new Color (1.0f, 1.0f, 1.0f, 0.0f);
@@ -142,8 +142,8 @@ public class CameraController : MonoBehaviour {
 				EnglishText.color = new Color (EnglishText.color.r, EnglishText.color.g, EnglishText.color.b, (float)(1 - fadeTimer / (percentTimeBetween * MusicController.introClip.length)));
 				break;
 			case(2): //fade out latin 1, fade in english 1
-				LatinText.text = "Iussit et extendi campos, subsidere valles,\nFronde tegi silvas, lapidosos surgere montes.";
-				EnglishText.text = "He ordered the plains to extend, the valleys to subside,\nthe leaves to hide the trees, and the stony mountains to rise.";
+				LatinText.text = "Iussit et extendi campos, subsidere valles,\nFronde tegi silvas, lapidosos surgere montes.".ToUpper();
+				EnglishText.text = "He ordered the plains to extend, the valleys to subside,\nthe leaves to hide the trees, and the stony mountains to rise.".ToUpper();
 				LatinText.color = Color.white;
 				LatinText.color = new Color (LatinText.color.r, LatinText.color.g, LatinText.color.b, (float)(1 - (fadeTimer+0.5) / (percentTimeBetween * MusicController.introClip.length)));
 				EnglishText.color = new Color (EnglishText.color.r, EnglishText.color.g, EnglishText.color.b, Mathf.Max(0.05f,(float)(fadeTimer / (percentTimeBetween * MusicController.introClip.length))));
@@ -154,7 +154,7 @@ public class CameraController : MonoBehaviour {
 				EnglishText.color = new Color (EnglishText.color.r, EnglishText.color.g, EnglishText.color.b, (float)(1 - fadeTimer / (percentTimeBetween * MusicController.introClip.length)));
 				break;
 			case(4): //display title
-				TitleText.text = "Ludum Dei";
+				TitleText.text = "Ludum Dei".ToUpper();
 				TitleText.fontSize = 80;
 				TitleText.color = Color.black;
 				break;

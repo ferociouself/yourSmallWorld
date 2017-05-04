@@ -163,11 +163,11 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1145aed44d44c4558a3ffa047b42b414, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: d598341c458e24f578af40429f5e3baf, type: 3}
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Authors
+  m_Text: AUTHORS
 --- !u!222 &398354411
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1145aed44d44c4558a3ffa047b42b414, type: 3}
+    m_Font: {fileID: 12800000, guid: d598341c458e24f578af40429f5e3baf, type: 3}
     m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
@@ -317,19 +317,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Jack Herd - Programmer
+  m_Text: 'JACK HERD - PROGRAMMER
 
 
-    Zachary Danz - Programmer, Composer
+    ZACHARY DANZ - PROGRAMMER, COMPOSER
 
 
-    David Hall - Designer, Writer
+    DAVID HALL - DESIGNER, WRITER
 
 
-    William Wong - Designer, Artist
+    WILLIAM WONG - DESIGNER, ARTIST
 
 
-    Jackson Ekis - Programmer'
+    JACKSON EKIS - PROGRAMMER'
 --- !u!222 &943185084
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1108,11 +1108,11 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1145aed44d44c4558a3ffa047b42b414, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: d598341c458e24f578af40429f5e3baf, type: 3}
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1120,7 +1120,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Begin Again
+  m_Text: BEGIN AGAIN
 --- !u!222 &1752810303
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1182,7 +1182,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1145aed44d44c4558a3ffa047b42b414, type: 3}
+    m_Font: {fileID: 12800000, guid: d598341c458e24f578af40429f5e3baf, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
@@ -1194,7 +1194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Return
+  m_Text: RETURN
 --- !u!222 &1783093997
 CanvasRenderer:
   m_ObjectHideFlags: 0

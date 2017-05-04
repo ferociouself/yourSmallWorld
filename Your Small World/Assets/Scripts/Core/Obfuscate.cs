@@ -17,7 +17,7 @@ public class Obfuscate : MonoBehaviour {
 		if (!this.GetComponent<Button> ().interactable) {
 			this.GetComponentInChildren<Text> ().text = "?";
 		} else {
-			this.GetComponentInChildren<Text> ().text = realtext;
+			this.GetComponentInChildren<Text> ().text = realtext.ToUpper();
 		}
 	}
 }
