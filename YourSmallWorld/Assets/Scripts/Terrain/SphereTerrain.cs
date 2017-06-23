@@ -225,7 +225,7 @@ public class SphereTerrain : MonoBehaviour {
 			vertices [index].removeResource ();
 			GameObject building = Resources.Load("Prefabs/" + prefabName, typeof(GameObject)) as GameObject;
 			building = Instantiate(building, transform.TransformPoint(vertices[index].getSphereVector()), Quaternion.identity);
-			building.transform.parent = transform.FindChild("Planet Objects");
+			building.transform.parent = transform.Find("Planet Objects");
 			building.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
 			buildingIndices.Add (vertices[index]);
 			vertices [index].setResource (building);
